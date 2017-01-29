@@ -94,7 +94,7 @@ class PostmarkTransport extends Transport
      */
     protected function getFrom(Swift_Mime_Message $message)
     {
-        return collect($message->getSender())
+        return collect($message->getFrom())
             ->map(function ($display, $address) {
                 return $display ? $display." <$address>" : $address;
             })

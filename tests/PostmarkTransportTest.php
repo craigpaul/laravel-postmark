@@ -27,7 +27,7 @@ class PostmarkTransportTest extends TestCase
         parent::setUp();
 
         $message = new \Swift_Message('Foo subject', 'Bar body');
-        $message->setSender('myself@example.com');
+        $message->setFrom('myself@example.com');
         $message->setTo('me@example.com');
         $message->setCc('cc@example.com');
         $message->setBcc('bcc@example.com');
