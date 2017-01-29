@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Changed
+- Removes hhvm from travis.yml file [`bfa3c1739e`](https://github.com/coconutcraig/laravel-postmark/commit/bfa3c1739e) 
+
 ## [0.1.0] - 2017-01-29
 
 ### Added
