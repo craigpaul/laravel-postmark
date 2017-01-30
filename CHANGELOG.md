@@ -3,7 +3,11 @@
 ## [Unreleased]
 
 ### Added
-- Adds setup documentation to readme [`2c2bc36a1b`](https://github.com/coconutcraig/laravel-postmark/commit/2c2bc36a1b) 
+- Adds setup documentation to readme [`2c2bc36a1b`](https://github.com/coconutcraig/laravel-postmark/commit/2c2bc36a1b)
+ 
+### Changed
+- Fixes changelog entries [`e5370029b4`](https://github.com/coconutcraig/laravel-postmark/commit/e5370029b4) 
+- Cleans up docblocks and removes useless dot files [`09ecd1b10c`](https://github.com/coconutcraig/laravel-postmark/commit/09ecd1b10c)  
 
 ## [0.2.0] - 2017-01-29
 
