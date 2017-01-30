@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+- Adds setup documentation to readme [`7c7659fb46`](https://github.com/coconutcraig/laravel-postmark/commit/7c7659fb46) 
+
 ## [0.2.0] - 2017-01-29
 
 ### Changed

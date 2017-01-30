@@ -1,4 +1,4 @@
-# laravel-postmark
+# Laravel Postmark
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -6,9 +6,6 @@
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
-
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
-PSRs you support to avoid any confusion with users and contributors.
 
 ## Install
 
@@ -20,9 +17,43 @@ $ composer require coconutcraig/laravel-postmark
 
 ## Usage
 
-``` php
+In order to take advantage of the Postmark mail driver, we need to **replace** the existing `MailServiceProvider` in `config/app.php`. Find this line:
 
+``` php
+Iluminate\Mail\MailServiceProvider::class,
 ```
+
+And **replace** it with:
+
+```php
+Coconuts\Mail\MailServiceProvider::class,
+```
+
+Next we will need to update the `config/services.php` file to hold our Postmark specific config.
+
+```php
+return [
+    // ...
+    
+    'postmark' => [
+        'secret' => env('POSTMARK_SECRET'),    
+    ],
+];
+```
+
+Then we can add the server key to our `.env` file and update our `MAIL_DRIVER`.
+
+```php
+MAIL_DRIVER=postmark
+
+// ...
+
+POSTMARK_SECRET=YOUR-SERVER-KEY-HERE
+```
+
+That's it! The mail system continues to work the exact same way as before and you can switch out Postmark for any of the pre-packaged Laravel mail drivers (smtp, mailgun, log, etc...).
+
+> Remember, when using Postmark the sending address used in your emails must be a [valid Sender Signature](http://support.postmarkapp.com/category/45-category) that you have already configured.
 
 ## Change log
 
