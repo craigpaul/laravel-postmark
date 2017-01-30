@@ -3,14 +3,14 @@
 ## [Unreleased]
 
 ### Added
-- Adds setup documentation to readme [`7c7659fb46`](https://github.com/coconutcraig/laravel-postmark/commit/7c7659fb46) 
+- Adds setup documentation to readme [`2c2bc36a1b`](https://github.com/coconutcraig/laravel-postmark/commit/2c2bc36a1b) 
 
 ## [0.2.0] - 2017-01-29
 
 ### Changed
 - Removes hhvm from travis.yml file [`bfa3c1739e`](https://github.com/coconutcraig/laravel-postmark/commit/bfa3c1739e) 
 - Changes scrutinizer runs to 1 from 3 [`b004ef9439`](https://github.com/coconutcraig/laravel-postmark/commit/b004ef9439)
-- Changes getSender to getFrom [`987e5875e6`](https://github.com/coconutcraig/laravel-postmark/commit/987e5875e6) 
+- Changes getSender to getFrom [`b1484d0337`](https://github.com/coconutcraig/laravel-postmark/commit/b1484d0337) 
 
 ## [0.1.0] - 2017-01-29
 
