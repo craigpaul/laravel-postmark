@@ -8,6 +8,8 @@ class TransportManager extends LaravelTransportManager
 {
     /**
      * Create an instance of the Postmark Swift Transport driver.
+     *
+     * @return \Coconuts\Mail\PostmarkTransport
      */
     public function createPostmarkDriver()
     {

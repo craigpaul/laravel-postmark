@@ -32,8 +32,8 @@ class PostmarkTransport extends Transport
     /**
      * Create a new Postmark transport instance.
      *
-     * @param  \GuzzleHttp\ClientInterface $client
-     * @param  string $key
+     * @param \GuzzleHttp\ClientInterface $client
+     * @param string $key
      *
      * @return void
      */
@@ -72,7 +72,7 @@ class PostmarkTransport extends Transport
     /**
      * Get all of the contacts for the message.
      *
-     * @param  \Swift_Mime_Message $message
+     * @param \Swift_Mime_Message $message
      *
      * @return array
      */
@@ -88,7 +88,7 @@ class PostmarkTransport extends Transport
     /**
      * Get the "From" payload field for the API request.
      *
-     * @param  \Swift_Mime_Message $message
+     * @param \Swift_Mime_Message $message
      *
      * @return string
      */
@@ -96,7 +96,7 @@ class PostmarkTransport extends Transport
     {
         return collect($message->getFrom())
             ->map(function ($display, $address) {
-                return $display ? $display." <$address>" : $address;
+                return $display ? $display . " <$address>" : $address;
             })
             ->values()
             ->implode(',');
@@ -105,7 +105,7 @@ class PostmarkTransport extends Transport
     /**
      * Get the "To" payload field for the API request.
      *
-     * @param  \Swift_Mime_Message $message
+     * @param \Swift_Mime_Message $message
      *
      * @return string
      */
@@ -113,7 +113,7 @@ class PostmarkTransport extends Transport
     {
         return collect($this->allContacts($message))
             ->map(function ($display, $address) {
-                return $display ? $display." <{$address}>" : $address;
+                return $display ? $display . " <{$address}>" : $address;
             })
             ->values()
             ->implode(',');
@@ -122,8 +122,8 @@ class PostmarkTransport extends Transport
     /**
      * Get the HTTP payload for sending the Postmark message.
      *
-     * @param  \Swift_Mime_Message $message
-     * @param  string $to
+     * @param \Swift_Mime_Message $message
+     * @param string $to
      *
      * @return array
      */
