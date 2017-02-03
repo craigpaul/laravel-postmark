@@ -129,6 +129,8 @@ class PostmarkTransport extends Transport
      */
     protected function payload(Swift_Mime_Message $message, $to)
     {
+        $headers = $message->getHeaders();
+
         return [
             'headers' => [
                 'Accept' => 'application/json',
@@ -137,6 +139,7 @@ class PostmarkTransport extends Transport
             'json' => [
                 'From' => $this->getFrom($message),
                 'To' => $to,
+                'Tag' => $headers->has('tag') ? $headers->get('tag')->getFieldBody() : '',
                 'Subject' => $message->getSubject(),
                 'HtmlBody' => $message->getBody(),
             ],

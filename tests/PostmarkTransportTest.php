@@ -31,6 +31,8 @@ class PostmarkTransportTest extends TestCase
         $message->setTo('me@example.com');
         $message->setCc('cc@example.com');
         $message->setBcc('bcc@example.com');
+        $headers = $message->getHeaders();
+        $headers->addTextHeader('Tag', 'Tagged');
         $this->message = $message;
 
         $client = new Client();
@@ -81,6 +83,7 @@ class PostmarkTransportTest extends TestCase
         $this->assertArrayHasKey('From', $payload['json']);
         $this->assertArrayHasKey('To', $payload['json']);
         $this->assertArrayHasKey('Subject', $payload['json']);
+        $this->assertArrayHasKey('Tag', $payload['json']);
         $this->assertArrayHasKey('HtmlBody', $payload['json']);
     }
 
