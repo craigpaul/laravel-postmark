@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [1.0.0] - 2017-03-24
+
+### Added
+- Adds documentation for attaching tag headers [`e7f09633c8`](https://github.com/coconutcraig/laravel-postmark/commit/e7f09633c8) 
+
 ## [0.2.1] - 2017-02-03
 
 ### Added
@@ -29,7 +34,8 @@
 ### Added
 - Adds package skeleton [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v0.2.1...HEAD
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v0.2.0...v0.2.1
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/coconutcraig/laravel-postmark/compare/v0.2.1...v1.0.0
+[0.2.1]: https://github.com/coconutcraig/laravel-postmark/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/coconutcraig/laravel-postmark/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/coconutcraig/laravel-postmark/compare/v0.0.1...v0.1.0
