@@ -55,6 +55,19 @@ That's it! The mail system continues to work the exact same way as before and yo
 
 > Remember, when using Postmark the sending address used in your emails must be a [valid Sender Signature](http://support.postmarkapp.com/category/45-category) that you have already configured.
 
+## Postmark Tags
+
+If you rely on categorizing your outgoing emails using Tags in Postmark, you can simply add a header within your Mailable class's build method.
+
+```php
+public function build()
+{
+    $this->withSwiftMessage(function (\Swift_Message $message) {
+        $message->getHeaders()->addTextHeader('tag', 'value');
+    });
+}
+```
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
