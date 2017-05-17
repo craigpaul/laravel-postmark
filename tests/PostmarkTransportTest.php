@@ -41,23 +41,15 @@ class PostmarkTransportTest extends TestCase
     }
 
     /** @test */
-    public function can_merge_all_contacts_into_a_single_array()
+    public function can_given_contacts_into_a_comma_separated_string()
     {
-        $contacts = $this->invokeMethod($this->transport, 'allContacts', [$this->message]);
+        $to = $this->invokeMethod($this->transport, 'getContacts', [$this->message->getTo()]);
+        $cc = $this->invokeMethod($this->transport, 'getContacts', [$this->message->getCc()]);
+        $bcc = $this->invokeMethod($this->transport, 'getContacts', [$this->message->getBcc()]);
 
-        $this->assertArrayHasKey('me@example.com', $contacts);
-        $this->assertArrayHasKey('cc@example.com', $contacts);
-        $this->assertArrayHasKey('bcc@example.com', $contacts);
-        $this->assertArrayNotHasKey('myself@example.com', $contacts);
-    }
-
-    /** @test */
-    public function can_combine_all_contacts_into_a_comma_separated_string()
-    {
-        $string = $this->invokeMethod($this->transport, 'getTo', [$this->message]);
-
-        $this->assertEquals('me@example.com,cc@example.com,bcc@example.com', $string);
-        $this->assertNotEquals('cc@example.com,bcc@example.com,me@example.com', $string);
+        $this->assertEquals('me@example.com', $to);
+        $this->assertEquals('cc@example.com', $cc);
+        $this->assertEquals('bcc@example.com', $bcc);
     }
 
     /** @test */
@@ -72,9 +64,7 @@ class PostmarkTransportTest extends TestCase
     /** @test */
     public function can_create_the_proper_payload_for_a_message()
     {
-        $to = $this->invokeMethod($this->transport, 'getTo', [$this->message]);
-
-        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message, $to]);
+        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
 
         $this->assertArrayHasKey('headers', $payload);
         $this->assertArrayHasKey('Accept', $payload['headers']);

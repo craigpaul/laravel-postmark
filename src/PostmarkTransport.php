@@ -58,11 +58,7 @@ class PostmarkTransport extends Transport
     {
         $this->beforeSendPerformed($message);
 
-        $to = $this->getTo($message);
-
-        $message->setBcc([]);
-
-        $this->client->post($this->url, $this->payload($message, $to));
+        $this->client->post($this->url, $this->payload($message));
 
         $this->sendPerformed($message);
 
@@ -70,19 +66,20 @@ class PostmarkTransport extends Transport
     }
 
     /**
-     * Get all of the contacts for the message.
+     * Format the contacts for the API request
      *
-     * @param \Swift_Mime_Message $message
+     * @param array $contacts
      *
-     * @return array
+     * @return string
      */
-    protected function allContacts(Swift_Mime_Message $message)
+    protected function getContacts($contacts)
     {
-        return array_merge(
-            (array)$message->getTo(),
-            (array)$message->getCc(),
-            (array)$message->getBcc()
-        );
+        return collect($contacts)
+            ->map(function ($display, $address) {
+                return $display ? $display . " <{$address}>" : $address;
+            })
+            ->values()
+            ->implode(',');
     }
 
     /**
@@ -103,33 +100,19 @@ class PostmarkTransport extends Transport
     }
 
     /**
-     * Get the "To" payload field for the API request.
-     *
-     * @param \Swift_Mime_Message $message
-     *
-     * @return string
-     */
-    protected function getTo($message)
-    {
-        return collect($this->allContacts($message))
-            ->map(function ($display, $address) {
-                return $display ? $display . " <{$address}>" : $address;
-            })
-            ->values()
-            ->implode(',');
-    }
-
-    /**
      * Get the HTTP payload for sending the Postmark message.
      *
      * @param \Swift_Mime_Message $message
-     * @param string $to
      *
      * @return array
      */
-    protected function payload(Swift_Mime_Message $message, $to)
+    protected function payload(Swift_Mime_Message $message)
     {
         $headers = $message->getHeaders();
+
+        $to = $this->getContacts($message->getTo());
+        $cc = $this->getContacts($message->getCc());
+        $bcc = $this->getContacts($message->getBcc());
 
         return [
             'headers' => [
@@ -139,6 +122,8 @@ class PostmarkTransport extends Transport
             'json' => [
                 'From' => $this->getFrom($message),
                 'To' => $to,
+                'Cc' => $cc,
+                'Bcc' => $bcc,
                 'Tag' => $headers->has('tag') ? $headers->get('tag')->getFieldBody() : '',
                 'Subject' => $message->getSubject(),
                 'HtmlBody' => $message->getBody(),

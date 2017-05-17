@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Changed
+- Separates out addresses into proper fields [`ddbe313660`](https://github.com/nodejs/node/commit/ddbe313660) 
+
 ## [1.0.0] - 2017-03-24
 
 ### Added
