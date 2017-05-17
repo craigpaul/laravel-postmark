@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.1.0]
+
 ### Changed
 - Separates out addresses into proper fields [`ddbe313660`](https://github.com/nodejs/node/commit/ddbe313660) 
 
@@ -37,7 +39,8 @@
 ### Added
 - Adds package skeleton [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/coconutcraig/laravel-postmark/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/coconutcraig/laravel-postmark/compare/v0.2.1...v1.0.0
 [0.2.1]: https://github.com/coconutcraig/laravel-postmark/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/coconutcraig/laravel-postmark/compare/v0.1.0...v0.2.0
