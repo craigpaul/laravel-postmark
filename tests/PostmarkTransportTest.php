@@ -31,6 +31,7 @@ class PostmarkTransportTest extends TestCase
         $message->setTo('me@example.com');
         $message->setCc('cc@example.com');
         $message->setBcc('bcc@example.com');
+        $message->setReplyTo('replyTo@example.com');
         $headers = $message->getHeaders();
         $headers->addTextHeader('Tag', 'Tagged');
         $this->message = $message;
@@ -46,10 +47,12 @@ class PostmarkTransportTest extends TestCase
         $to = $this->invokeMethod($this->transport, 'getContacts', [$this->message->getTo()]);
         $cc = $this->invokeMethod($this->transport, 'getContacts', [$this->message->getCc()]);
         $bcc = $this->invokeMethod($this->transport, 'getContacts', [$this->message->getBcc()]);
+        $replyTo = $this->invokeMethod($this->transport, 'getContacts', [$this->message->getReplyTo()]);
 
         $this->assertEquals('me@example.com', $to);
         $this->assertEquals('cc@example.com', $cc);
         $this->assertEquals('bcc@example.com', $bcc);
+        $this->assertEquals('replyTo@example.com', $replyTo);
     }
 
     /** @test */

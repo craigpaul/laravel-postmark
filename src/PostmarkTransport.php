@@ -113,6 +113,7 @@ class PostmarkTransport extends Transport
         $to = $this->getContacts($message->getTo());
         $cc = $this->getContacts($message->getCc());
         $bcc = $this->getContacts($message->getBcc());
+        $replyTo = $this->getContacts($message->getReplyTo());
 
         return [
             'headers' => [
@@ -127,6 +128,7 @@ class PostmarkTransport extends Transport
                 'Tag' => $headers->has('tag') ? $headers->get('tag')->getFieldBody() : '',
                 'Subject' => $message->getSubject(),
                 'HtmlBody' => $message->getBody(),
+                'ReplyTo' => $replyTo,
             ],
         ];
     }
