@@ -79,8 +79,10 @@ class PostmarkTransport extends Transport
         $children = $message->getChildren();
 
         foreach ($children as $child) {
+            $header = $child->getHeaders()->get('content-type');
+
             $attachments[] = [
-                'Name' => $child->getFilename(),
+                'Name' => $header->getParameter('name'),
                 'Content' => base64_encode($child->getBody()),
                 'ContentType' => $child->getContentType(),
             ];
