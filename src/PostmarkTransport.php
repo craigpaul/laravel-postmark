@@ -2,6 +2,7 @@
 
 namespace Coconuts\Mail;
 
+use Swift_Attachment;
 use Swift_Mime_Message;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Mail\Transport\Transport;
@@ -79,13 +80,15 @@ class PostmarkTransport extends Transport
         $children = $message->getChildren();
 
         foreach ($children as $child) {
-            $header = $child->getHeaders()->get('content-type');
+            if ($child instanceof Swift_Attachment) {
+                $header = $child->getHeaders()->get('content-type');
 
-            $attachments[] = [
-                'Name' => $header->getParameter('name'),
-                'Content' => base64_encode($child->getBody()),
-                'ContentType' => $child->getContentType(),
-            ];
+                $attachments[] = [
+                    'Name' => $header->getParameter('name'),
+                    'Content' => base64_encode($child->getBody()),
+                    'ContentType' => $child->getContentType(),
+                ];
+            }
         }
 
         return $attachments;
