@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [1.1.4]
+
+### Fixed
+
+- Adds check to make sure we only attach swift attachments [`e3a4c7b86b`](https://github.com/coconutcraig/laravel-postmark/commit/e3a4c7b86b) 
+
 ## [1.1.3]
 
 ### Fixed
@@ -57,7 +63,9 @@
 ### Added
 - Adds package skeleton [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.2...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.4...HEAD
+[1.1.4]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.3...v1.1.4
+[1.1.3]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/coconutcraig/laravel-postmark/compare/v1.0.0...v1.1.0
