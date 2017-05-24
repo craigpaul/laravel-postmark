@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [1.1.2]
+
+- Adds attachment handling [`24d9e889bb`](https://github.com/coconutcraig/laravel-postmark/commit/24d9e889bb) 
+
 ## [1.1.1]
 
 ### Added
@@ -45,7 +49,8 @@
 ### Added
 - Adds package skeleton [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.1...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.2...HEAD
+[1.1.2]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/coconutcraig/laravel-postmark/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/coconutcraig/laravel-postmark/compare/v0.2.1...v1.0.0
