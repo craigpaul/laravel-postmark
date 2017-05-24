@@ -2,7 +2,15 @@
 
 ## [Unreleased]
 
+## [1.1.3]
+
+### Fixed
+
+- Fixes bug with getting filename [`3a03b6f8eb`](https://github.com/coconutcraig/laravel-postmark/commit/3a03b6f8eb) 
+
 ## [1.1.2]
+
+### Added
 
 - Adds attachment handling [`24d9e889bb`](https://github.com/coconutcraig/laravel-postmark/commit/24d9e889bb) 
 
