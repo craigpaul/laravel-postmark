@@ -66,6 +66,30 @@ class PostmarkTransport extends Transport
     }
 
     /**
+     * Get all attachments for the given message.
+     *
+     * @param \Swift_Mime_Message $message
+     *
+     * @return array
+     */
+    protected function getAttachments(Swift_Mime_Message $message)
+    {
+        $attachments = [];
+
+        $children = $message->getChildren();
+
+        foreach ($children as $child) {
+            $attachments[] = [
+                'Name' => $child->getFilename(),
+                'Content' => base64_encode($child->getBody()),
+                'ContentType' => $child->getContentType(),
+            ];
+        }
+
+        return $attachments;
+    }
+
+    /**
      * Format the contacts for the API request
      *
      * @param array $contacts
@@ -114,6 +138,7 @@ class PostmarkTransport extends Transport
         $cc = $this->getContacts($message->getCc());
         $bcc = $this->getContacts($message->getBcc());
         $replyTo = $this->getContacts($message->getReplyTo());
+        $attachments = $this->getAttachments($message);
 
         return [
             'headers' => [
@@ -129,6 +154,7 @@ class PostmarkTransport extends Transport
                 'Subject' => $message->getSubject(),
                 'HtmlBody' => $message->getBody(),
                 'ReplyTo' => $replyTo,
+                'Attachments' => $attachments,
             ],
         ];
     }

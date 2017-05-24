@@ -26,12 +26,15 @@ class PostmarkTransportTest extends TestCase
     {
         parent::setUp();
 
+        $attachment = \Swift_Attachment::newInstance('test attachment', 'test.txt');
+        $attachment->setContentType('text/plain');
         $message = new \Swift_Message('Foo subject', 'Bar body');
         $message->setFrom('myself@example.com');
         $message->setTo('me@example.com');
         $message->setCc('cc@example.com');
         $message->setBcc('bcc@example.com');
         $message->setReplyTo('replyTo@example.com');
+        $message->attach($attachment);
         $headers = $message->getHeaders();
         $headers->addTextHeader('Tag', 'Tagged');
         $this->message = $message;
@@ -78,6 +81,14 @@ class PostmarkTransportTest extends TestCase
         $this->assertArrayHasKey('Subject', $payload['json']);
         $this->assertArrayHasKey('Tag', $payload['json']);
         $this->assertArrayHasKey('HtmlBody', $payload['json']);
+        $this->assertArrayHasKey('ReplyTo', $payload['json']);
+        $this->assertArrayHasKey('Attachments', $payload['json']);
+
+        $attachment = $payload['json']['Attachments'][0];
+
+        $this->assertSame('test.txt', $attachment['Name']);
+        $this->assertSame(base64_encode('test attachment'), $attachment['Content']);
+        $this->assertSame('text/plain', $attachment['ContentType']);
     }
 
     /** @test */
