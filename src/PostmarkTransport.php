@@ -59,7 +59,12 @@ class PostmarkTransport extends Transport
     {
         $this->beforeSendPerformed($message);
 
-        $this->client->post($this->url, $this->payload($message));
+        $response = $this->client->post($this->url, $this->payload($message));
+
+        $message->getHeaders()->addTextHeader(
+            'X-PM-Message-Id',
+            $this->getMessageId($response)
+        );
 
         $this->sendPerformed($message);
 
@@ -126,6 +131,20 @@ class PostmarkTransport extends Transport
             })
             ->values()
             ->implode(',');
+    }
+
+    /**
+     * Get the message ID from the response.
+     *
+     * @param \GuzzleHttp\Psr7\Response $response
+     * @return string
+     */
+    protected function getMessageId($response)
+    {
+        return object_get(
+            json_decode($response->getBody()->getContents()),
+            'MessageID'
+        );
     }
 
     /**
