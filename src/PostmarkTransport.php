@@ -127,7 +127,7 @@ class PostmarkTransport extends Transport
     {
         return collect($message->getFrom())
             ->map(function ($display, $address) {
-                return $display ? $display . " <$address>" : $address;
+                return $display ? "$display <$address>" : $address;
             })
             ->values()
             ->implode(',');
@@ -137,6 +137,7 @@ class PostmarkTransport extends Transport
      * Get the message ID from the response.
      *
      * @param \GuzzleHttp\Psr7\Response $response
+     *
      * @return string
      */
     protected function getMessageId($response)

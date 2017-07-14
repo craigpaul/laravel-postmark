@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [1.1.5]
+
+### Updated
+- Set X-PM-Message-Id into swift message headers [`a7a744d53a`](https://github.com/coconutcraig/laravel-postmark/commit/a7a744d53a) 
+- Updates minor code styling [`8dfb904663`](https://github.com/coconutcraig/laravel-postmark/commit/8dfb904663)  
+
 ## [1.1.4]
 
 ### Fixed
@@ -63,7 +69,8 @@
 ### Added
 - Adds package skeleton [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.4...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.5...HEAD
+[1.1.5]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.4...v1.1.5
 [1.1.4]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.3...v1.1.4
 [1.1.3]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.1...v1.1.2
