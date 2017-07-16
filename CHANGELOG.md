@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- Added a service provider that extends the TransportManager class with a Postmark driver.
+
 ## [1.1.5]
 
 ### Updated
