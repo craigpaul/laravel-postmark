@@ -33,8 +33,8 @@ class PostmarkServiceProvider extends ServiceProvider
      */
     protected function guzzle($config)
     {
-        return new HttpClient(Arr::add(
-            Arr::get($config, 'guzzle', []),
+        return new HttpClient(array_add(
+            array_get($config, 'guzzle', []),
             'connect_timeout',
             60
         ));
