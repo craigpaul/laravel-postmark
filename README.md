@@ -19,16 +19,10 @@ $ composer require coconutcraig/laravel-postmark
 
 ## Usage
 
-In order to take advantage of the Postmark mail driver, we need to **replace** the existing `MailServiceProvider` in `config/app.php`. Find this line:
+After updating composer, add the PostmarkServiceProvider to the providers array in `config/app.php`
 
 ``` php
-Iluminate\Mail\MailServiceProvider::class,
-```
-
-And **replace** it with:
-
-```php
-Coconuts\Mail\MailServiceProvider::class,
+Coconuts\Mail\PostmarkServiceProvider::class,
 ```
 
 Next we will need to update the `config/services.php` file to hold our Postmark specific config.
