@@ -3,7 +3,7 @@
 namespace Coconuts\Mail;
 
 use Swift_Attachment;
-use Swift_Mime_Message;
+use Swift_Mime_SimpleMessage;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Mail\Transport\Transport;
 
@@ -50,12 +50,12 @@ class PostmarkTransport extends Transport
      * Recipient/sender data will be retrieved from the Message API.
      * The return value is the number of recipients who were accepted for delivery.
      *
-     * @param Swift_Mime_Message $message
+     * @param Swift_Mime_SimpleMessage $message
      * @param string[] $failedRecipients An array of failures by-reference
      *
      * @return int
      */
-    public function send(Swift_Mime_Message $message, &$failedRecipients = null)
+    public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
     {
         $this->beforeSendPerformed($message);
 
@@ -74,11 +74,11 @@ class PostmarkTransport extends Transport
     /**
      * Get all attachments for the given message.
      *
-     * @param \Swift_Mime_Message $message
+     * @param \Swift_Mime_SimpleMessage $message
      *
      * @return array
      */
-    protected function getAttachments(Swift_Mime_Message $message)
+    protected function getAttachments(Swift_Mime_SimpleMessage $message)
     {
         $attachments = [];
 
@@ -123,7 +123,7 @@ class PostmarkTransport extends Transport
      *
      * @return string
      */
-    protected function getFrom(Swift_Mime_Message $message)
+    protected function getFrom(Swift_Mime_SimpleMessage $message)
     {
         return collect($message->getFrom())
             ->map(function ($display, $address) {
@@ -155,7 +155,7 @@ class PostmarkTransport extends Transport
      *
      * @return array
      */
-    protected function payload(Swift_Mime_Message $message)
+    protected function payload(Swift_Mime_SimpleMessage $message)
     {
         $headers = $message->getHeaders();
 

@@ -19,13 +19,7 @@ $ composer require coconutcraig/laravel-postmark
 
 ## Usage
 
-After updating composer, add the PostmarkServiceProvider to the providers array in `config/app.php`
-
-``` php
-Coconuts\Mail\PostmarkServiceProvider::class,
-```
-
-Next we will need to update the `config/services.php` file to hold our Postmark specific config.
+Update the `config/services.php` file to hold our Postmark specific config.
 
 ```php
 return [
