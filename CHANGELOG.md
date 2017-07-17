@@ -2,7 +2,19 @@
 
 ## [Unreleased]
 
-- Added a service provider that extends the TransportManager class with a Postmark driver.
+## [2.0.0]
+
+### Added
+- Adds upgrade instructions from v1 to v2 [`a3450dde6f`](https://github.com/coconutcraig/laravel-postmark/commit/a3450dde6f) 
+- Adds a short description about Postmark [`17056874e6`](https://github.com/coconutcraig/laravel-postmark/commit/17056874e6) 
+- Added a service provider. [`5bf7472003`](https://github.com/coconutcraig/laravel-postmark/commit/5bf7472003) 
+
+### Removed
+- Removed guzzle test param. [`b65d000870`](https://github.com/coconutcraig/laravel-postmark/commit/b65d000870) 
+- Removed unused local variable $app [`295c02ae0a`](https://github.com/coconutcraig/laravel-postmark/commit/295c02ae0a)
+
+### Updated
+- Using helper method instead of static access to class 'Arr' [`c891f714c9`](https://github.com/coconutcraig/laravel-postmark/commit/c891f714c9) 
 
 ## [1.1.5]
 
@@ -71,7 +83,8 @@
 ### Added
 - Adds package skeleton [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.5...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.5...v2.0.0
 [1.1.5]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.4...v1.1.5
 [1.1.4]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.3...v1.1.4
 [1.1.3]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.2...v1.1.3
