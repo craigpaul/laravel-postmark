@@ -17,7 +17,7 @@ class PostmarkServiceProvider extends ServiceProvider
     {
         $config = $this->app['config']->get('services.postmark', []);
 
-        $this->app['swift.transport']->extend('postmark', function ($app) use ($config) {
+        $this->app['swift.transport']->extend('postmark', function () use ($config) {
             return new PostmarkTransport(
                 $this->guzzle($config),
                 $config['secret']
