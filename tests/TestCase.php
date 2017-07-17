@@ -18,7 +18,6 @@ class TestCase extends Orchestra
     {
         $app['config']->set('services.postmark', [
             'secret' => 'POSTMARK_API_TEST',
-            'guzzle'=>['test'=>1]
         ]);
     }
 
