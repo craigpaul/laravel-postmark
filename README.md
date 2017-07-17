@@ -64,6 +64,24 @@ public function build()
 }
 ```
 
+## Upgrading
+
+### From V1 to V2
+
+When upgrading from V1 to V2, you will need to change the old service provider back to the MailServiceProvider that comes with Laravel in `config/app.php`.
+
+``` php
+Coconuts\Mail\PostmarkServiceProvider::class,
+```
+
+And **replace** it with:
+
+```php
+Iluminate\Mail\MailServiceProvider::class,
+```
+
+After that, you can follow the regular [install instructions](#install).
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
