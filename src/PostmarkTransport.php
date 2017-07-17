@@ -110,7 +110,7 @@ class PostmarkTransport extends Transport
     {
         return collect($contacts)
             ->map(function ($display, $address) {
-                return $display ? $display . " <{$address}>" : $address;
+                return $display ? $display." <{$address}>" : $address;
             })
             ->values()
             ->implode(',');

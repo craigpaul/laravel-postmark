@@ -3,7 +3,6 @@
 namespace Coconuts\Mail;
 
 use GuzzleHttp\Client as HttpClient;
-use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 
 class PostmarkServiceProvider extends ServiceProvider
@@ -28,7 +27,8 @@ class PostmarkServiceProvider extends ServiceProvider
     /**
      * Get a fresh Guzzle HTTP client instance.
      *
-     * @param  array  $config
+     * @param array $config
+     *
      * @return \GuzzleHttp\Client
      */
     protected function guzzle($config)
