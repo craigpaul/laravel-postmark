@@ -17,6 +17,13 @@ Via Composer
 $ composer require coconutcraig/laravel-postmark
 ```
 
+## Support
+
+| Laravel | Laravel Postmark |
+|---------|------------------|
+| 5.4     | <= 2.0           |
+| 5.5     | >= 2.1           |
+
 ## Usage
 
 Update the `config/services.php` file to hold our Postmark specific config.
@@ -56,22 +63,6 @@ public function build()
         $message->getHeaders()->addTextHeader('tag', 'value');
     });
 }
-```
-
-## Upgrading
-
-### From V1 to V2
-
-When upgrading from V1 to V2, you will need to change the old service provider back to the MailServiceProvider that comes with Laravel in `config/app.php`.
-
-``` php
-Coconuts\Mail\PostmarkServiceProvider::class,
-```
-
-And **replace** it with:
-
-```php
-Iluminate\Mail\MailServiceProvider::class,
 ```
 
 After that, you can follow the regular [install instructions](#install).

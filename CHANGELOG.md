@@ -3,7 +3,7 @@
 ## [Unreleased]
 
 ### Updated
-- Added support for Laravel 5.5.
+- Add support for Laravel 5.5. [`d29cdb46f6`](https://github.com/coconutcraig/laravel-postmark/commit/d29cdb46f6)
 
 ## [2.0.0]
 
