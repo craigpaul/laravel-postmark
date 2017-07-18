@@ -26,7 +26,7 @@ class PostmarkTransportTest extends TestCase
     {
         parent::setUp();
 
-        $attachment = \Swift_Attachment::newInstance('test attachment', 'test.txt');
+        $attachment = new \Swift_Attachment('test attachment', 'test.txt');
         $attachment->setContentType('text/plain');
         $message = new \Swift_Message('Foo subject', 'Bar body');
         $message->setFrom('myself@example.com');

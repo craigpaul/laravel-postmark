@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Updated
+- Added support for Laravel 5.5.
+
 ## [2.0.0]
 
 ### Added
