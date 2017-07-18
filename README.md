@@ -26,6 +26,10 @@ $ composer require coconutcraig/laravel-postmark
 | 5.4     | <= 2.0           |
 | 5.5     | >= 2.1           |
 
+## Upgrading
+
+Please see [UPGRADE](UPGRADE.md) for details.
+
 ## Usage
 
 Update the `config/services.php` file to hold our Postmark specific config.
