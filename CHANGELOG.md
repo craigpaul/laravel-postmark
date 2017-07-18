@@ -2,20 +2,26 @@
 
 ## [Unreleased]
 
+## [2.1.1] - 2017-07-17
+
 ### Added
 - Adds upgrade guide and link to readme [`158742412c`](https://github.com/coconutcraig/laravel-postmark/commit/158742412c)
 - Adds tag link for laravel 5.4 support [`a4b8c64f5c`](https://github.com/coconutcraig/laravel-postmark/commit/a4b8c64f5c)
 
 ### Removed
+- Removes redundant getFrom method and test [`81c555b9af`](https://github.com/coconutcraig/laravel-postmark/commit/81c555b9af)
 - Removes line forgotten from previous upgrade guide [`4910872bbe`](https://github.com/coconutcraig/laravel-postmark/commit/4910872bbe)
 
-## [2.1.0]
+### Updated
+- Updates docblocks [`e3af135c8f`](https://github.com/coconutcraig/laravel-postmark/commit/e3af135c8f)
+
+## [2.1.0] - 2017-07-17
 
 ### Updated
 - Adds support table to readme [`1f6f85b0c0`](https://github.com/coconutcraig/laravel-postmark/commit/1f6f85b0c0)
 - Add support for Laravel 5.5. [`d29cdb46f6`](https://github.com/coconutcraig/laravel-postmark/commit/d29cdb46f6)
 
-## [2.0.0]
+## [2.0.0] - 2017-07-17
 
 ### Added
 - Adds upgrade instructions from v1 to v2 [`a3450dde6f`](https://github.com/coconutcraig/laravel-postmark/commit/a3450dde6f) 
@@ -29,37 +35,37 @@
 ### Updated
 - Using helper method instead of static access to class 'Arr' [`c891f714c9`](https://github.com/coconutcraig/laravel-postmark/commit/c891f714c9) 
 
-## [1.1.5]
+## [1.1.5] - 2017-07-02
 
 ### Updated
 - Set X-PM-Message-Id into swift message headers [`a7a744d53a`](https://github.com/coconutcraig/laravel-postmark/commit/a7a744d53a) 
 - Updates minor code styling [`8dfb904663`](https://github.com/coconutcraig/laravel-postmark/commit/8dfb904663)  
 
-## [1.1.4]
+## [1.1.4] - 2017-05-24
 
 ### Fixed
 
 - Adds check to make sure we only attach swift attachments [`e3a4c7b86b`](https://github.com/coconutcraig/laravel-postmark/commit/e3a4c7b86b) 
 
-## [1.1.3]
+## [1.1.3] - 2017-05-24
 
 ### Fixed
 
 - Fixes bug with getting filename [`3a03b6f8eb`](https://github.com/coconutcraig/laravel-postmark/commit/3a03b6f8eb) 
 
-## [1.1.2]
+## [1.1.2] - 2017-05-24
 
 ### Added
 
 - Adds attachment handling [`24d9e889bb`](https://github.com/coconutcraig/laravel-postmark/commit/24d9e889bb) 
 
-## [1.1.1]
+## [1.1.1] - 2017-05-23
 
 ### Added
 
 - Adds reply to header override [`71695a1829`](https://github.com/coconutcraig/laravel-postmark/commit/71695a1829) 
 
-## [1.1.0]
+## [1.1.0] - 2017-05-17
 
 ### Changed
 - Separates out addresses into proper fields [`ddbe313660`](https://github.com/coconutcraig/laravel-postmark/commit/ddbe313660) 
@@ -96,7 +102,8 @@
 ### Added
 - Adds package skeleton [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.1...HEAD
+[2.1.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.5...v2.0.0
 [1.1.5]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.4...v1.1.5
