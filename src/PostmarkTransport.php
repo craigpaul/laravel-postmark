@@ -119,7 +119,7 @@ class PostmarkTransport extends Transport
     /**
      * Get the "From" payload field for the API request.
      *
-     * @param \Swift_Mime_Message $message
+     * @param \Swift_Mime_SimpleMessage $message
      *
      * @return string
      */
@@ -151,7 +151,7 @@ class PostmarkTransport extends Transport
     /**
      * Get the HTTP payload for sending the Postmark message.
      *
-     * @param \Swift_Mime_Message $message
+     * @param \Swift_Mime_SimpleMessage $message
      *
      * @return array
      */
