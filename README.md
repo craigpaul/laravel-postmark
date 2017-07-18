@@ -67,8 +67,6 @@ public function build()
 }
 ```
 
-After that, you can follow the regular [install instructions](#install).
-
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
