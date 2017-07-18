@@ -1,5 +1,7 @@
 # Laravel Postmark
 
+Looking for Laravel Postmark for Laravel 5.4? Visit the [`2.0` tag][link-20-tag]
+
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
 [![Build Status][ico-travis]][link-travis]
@@ -108,3 +110,4 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-downloads]: https://packagist.org/packages/coconutcraig/laravel-postmark
 [link-author]: https://github.com/coconutcraig
 [link-contributors]: ../../contributors
+[link-20-tag]: https://github.com/coconutcraig/laravel-postmark/tree/v2.0.0
