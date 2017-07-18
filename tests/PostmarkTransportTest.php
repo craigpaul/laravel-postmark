@@ -59,15 +59,6 @@ class PostmarkTransportTest extends TestCase
     }
 
     /** @test */
-    public function can_get_the_from_field_as_a_string()
-    {
-        $string = $this->invokeMethod($this->transport, 'getFrom', [$this->message]);
-
-        $this->assertEquals('myself@example.com', $string);
-        $this->assertNotEquals('me@example.com', $string);
-    }
-
-    /** @test */
     public function can_create_the_proper_payload_for_a_message()
     {
         $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);

@@ -117,23 +117,6 @@ class PostmarkTransport extends Transport
     }
 
     /**
-     * Get the "From" payload field for the API request.
-     *
-     * @param \Swift_Mime_SimpleMessage $message
-     *
-     * @return string
-     */
-    protected function getFrom(Swift_Mime_SimpleMessage $message)
-    {
-        return collect($message->getFrom())
-            ->map(function ($display, $address) {
-                return $display ? "$display <$address>" : $address;
-            })
-            ->values()
-            ->implode(',');
-    }
-
-    /**
      * Get the message ID from the response.
      *
      * @param \GuzzleHttp\Psr7\Response $response
@@ -160,6 +143,7 @@ class PostmarkTransport extends Transport
         $headers = $message->getHeaders();
 
         $to = $this->getContacts($message->getTo());
+        $from = $this->getContacts($message->getFrom());
         $cc = $this->getContacts($message->getCc());
         $bcc = $this->getContacts($message->getBcc());
         $replyTo = $this->getContacts($message->getReplyTo());
@@ -171,7 +155,7 @@ class PostmarkTransport extends Transport
                 'X-Postmark-Server-Token' => $this->key,
             ],
             'json' => [
-                'From' => $this->getFrom($message),
+                'From' => $from,
                 'To' => $to,
                 'Cc' => $cc,
                 'Bcc' => $bcc,
