@@ -2,9 +2,17 @@
 
 ## [Unreleased]
 
+### Added
+- Adds upgrade guide and link to readme [`158742412c`](https://github.com/coconutcraig/laravel-postmark/commit/158742412c)
+- Adds tag link for laravel 5.4 support [`a4b8c64f5c`](https://github.com/coconutcraig/laravel-postmark/commit/a4b8c64f5c)
+
+### Removed
+- Removes line forgotten from previous upgrade guide [`4910872bbe`](https://github.com/coconutcraig/laravel-postmark/commit/4910872bbe)
+
 ## [2.1.0]
 
 ### Updated
+- Adds support table to readme [`1f6f85b0c0`](https://github.com/coconutcraig/laravel-postmark/commit/1f6f85b0c0)
 - Add support for Laravel 5.5. [`d29cdb46f6`](https://github.com/coconutcraig/laravel-postmark/commit/d29cdb46f6)
 
 ## [2.0.0]
