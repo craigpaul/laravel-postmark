@@ -80,23 +80,16 @@ class PostmarkTransport extends Transport
      */
     protected function getAttachments(Swift_Mime_SimpleMessage $message)
     {
-        $attachments = [];
-
-        $children = $message->getChildren();
-
-        foreach ($children as $child) {
-            if ($child instanceof Swift_Attachment) {
-                $header = $child->getHeaders()->get('content-type');
-
-                $attachments[] = [
-                    'Name' => $header->getParameter('name'),
+        return collect($message->getChildren())
+            ->filter(function ($child) {
+                return $child instanceof Swift_Attachment;
+            })->map(function ($child) {
+                return [
+                    'Name' => $child->getHeaders()->get('content-type')->getParameter('name'),
                     'Content' => base64_encode($child->getBody()),
-                    'ContentType' => $child->getContentType(),
+                    'ContentType' => $child->getContentType()
                 ];
-            }
-        }
-
-        return $attachments;
+            });
     }
 
     /**
