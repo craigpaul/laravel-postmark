@@ -100,7 +100,7 @@ class PostmarkTransport extends Transport
     }
 
     /**
-     * Format the contacts for the API request
+     * Format the contacts for the API request.
      *
      * @param array $contacts
      *
