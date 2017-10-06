@@ -68,18 +68,19 @@ class PostmarkTransport extends Transport
      *
      * @param \Swift_Mime_SimpleMessage $message
      *
-     * @return array
+     * @return \Illuminate\Support\Collection
      */
     protected function getAttachments(Swift_Mime_SimpleMessage $message)
     {
         return collect($message->getChildren())
             ->filter(function ($child) {
                 return $child instanceof Swift_Attachment;
-            })->map(function ($child) {
+            })
+            ->map(function ($child) {
                 return [
                     'Name' => $child->getHeaders()->get('content-type')->getParameter('name'),
                     'Content' => base64_encode($child->getBody()),
-                    'ContentType' => $child->getContentType()
+                    'ContentType' => $child->getContentType(),
                 ];
             });
     }
@@ -95,7 +96,7 @@ class PostmarkTransport extends Transport
     {
         return collect($contacts)
             ->map(function ($display, $address) {
-                return $display ? $display." <{$address}>" : $address;
+                return $display ? $display . " <{$address}>" : $address;
             })
             ->values()
             ->implode(',');
