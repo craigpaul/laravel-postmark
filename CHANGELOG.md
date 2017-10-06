@@ -2,8 +2,10 @@
 
 ## [Unreleased]
 
+## [2.1.3] - 2017-10-06
+
 ### Fixed
-- getAttachments method should return array instead of Collection.
+- getAttachments should return array. [`9adaf6340f`](https://github.com/coconutcraig/laravel-postmark/commit/9adaf6340f) 
 
 ## [2.1.2] - 2017-10-06
 
@@ -115,7 +117,8 @@
 ### Added
 - Adds package skeleton [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.2...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.3...HEAD
+[2.1.3]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.2...v2.1.3
 [2.1.2]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.1...v2.1.2
 [2.1.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.0.0...v2.1.0
