@@ -45,15 +45,7 @@ class PostmarkTransport extends Transport
     }
 
     /**
-     * Send the given Message.
-     *
-     * Recipient/sender data will be retrieved from the Message API.
-     * The return value is the number of recipients who were accepted for delivery.
-     *
-     * @param Swift_Mime_SimpleMessage $message
-     * @param string[] $failedRecipients An array of failures by-reference
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
     {
