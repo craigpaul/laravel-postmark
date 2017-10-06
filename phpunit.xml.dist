@@ -10,7 +10,7 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="Laravel Postmarks Test Suite">
+        <testsuite name="Laravel Postmark Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

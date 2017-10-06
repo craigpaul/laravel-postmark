@@ -45,15 +45,7 @@ class PostmarkTransport extends Transport
     }
 
     /**
-     * Send the given Message.
-     *
-     * Recipient/sender data will be retrieved from the Message API.
-     * The return value is the number of recipients who were accepted for delivery.
-     *
-     * @param Swift_Mime_SimpleMessage $message
-     * @param string[] $failedRecipients An array of failures by-reference
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
     {
@@ -80,27 +72,20 @@ class PostmarkTransport extends Transport
      */
     protected function getAttachments(Swift_Mime_SimpleMessage $message)
     {
-        $attachments = [];
-
-        $children = $message->getChildren();
-
-        foreach ($children as $child) {
-            if ($child instanceof Swift_Attachment) {
-                $header = $child->getHeaders()->get('content-type');
-
-                $attachments[] = [
-                    'Name' => $header->getParameter('name'),
+        return collect($message->getChildren())
+            ->filter(function ($child) {
+                return $child instanceof Swift_Attachment;
+            })->map(function ($child) {
+                return [
+                    'Name' => $child->getHeaders()->get('content-type')->getParameter('name'),
                     'Content' => base64_encode($child->getBody()),
-                    'ContentType' => $child->getContentType(),
+                    'ContentType' => $child->getContentType()
                 ];
-            }
-        }
-
-        return $attachments;
+            });
     }
 
     /**
-     * Format the contacts for the API request
+     * Format the contacts for the API request.
      *
      * @param array $contacts
      *
@@ -140,30 +125,21 @@ class PostmarkTransport extends Transport
      */
     protected function payload(Swift_Mime_SimpleMessage $message)
     {
-        $headers = $message->getHeaders();
-
-        $to = $this->getContacts($message->getTo());
-        $from = $this->getContacts($message->getFrom());
-        $cc = $this->getContacts($message->getCc());
-        $bcc = $this->getContacts($message->getBcc());
-        $replyTo = $this->getContacts($message->getReplyTo());
-        $attachments = $this->getAttachments($message);
-
         return [
             'headers' => [
                 'Accept' => 'application/json',
                 'X-Postmark-Server-Token' => $this->key,
             ],
             'json' => [
-                'From' => $from,
-                'To' => $to,
-                'Cc' => $cc,
-                'Bcc' => $bcc,
-                'Tag' => $headers->has('tag') ? $headers->get('tag')->getFieldBody() : '',
+                'From' => $this->getContacts($message->getFrom()),
+                'To' => $this->getContacts($message->getTo()),
+                'Cc' => $this->getContacts($message->getCc()),
+                'Bcc' => $this->getContacts($message->getBcc()),
+                'Tag' => $message->getHeaders()->has('tag') ? $message->getHeaders()->get('tag')->getFieldBody() : '',
                 'Subject' => $message->getSubject(),
                 'HtmlBody' => $message->getBody(),
-                'ReplyTo' => $replyTo,
-                'Attachments' => $attachments,
+                'ReplyTo' => $this->getContacts($message->getReplyTo()),
+                'Attachments' => $this->getAttachments($message),
             ],
         ];
     }
