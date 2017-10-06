@@ -68,7 +68,7 @@ class PostmarkTransport extends Transport
      *
      * @param \Swift_Mime_SimpleMessage $message
      *
-     * @return \Illuminate\Support\Collection
+     * @return array
      */
     protected function getAttachments(Swift_Mime_SimpleMessage $message)
     {
@@ -82,7 +82,8 @@ class PostmarkTransport extends Transport
                     'Content' => base64_encode($child->getBody()),
                     'ContentType' => $child->getContentType(),
                 ];
-            });
+            })
+            ->toArray();
     }
 
     /**

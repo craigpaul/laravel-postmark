@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Fixed
+- getAttachments method should return array instead of Collection.
+
 ## [2.1.2] - 2017-10-06
 
 ### Updated
