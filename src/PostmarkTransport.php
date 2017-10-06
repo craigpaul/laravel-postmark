@@ -140,30 +140,21 @@ class PostmarkTransport extends Transport
      */
     protected function payload(Swift_Mime_SimpleMessage $message)
     {
-        $headers = $message->getHeaders();
-
-        $to = $this->getContacts($message->getTo());
-        $from = $this->getContacts($message->getFrom());
-        $cc = $this->getContacts($message->getCc());
-        $bcc = $this->getContacts($message->getBcc());
-        $replyTo = $this->getContacts($message->getReplyTo());
-        $attachments = $this->getAttachments($message);
-
         return [
             'headers' => [
                 'Accept' => 'application/json',
                 'X-Postmark-Server-Token' => $this->key,
             ],
             'json' => [
-                'From' => $from,
-                'To' => $to,
-                'Cc' => $cc,
-                'Bcc' => $bcc,
-                'Tag' => $headers->has('tag') ? $headers->get('tag')->getFieldBody() : '',
+                'From' => $this->getContacts($message->getFrom()),
+                'To' => $this->getContacts($message->getTo()),
+                'Cc' => $this->getContacts($message->getCc()),
+                'Bcc' => $this->getContacts($message->getBcc()),
+                'Tag' => $message->getHeaders()->has('tag') ? $message->getHeaders()->get('tag')->getFieldBody() : '',
                 'Subject' => $message->getSubject(),
                 'HtmlBody' => $message->getBody(),
-                'ReplyTo' => $replyTo,
-                'Attachments' => $attachments,
+                'ReplyTo' => $this->getContacts($message->getReplyTo()),
+                'Attachments' => $this->getAttachments($message),
             ],
         ];
     }
