@@ -2,11 +2,15 @@
 
 ## [Unreleased]
 
+## [2.1.2] - 2017-10-06
+
 ### Updated
-- Refactored the getAttachments method.
-- Removed single used variables.
-- Inherit the docs from the parent class.
-- Fixed typo.
+- Updates docblock return. [`ba2c7dbe8e`](https://github.com/coconutcraig/laravel-postmark/commit/ba2c7dbe8e)
+- Inherit the docs from the parent class. [`8a37c8c3ef`](https://github.com/coconutcraig/laravel-postmark/commit/8a37c8c3ef)
+- Refactor getAttachments method. [`a5d4b90969`](https://github.com/coconutcraig/laravel-postmark/commit/a5d4b90969)
+- Missing dot at the end of the sentence. [`5a1d90406a`](https://github.com/coconutcraig/laravel-postmark/commit/5a1d90406a)
+- Remove single used variables. [`69603881f4`](https://github.com/coconutcraig/laravel-postmark/commit/69603881f4)
+- Typo. [`598b9b3a47`](https://github.com/coconutcraig/laravel-postmark/commit/598b9b3a47)
 
 ## [2.1.1] - 2017-07-17
 
@@ -108,7 +112,8 @@
 ### Added
 - Adds package skeleton [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.1...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.2...HEAD
+[2.1.2]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.1...v2.1.2
 [2.1.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/coconutcraig/laravel-postmark/compare/v1.1.5...v2.0.0
