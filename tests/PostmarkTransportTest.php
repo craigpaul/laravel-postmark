@@ -45,7 +45,7 @@ class PostmarkTransportTest extends TestCase
     }
 
     /** @test */
-    public function can_given_contacts_into_a_comma_separated_string()
+    public function can_get_given_contacts_into_a_comma_separated_string()
     {
         $to = $this->invokeMethod($this->transport, 'getContacts', [$this->message->getTo()]);
         $cc = $this->invokeMethod($this->transport, 'getContacts', [$this->message->getCc()]);
@@ -56,6 +56,20 @@ class PostmarkTransportTest extends TestCase
         $this->assertEquals('cc@example.com', $cc);
         $this->assertEquals('bcc@example.com', $bcc);
         $this->assertEquals('replyTo@example.com', $replyTo);
+    }
+
+    /** @test */
+    public function can_get_given_attachments_into_array()
+    {
+        $attachments = $this->invokeMethod($this->transport, 'getAttachments', [$this->message]);
+
+        $this->assertEquals([
+            [
+                'Name' => 'test.txt',
+                'Content' => 'dGVzdCBhdHRhY2htZW50',
+                'ContentType' => 'text/plain',
+            ]
+        ], $attachments);
     }
 
     /** @test */
