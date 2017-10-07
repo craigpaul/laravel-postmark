@@ -305,6 +305,20 @@ class PostmarkTransportTest extends TestCase
     }
 
     /** @test */
+    public function payload_has_the_proper_html_and_text_body_reverse_order()
+    {
+        $message = new \Swift_Message;
+        $message->setBody('<html>', 'text/html');
+        $message->addPart('Lorem ipsum.', 'text/plain');
+        $payload = $this->getPayload($message);
+
+        tap($payload['json'], function ($json) {
+            $this->assertSame('Lorem ipsum.', $json['TextBody']);
+            $this->assertSame('<html>', $json['HtmlBody']);
+        });
+    }
+
+    /** @test */
     public function payload_has_the_proper_reply_to_address()
     {
         $this->message->setReplyTo('replyTo@example.com', 'ReplyName');

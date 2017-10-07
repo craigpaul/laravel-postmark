@@ -144,6 +144,8 @@ class PostmarkTransport extends Transport
 
         switch ($message->getContentType()) {
             case 'text/html':
+            case 'multipart/related':
+            case 'multipart/alternative':
                 $data['HtmlBody'] = $this->getBody($message);
                 break;
             default:
