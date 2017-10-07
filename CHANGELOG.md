@@ -5,6 +5,9 @@
 ### Added
 - Adds Content-Type application/json to payload headers.
 
+### Updated
+- Refactor PostmarkTransportTest.
+
 ## [2.1.3] - 2017-10-06
 
 ### Fixed

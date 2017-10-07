@@ -28,20 +28,23 @@ class PostmarkTransportTest extends TestCase
 
         $attachment = new \Swift_Attachment('test attachment', 'test.txt');
         $attachment->setContentType('text/plain');
-        $message = new \Swift_Message('Foo subject', 'Bar body');
-        $message->setFrom('myself@example.com');
-        $message->setTo('me@example.com');
-        $message->setCc('cc@example.com');
-        $message->setBcc('bcc@example.com');
-        $message->setReplyTo('replyTo@example.com');
-        $message->attach($attachment);
-        $headers = $message->getHeaders();
-        $headers->addTextHeader('Tag', 'Tagged');
-        $this->message = $message;
 
-        $client = new Client();
-        $key = $this->app['config']->get('services.postmark.secret');
-        $this->transport = new PostmarkTransport($client, $key);
+        $this->message = tap(new \Swift_Message, function ($message) use ($attachment) {
+            $message->setSubject('Foo subject');
+            $message->setBody('Bar body', 'text/plain');
+            $message->setFrom('myself@example.com');
+            $message->setTo('me@example.com');
+            $message->setCc('cc@example.com');
+            $message->setBcc('bcc@example.com');
+            $message->setReplyTo('replyTo@example.com');
+            $message->attach($attachment);
+            $message->getHeaders()->addTextHeader('Tag', 'Tagged');
+        });
+
+        $this->transport = new PostmarkTransport(
+            new Client(),
+            $this->app['config']->get('services.postmark.secret')
+        );
     }
 
     /** @test */
@@ -78,22 +81,31 @@ class PostmarkTransportTest extends TestCase
         $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
 
         $this->assertArrayHasKey('headers', $payload);
-        $this->assertArrayHasKey('Accept', $payload['headers']);
-        $this->assertArrayHasKey('X-Postmark-Server-Token', $payload['headers']);
         $this->assertArrayHasKey('json', $payload);
-        $this->assertArrayHasKey('From', $payload['json']);
-        $this->assertArrayHasKey('To', $payload['json']);
-        $this->assertArrayHasKey('Subject', $payload['json']);
-        $this->assertArrayHasKey('Tag', $payload['json']);
-        $this->assertArrayHasKey('HtmlBody', $payload['json']);
-        $this->assertArrayHasKey('ReplyTo', $payload['json']);
-        $this->assertArrayHasKey('Attachments', $payload['json']);
 
-        $attachment = $payload['json']['Attachments'][0];
+        tap($payload['headers'], function ($headers) {
+            $this->assertArrayHasKey('Content-Type', $headers);
+            $this->assertArrayHasKey('Accept', $headers);
+            $this->assertArrayHasKey('X-Postmark-Server-Token', $headers);
+        });
 
-        $this->assertSame('test.txt', $attachment['Name']);
-        $this->assertSame(base64_encode('test attachment'), $attachment['Content']);
-        $this->assertSame('text/plain', $attachment['ContentType']);
+        tap($payload['json'], function ($json) {
+            $this->assertArrayHasKey('From', $json);
+            $this->assertArrayHasKey('To', $json);
+            $this->assertArrayHasKey('Cc', $json);
+            $this->assertArrayHasKey('Bcc', $json);
+            $this->assertArrayHasKey('Subject', $json);
+            $this->assertArrayHasKey('Tag', $json);
+            $this->assertArrayHasKey('HtmlBody', $json);
+            $this->assertArrayHasKey('ReplyTo', $json);
+            $this->assertArrayHasKey('Attachments', $json);
+        });
+
+        tap($payload['json']['Attachments'][0], function ($attachment) {
+            $this->assertSame('test.txt', $attachment['Name']);
+            $this->assertSame(base64_encode('test attachment'), $attachment['Content']);
+            $this->assertSame('text/plain', $attachment['ContentType']);
+        });
     }
 
     /** @test */
