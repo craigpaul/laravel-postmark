@@ -74,6 +74,22 @@ class PostmarkTransportTest extends TestCase
     }
 
     /** @test */
+    public function can_get_given_subject()
+    {
+        $subject = $this->invokeMethod($this->transport, 'getSubject', [$this->message]);
+
+        $this->assertSame('Foo subject', $subject);
+    }
+
+    /** @test */
+    public function get_subject_returns_empty_string_when_there_is_no_subject_set()
+    {
+        $subject = $this->invokeMethod($this->transport, 'getSubject', [new \Swift_Message]);
+
+        $this->assertSame('', $subject);
+    }
+
+    /** @test */
     public function can_get_given_tag()
     {
         $tag = $this->invokeMethod($this->transport, 'getTag', [$this->message]);

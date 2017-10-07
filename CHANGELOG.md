@@ -5,6 +5,7 @@
 ### Added
 - Adds Content-Type application/json to payload headers.
 - Adds getTag function to get the tag from a message.
+- Adds getSubject function to get the subject from a message.
 - Adds tests to ensure that the json payload has the proper values.
 
 ### Updated

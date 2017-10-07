@@ -119,6 +119,18 @@ class PostmarkTransport extends Transport
     }
 
     /**
+     * Get the subject for the given message.
+     *
+     * @param \Swift_Mime_SimpleMessage $message
+     *
+     * @return string
+     */
+    protected function getSubject($message)
+    {
+        return $message->getSubject() ?: '';
+    }
+
+    /**
      * Get the tag for the given message.
      *
      * @param \Swift_Mime_SimpleMessage $message
@@ -155,7 +167,7 @@ class PostmarkTransport extends Transport
                 'Cc' => $this->getContacts($message->getCc()),
                 'Bcc' => $this->getContacts($message->getBcc()),
                 'Tag' => $this->getTag($message),
-                'Subject' => $message->getSubject(),
+                'Subject' => $this->getSubject($message),
                 'HtmlBody' => $message->getBody(),
                 'ReplyTo' => $this->getContacts($message->getReplyTo()),
                 'Attachments' => $this->getAttachments($message),
