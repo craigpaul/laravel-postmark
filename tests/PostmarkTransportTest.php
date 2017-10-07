@@ -47,6 +47,18 @@ class PostmarkTransportTest extends TestCase
         );
     }
 
+    /**
+     * Get the json payload for the given message.
+     *
+     * @param  \Swift_Message $message
+     *
+     * @return string
+     */
+    private function getPayload($message)
+    {
+        return $this->invokeMethod($this->transport, 'payload', [$message]);
+    }
+
     /** @test */
     public function can_get_given_contacts_into_a_comma_separated_string()
     {
@@ -104,7 +116,7 @@ class PostmarkTransportTest extends TestCase
     /** @test */
     public function can_create_the_proper_payload_structure_for_a_message()
     {
-        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+        $payload = $this->getPayload($this->message);
 
         $this->assertArrayHasKey('headers', $payload);
         $this->assertArrayHasKey('json', $payload);
@@ -142,7 +154,7 @@ class PostmarkTransportTest extends TestCase
             'super-secret-token'
         );
 
-        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['headers'], function ($headers) {
             $this->assertSame('application/json', $headers['Content-Type']);
@@ -155,7 +167,7 @@ class PostmarkTransportTest extends TestCase
     public function payload_has_the_proper_from_address()
     {
         $this->message->setFrom('john@example.com', 'John Doe');
-        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('John Doe <john@example.com>', $json['From']);
@@ -166,7 +178,7 @@ class PostmarkTransportTest extends TestCase
     public function payload_has_the_proper_to_address()
     {
         $this->message->setTo('jane@example.com', 'Jane Doe');
-        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('Jane Doe <jane@example.com>', $json['To']);
@@ -177,7 +189,7 @@ class PostmarkTransportTest extends TestCase
     public function payload_has_the_proper_cc_address()
     {
         $this->message->setCc('foo@example.com', 'Foo');
-        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('Foo <foo@example.com>', $json['Cc']);
@@ -188,7 +200,7 @@ class PostmarkTransportTest extends TestCase
     public function payload_has_the_proper_bcc_address()
     {
         $this->message->setBcc('bar@example.com', 'Bar');
-        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('Bar <bar@example.com>', $json['Bcc']);
@@ -199,7 +211,7 @@ class PostmarkTransportTest extends TestCase
     public function payload_has_the_proper_subject()
     {
         $this->message->setSubject('Lorem ipsum.');
-        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('Lorem ipsum.', $json['Subject']);
@@ -210,7 +222,7 @@ class PostmarkTransportTest extends TestCase
     public function payload_has_the_proper_tag()
     {
         $this->message->getHeaders()->addTextHeader('Tag', 'TestTag');
-        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('TestTag', $json['Tag']);
@@ -221,7 +233,7 @@ class PostmarkTransportTest extends TestCase
     public function payload_has_the_proper_reply_to_address()
     {
         $this->message->setReplyTo('replyTo@example.com', 'ReplyName');
-        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('ReplyName <replyTo@example.com>', $json['ReplyTo']);
@@ -232,7 +244,7 @@ class PostmarkTransportTest extends TestCase
     public function payload_has_the_proper_html_body()
     {
         $this->message->setBody('Lorem ipsum.');
-        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('Lorem ipsum.', $json['HtmlBody']);
@@ -252,7 +264,7 @@ class PostmarkTransportTest extends TestCase
         $message->attach($attachment1);
         $message->attach($attachment2);
 
-        $payload = $this->invokeMethod($this->transport, 'payload', [$message]);
+        $payload = $this->getPayload($message);
 
         tap($payload['json']['Attachments'], function ($json) {
             $this->assertCount(2, $json);
