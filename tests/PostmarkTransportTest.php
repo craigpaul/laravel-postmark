@@ -298,7 +298,7 @@ class PostmarkTransportTest extends TestCase
     }
 
     /** @test */
-    public function empty_keys_are_not_present_in_the_json_payload()
+    public function empty_fields_are_not_present_in_the_json_payload()
     {
         $message = new \Swift_Message;
         $payload = $this->getPayload($message);
@@ -309,6 +309,19 @@ class PostmarkTransportTest extends TestCase
             $this->assertArrayNotHasKey('Tag', $json);
             $this->assertArrayNotHasKey('ReplyTo', $json);
             $this->assertArrayNotHasKey('Attachments', $json);
+        });
+    }
+
+    /** @test */
+    public function required_fields_are_present_in_the_json_payload()
+    {
+        $message = new \Swift_Message;
+        $payload = $this->getPayload($message);
+
+        tap($payload['json'], function ($json) {
+            $this->assertArrayHasKey('From', $json);
+            $this->assertArrayHasKey('To', $json);
+            $this->assertArrayHasKey('HtmlBody', $json);
         });
     }
 

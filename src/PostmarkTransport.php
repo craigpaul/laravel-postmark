@@ -164,19 +164,19 @@ class PostmarkTransport extends Transport
         ])
         ->merge([
             'json' => collect([
-                'From' => $this->getContacts($message->getFrom()),
-                'To' => $this->getContacts($message->getTo()),
                 'Cc' => $this->getContacts($message->getCc()),
                 'Bcc' => $this->getContacts($message->getBcc()),
                 'Tag' => $this->getTag($message),
                 'Subject' => $this->getSubject($message),
-                'HtmlBody' => $message->getBody(),
                 'ReplyTo' => $this->getContacts($message->getReplyTo()),
                 'Attachments' => $this->getAttachments($message),
             ])
             ->reject(function ($item) {
                 return empty($item);
             })
+            ->put('From', $this->getContacts($message->getFrom()))
+            ->put('To', $this->getContacts($message->getTo()))
+            ->put('HtmlBody', $message->getBody())
         ])
         ->toArray();
     }
