@@ -303,8 +303,6 @@ class PostmarkTransportTest extends TestCase
         $message = new \Swift_Message;
         $payload = $this->getPayload($message);
 
-        dump($payload);
-
         tap($payload['json'], function ($json) {
             $this->assertArrayNotHasKey('Cc', $json);
             $this->assertArrayNotHasKey('Bcc', $json);
