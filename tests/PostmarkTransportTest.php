@@ -63,15 +63,15 @@ class PostmarkTransportTest extends TestCase
     /** @test */
     public function can_get_given_contacts_into_a_comma_separated_string()
     {
-        $to = $this->invokeMethod($this->transport, 'getContacts', [$this->message->getTo()]);
-        $cc = $this->invokeMethod($this->transport, 'getContacts', [$this->message->getCc()]);
-        $bcc = $this->invokeMethod($this->transport, 'getContacts', [$this->message->getBcc()]);
-        $replyTo = $this->invokeMethod($this->transport, 'getContacts', [$this->message->getReplyTo()]);
-
+        $to = $this->invokeMethod($this->transport, 'getContacts', [['me@example.com' => '']]);
         $this->assertEquals('me@example.com', $to);
-        $this->assertEquals('cc@example.com', $cc);
-        $this->assertEquals('bcc@example.com', $bcc);
-        $this->assertEquals('replyTo@example.com', $replyTo);
+
+        $multiple = $this->invokeMethod($this->transport, 'getContacts', [[
+            'john@example.com' => 'John',
+            'jane@example.com' => 'Jane',
+            'user@example.com' => 'User',
+        ]]);
+        $this->assertEquals('John <john@example.com>,Jane <jane@example.com>,User <user@example.com>', $multiple);
     }
 
     /** @test */

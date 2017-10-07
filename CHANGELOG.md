@@ -16,6 +16,8 @@
 ### Updated
 - Refactor PostmarkTransportTest.
 - Payload does not contain empty keys.
+- Updates docblock getContact can receive a string or array.
+- Updates test for getting contacts into a comma seperated string.
 
 ## [2.1.3] - 2017-10-06
 
