@@ -153,11 +153,11 @@ class PostmarkTransport extends Transport
                 break;
         }
 
-        if($text = $this->getMimePart($message, 'text/plain')) {
+        if ($text = $this->getMimePart($message, 'text/plain')) {
             $data['TextBody'] = $text->getBody();
         }
 
-        if($html = $this->getMimePart($message, 'text/html')) {
+        if ($html = $this->getMimePart($message, 'text/html')) {
             $data['HtmlBody'] = $html->getBody();
         }
 
