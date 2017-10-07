@@ -284,16 +284,33 @@ class PostmarkTransportTest extends TestCase
 
         tap($payload['json']['Attachments'], function ($json) {
             $this->assertCount(2, $json);
-            $this->assertContains(            [
+            $this->assertContains([
                 'Name' => 'attachment1.txt',
                 'Content' => 'dGVzdCBhdHRhY2htZW50IDE=',
                 'ContentType' => 'text/plain',
             ], $json);
-            $this->assertContains(            [
+            $this->assertContains([
                 'Name' => 'attachment2.txt',
                 'Content' => 'dGVzdCBhdHRhY2htZW50IDI=',
                 'ContentType' => 'text/plain',
             ], $json);
+        });
+    }
+
+    /** @test */
+    public function empty_keys_are_not_present_in_the_json_payload()
+    {
+        $message = new \Swift_Message;
+        $payload = $this->getPayload($message);
+
+        dump($payload);
+
+        tap($payload['json'], function ($json) {
+            $this->assertArrayNotHasKey('Cc', $json);
+            $this->assertArrayNotHasKey('Bcc', $json);
+            $this->assertArrayNotHasKey('Tag', $json);
+            $this->assertArrayNotHasKey('ReplyTo', $json);
+            $this->assertArrayNotHasKey('Attachments', $json);
         });
     }
 

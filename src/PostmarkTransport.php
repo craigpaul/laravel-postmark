@@ -155,13 +155,15 @@ class PostmarkTransport extends Transport
      */
     protected function payload(Swift_Mime_SimpleMessage $message)
     {
-        return [
+        return collect([
             'headers' => [
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
                 'X-Postmark-Server-Token' => $this->key,
-            ],
-            'json' => [
+            ]
+        ])
+        ->merge([
+            'json' => collect([
                 'From' => $this->getContacts($message->getFrom()),
                 'To' => $this->getContacts($message->getTo()),
                 'Cc' => $this->getContacts($message->getCc()),
@@ -171,7 +173,11 @@ class PostmarkTransport extends Transport
                 'HtmlBody' => $message->getBody(),
                 'ReplyTo' => $this->getContacts($message->getReplyTo()),
                 'Attachments' => $this->getAttachments($message),
-            ],
-        ];
+            ])
+            ->reject(function ($item) {
+                return empty($item);
+            })
+        ])
+        ->toArray();
     }
 }

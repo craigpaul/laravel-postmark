@@ -10,6 +10,7 @@
 
 ### Updated
 - Refactor PostmarkTransportTest.
+- Payload does not contain empty keys.
 
 ## [2.1.3] - 2017-10-06
 
