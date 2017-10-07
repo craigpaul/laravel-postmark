@@ -119,6 +119,18 @@ class PostmarkTransport extends Transport
     }
 
     /**
+     * Get the body for the given message.
+     *
+     * @param \Swift_Mime_SimpleMessage $message
+     *
+     * @return string
+     */
+    protected function getBody($message)
+    {
+        return $message->getBody() ?: '';
+    }
+
+    /**
      * Get the subject for the given message.
      *
      * @param \Swift_Mime_SimpleMessage $message
@@ -176,7 +188,7 @@ class PostmarkTransport extends Transport
             })
             ->put('From', $this->getContacts($message->getFrom()))
             ->put('To', $this->getContacts($message->getTo()))
-            ->put('HtmlBody', $message->getBody())
+            ->put('HtmlBody', $this->getBody($message))
         ])
         ->toArray();
     }

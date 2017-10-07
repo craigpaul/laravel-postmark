@@ -74,6 +74,22 @@ class PostmarkTransportTest extends TestCase
     }
 
     /** @test */
+    public function can_get_given_body()
+    {
+        $body = $this->invokeMethod($this->transport, 'getBody', [$this->message]);
+
+        $this->assertSame('Bar body', $body);
+    }
+
+    /** @test */
+    public function get_body_returns_empty_string_when_there_is_no_body_set()
+    {
+        $body = $this->invokeMethod($this->transport, 'getBody', [new \Swift_Message]);
+
+        $this->assertSame('', $body);
+    }
+
+    /** @test */
     public function can_get_given_subject()
     {
         $subject = $this->invokeMethod($this->transport, 'getSubject', [$this->message]);
