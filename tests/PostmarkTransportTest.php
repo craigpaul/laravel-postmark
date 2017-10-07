@@ -90,6 +90,15 @@ class PostmarkTransportTest extends TestCase
     }
 
     /** @test */
+    public function can_get_a_mime_part_from_message()
+    {
+        $this->message->addPart('<html>', 'text/html');
+        $part = $this->invokeMethod($this->transport, 'getMimePart', [$this->message, 'text/html']);
+
+        $this->assertSame('<html>', $part->getBody());
+    }
+
+    /** @test */
     public function can_get_given_subject()
     {
         $subject = $this->invokeMethod($this->transport, 'getSubject', [$this->message]);

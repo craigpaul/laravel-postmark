@@ -2,6 +2,7 @@
 
 namespace Coconuts\Mail;
 
+use Swift_MimePart;
 use Swift_Attachment;
 use Swift_Mime_SimpleMessage;
 use GuzzleHttp\ClientInterface;
@@ -128,6 +129,26 @@ class PostmarkTransport extends Transport
     protected function getBody(Swift_Mime_SimpleMessage $message)
     {
         return $message->getBody() ?: '';
+    }
+
+    /**
+     * Get a mime part from the given message.
+     *
+     * @param \Swift_Mime_SimpleMessage $message
+     * @param string $mimeType
+     *
+     * @return \Swift_MimePart
+     */
+    protected function getMimePart(Swift_Mime_SimpleMessage $message, $mimeType)
+    {
+        return collect($message->getChildren())
+            ->filter(function ($child) {
+                return $child instanceof Swift_MimePart;
+            })
+            ->filter(function ($child) use ($mimeType) {
+                return strpos($child->getContentType(), $mimeType) === 0;
+            })
+            ->first();
     }
 
     /**
