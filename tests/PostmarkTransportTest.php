@@ -62,6 +62,32 @@ class PostmarkTransportTest extends TestCase
     }
 
     /** @test */
+    public function can_get_given_tag()
+    {
+        $tag = $this->invokeMethod($this->transport, 'getTag', [$this->message]);
+
+        $this->assertSame('Tagged', $tag);
+    }
+
+    /** @test */
+    public function get_tag_returns_empty_string_when_there_is_no_tag_present()
+    {
+        $tag = $this->invokeMethod($this->transport, 'getTag', [new \Swift_Message]);
+
+        $this->assertSame('', $tag);
+    }
+
+    /** @test */
+    public function get_tag_returns_only_the_last_tag_when_multiple_tags_were_set()
+    {
+        $this->message->getHeaders()->addTextHeader('Tag', 'TestTag1');
+        $this->message->getHeaders()->addTextHeader('Tag', 'TestTag2');
+        $tag = $this->invokeMethod($this->transport, 'getTag', [$this->message]);
+
+        $this->assertSame('TestTag2', $tag);
+    }
+
+    /** @test */
     public function can_get_given_attachments_into_array()
     {
         $attachments = $this->invokeMethod($this->transport, 'getAttachments', [$this->message]);

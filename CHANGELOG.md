@@ -4,6 +4,7 @@
 
 ### Added
 - Adds Content-Type application/json to payload headers.
+- Adds getTag function to get the tag from a message.
 
 ### Updated
 - Refactor PostmarkTransportTest.

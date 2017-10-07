@@ -119,6 +119,22 @@ class PostmarkTransport extends Transport
     }
 
     /**
+     * Get the tag for the given message.
+     *
+     * @param \Swift_Mime_SimpleMessage $message
+     *
+     * @return string
+     */
+    protected function getTag($message)
+    {
+        return optional(
+            collect($message->getHeaders()->getAll('tag'))
+            ->last()
+        )
+        ->getFieldBody() ?: '';
+    }
+
+    /**
      * Get the HTTP payload for sending the Postmark message.
      *
      * @param \Swift_Mime_SimpleMessage $message
@@ -138,7 +154,7 @@ class PostmarkTransport extends Transport
                 'To' => $this->getContacts($message->getTo()),
                 'Cc' => $this->getContacts($message->getCc()),
                 'Bcc' => $this->getContacts($message->getBcc()),
-                'Tag' => $message->getHeaders()->has('tag') ? $message->getHeaders()->get('tag')->getFieldBody() : '',
+                'Tag' => $this->getTag($message),
                 'Subject' => $message->getSubject(),
                 'HtmlBody' => $message->getBody(),
                 'ReplyTo' => $this->getContacts($message->getReplyTo()),
