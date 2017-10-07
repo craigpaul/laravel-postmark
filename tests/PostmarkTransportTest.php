@@ -181,12 +181,6 @@ class PostmarkTransportTest extends TestCase
             $this->assertArrayHasKey('ReplyTo', $json);
             $this->assertArrayHasKey('Attachments', $json);
         });
-
-        tap($payload['json']['Attachments'][0], function ($attachment) {
-            $this->assertSame('test.txt', $attachment['Name']);
-            $this->assertSame(base64_encode('test attachment'), $attachment['Content']);
-            $this->assertSame('text/plain', $attachment['ContentType']);
-        });
     }
 
     /** @test */
