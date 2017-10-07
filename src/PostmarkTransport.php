@@ -130,6 +130,7 @@ class PostmarkTransport extends Transport
         return [
             'headers' => [
                 'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
                 'X-Postmark-Server-Token' => $this->key,
             ],
             'json' => [

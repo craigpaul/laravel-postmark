@@ -2,10 +2,13 @@
 
 ## [Unreleased]
 
+### Added
+- Adds Content-Type application/json to payload headers.
+
 ## [2.1.3] - 2017-10-06
 
 ### Fixed
-- getAttachments should return array. [`9adaf6340f`](https://github.com/coconutcraig/laravel-postmark/commit/9adaf6340f) 
+- getAttachments should return array. [`9adaf6340f`](https://github.com/coconutcraig/laravel-postmark/commit/9adaf6340f)
 
 ## [2.1.2] - 2017-10-06
 
