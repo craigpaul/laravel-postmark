@@ -125,7 +125,7 @@ class PostmarkTransport extends Transport
      *
      * @return string
      */
-    protected function getBody($message)
+    protected function getBody(Swift_Mime_SimpleMessage $message)
     {
         return $message->getBody() ?: '';
     }
@@ -137,7 +137,7 @@ class PostmarkTransport extends Transport
      *
      * @return string
      */
-    protected function getSubject($message)
+    protected function getSubject(Swift_Mime_SimpleMessage $message)
     {
         return $message->getSubject() ?: '';
     }
@@ -149,7 +149,7 @@ class PostmarkTransport extends Transport
      *
      * @return string
      */
-    protected function getTag($message)
+    protected function getTag(Swift_Mime_SimpleMessage $message)
     {
         return optional(
             collect($message->getHeaders()->getAll('tag'))
