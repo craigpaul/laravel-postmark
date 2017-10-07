@@ -39,6 +39,7 @@ class PostmarkTransportTest extends TestCase
             $message->setReplyTo('replyTo@example.com');
             $message->attach($attachment);
             $message->getHeaders()->addTextHeader('Tag', 'Tagged');
+            $message->addPart('<html>', 'text/html');
         });
 
         $this->transport = new PostmarkTransport(
@@ -176,6 +177,7 @@ class PostmarkTransportTest extends TestCase
             $this->assertArrayHasKey('Subject', $json);
             $this->assertArrayHasKey('Tag', $json);
             $this->assertArrayHasKey('HtmlBody', $json);
+            $this->assertArrayHasKey('TextBody', $json);
             $this->assertArrayHasKey('ReplyTo', $json);
             $this->assertArrayHasKey('Attachments', $json);
         });
@@ -271,6 +273,44 @@ class PostmarkTransportTest extends TestCase
     }
 
     /** @test */
+    public function payload_has_the_proper_html_body()
+    {
+        $this->message->setBody('<html>', 'text/html');
+        $payload = $this->getPayload($this->message);
+
+        tap($payload['json'], function ($json) {
+            $this->assertSame('<html>', $json['HtmlBody']);
+            $this->assertArrayNotHasKey('TextBody', $json);
+        });
+    }
+
+    /** @test */
+    public function payload_has_the_proper_text_body()
+    {
+        $message = new \Swift_Message;
+        $message->setBody('Lorem ipsum.', 'text/plain');
+        $payload = $this->getPayload($message);
+
+        tap($payload['json'], function ($json) {
+            $this->assertSame('Lorem ipsum.', $json['TextBody']);
+            $this->assertArrayNotHasKey('HtmlBody', $json);
+        });
+    }
+
+    /** @test */
+    public function payload_has_the_proper_html_and_text_body()
+    {
+        $this->message->setBody('Lorem ipsum.', 'text/plain');
+        $this->message->addPart('<html>', 'text/html');
+        $payload = $this->getPayload($this->message);
+
+        tap($payload['json'], function ($json) {
+            $this->assertSame('Lorem ipsum.', $json['TextBody']);
+            $this->assertSame('<html>', $json['HtmlBody']);
+        });
+    }
+
+    /** @test */
     public function payload_has_the_proper_reply_to_address()
     {
         $this->message->setReplyTo('replyTo@example.com', 'ReplyName');
@@ -278,17 +318,6 @@ class PostmarkTransportTest extends TestCase
 
         tap($payload['json'], function ($json) {
             $this->assertSame('ReplyName <replyTo@example.com>', $json['ReplyTo']);
-        });
-    }
-
-    /** @test */
-    public function payload_has_the_proper_html_body()
-    {
-        $this->message->setBody('Lorem ipsum.');
-        $payload = $this->getPayload($this->message);
-
-        tap($payload['json'], function ($json) {
-            $this->assertSame('Lorem ipsum.', $json['HtmlBody']);
         });
     }
 
@@ -346,7 +375,7 @@ class PostmarkTransportTest extends TestCase
         tap($payload['json'], function ($json) {
             $this->assertArrayHasKey('From', $json);
             $this->assertArrayHasKey('To', $json);
-            $this->assertArrayHasKey('HtmlBody', $json);
+            $this->assertArrayHasKey('TextBody', $json);
         });
     }
 

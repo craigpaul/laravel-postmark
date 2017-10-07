@@ -132,6 +132,37 @@ class PostmarkTransport extends Transport
     }
 
     /**
+     * Get the text and html fields for the given message.
+     *
+     * @param \Swift_Mime_SimpleMessage $message
+     *
+     * @return array
+     */
+    protected function getHtmlAndTextBody(Swift_Mime_SimpleMessage $message)
+    {
+        $data = [];
+
+        switch ($message->getContentType()) {
+            case 'text/html':
+                $data['HtmlBody'] = $this->getBody($message);
+                break;
+            default:
+                $data['TextBody'] = $this->getBody($message);
+                break;
+        }
+
+        if($text = $this->getMimePart($message, 'text/plain')) {
+            $data['TextBody'] = $text->getBody();
+        }
+
+        if($html = $this->getMimePart($message, 'text/html')) {
+            $data['HtmlBody'] = $html->getBody();
+        }
+
+        return $data;
+    }
+
+    /**
      * Get a mime part from the given message.
      *
      * @param \Swift_Mime_SimpleMessage $message
@@ -209,7 +240,7 @@ class PostmarkTransport extends Transport
             })
             ->put('From', $this->getContacts($message->getFrom()))
             ->put('To', $this->getContacts($message->getTo()))
-            ->put('HtmlBody', $this->getBody($message))
+            ->merge($this->getHtmlAndTextBody($message))
         ])
         ->toArray();
     }

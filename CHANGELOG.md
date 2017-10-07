@@ -5,10 +5,12 @@
 ### Added
 - Adds Content-Type application/json to payload headers.
 - Adds getBody function to get the body from a message.
+- Adds getHtmlAndTextBody function to get the proper HtmlBody and TextBody fields.
 - Adds getMimePart function to get a mime part from a message.
 - Adds getTag function to get the tag from a message.
 - Adds getSubject function to get the subject from a message.
 - Adds tests to ensure that the json payload has the proper values.
+- Adds tests to ensure that the json payload has the proper HtmlBody and TextBody values.
 - Adds test to ensure that required fields are in the payload.
 
 ### Updated
