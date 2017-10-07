@@ -102,7 +102,7 @@ class PostmarkTransportTest extends TestCase
     }
 
     /** @test */
-    public function can_create_the_proper_payload_for_a_message()
+    public function can_create_the_proper_payload_structure_for_a_message()
     {
         $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
 
@@ -131,6 +131,141 @@ class PostmarkTransportTest extends TestCase
             $this->assertSame('test.txt', $attachment['Name']);
             $this->assertSame(base64_encode('test attachment'), $attachment['Content']);
             $this->assertSame('text/plain', $attachment['ContentType']);
+        });
+    }
+
+    /** @test */
+    public function payload_has_the_proper_header_values()
+    {
+        $this->transport = new PostmarkTransport(
+            new Client(),
+            'super-secret-token'
+        );
+
+        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+
+        tap($payload['headers'], function ($headers) {
+            $this->assertSame('application/json', $headers['Content-Type']);
+            $this->assertSame('application/json', $headers['Accept']);
+            $this->assertSame('super-secret-token', $headers['X-Postmark-Server-Token']);
+        });
+    }
+
+    /** @test */
+    public function payload_has_the_proper_from_address()
+    {
+        $this->message->setFrom('john@example.com', 'John Doe');
+        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+
+        tap($payload['json'], function ($json) {
+            $this->assertSame('John Doe <john@example.com>', $json['From']);
+        });
+    }
+
+    /** @test */
+    public function payload_has_the_proper_to_address()
+    {
+        $this->message->setTo('jane@example.com', 'Jane Doe');
+        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+
+        tap($payload['json'], function ($json) {
+            $this->assertSame('Jane Doe <jane@example.com>', $json['To']);
+        });
+    }
+
+    /** @test */
+    public function payload_has_the_proper_cc_address()
+    {
+        $this->message->setCc('foo@example.com', 'Foo');
+        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+
+        tap($payload['json'], function ($json) {
+            $this->assertSame('Foo <foo@example.com>', $json['Cc']);
+        });
+    }
+
+    /** @test */
+    public function payload_has_the_proper_bcc_address()
+    {
+        $this->message->setBcc('bar@example.com', 'Bar');
+        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+
+        tap($payload['json'], function ($json) {
+            $this->assertSame('Bar <bar@example.com>', $json['Bcc']);
+        });
+    }
+
+    /** @test */
+    public function payload_has_the_proper_subject()
+    {
+        $this->message->setSubject('Lorem ipsum.');
+        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+
+        tap($payload['json'], function ($json) {
+            $this->assertSame('Lorem ipsum.', $json['Subject']);
+        });
+    }
+
+    /** @test */
+    public function payload_has_the_proper_tag()
+    {
+        $this->message->getHeaders()->addTextHeader('Tag', 'TestTag');
+        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+
+        tap($payload['json'], function ($json) {
+            $this->assertSame('TestTag', $json['Tag']);
+        });
+    }
+
+    /** @test */
+    public function payload_has_the_proper_reply_to_address()
+    {
+        $this->message->setReplyTo('replyTo@example.com', 'ReplyName');
+        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+
+        tap($payload['json'], function ($json) {
+            $this->assertSame('ReplyName <replyTo@example.com>', $json['ReplyTo']);
+        });
+    }
+
+    /** @test */
+    public function payload_has_the_proper_html_body()
+    {
+        $this->message->setBody('Lorem ipsum.');
+        $payload = $this->invokeMethod($this->transport, 'payload', [$this->message]);
+
+        tap($payload['json'], function ($json) {
+            $this->assertSame('Lorem ipsum.', $json['HtmlBody']);
+        });
+    }
+
+    /** @test */
+    public function payload_has_the_proper_attachments()
+    {
+        $attachment1 = new \Swift_Attachment('test attachment 1', 'attachment1.txt');
+        $attachment1->setContentType('text/plain');
+
+        $attachment2 = new \Swift_Attachment('test attachment 2', 'attachment2.txt');
+        $attachment2->setContentType('text/plain');
+
+        $message = new \Swift_Message;
+        $message->attach($attachment1);
+        $message->attach($attachment2);
+
+        $payload = $this->invokeMethod($this->transport, 'payload', [$message]);
+
+        tap($payload['json']['Attachments'], function ($json) {
+            $this->assertCount(2, $json);
+            $this->assertContains(            [
+                'Name' => 'attachment1.txt',
+                'Content' => 'dGVzdCBhdHRhY2htZW50IDE=',
+                'ContentType' => 'text/plain',
+            ], $json);
+            $this->assertContains(            [
+                'Name' => 'attachment2.txt',
+                'Content' => 'dGVzdCBhdHRhY2htZW50IDI=',
+                'ContentType' => 'text/plain',
+            ], $json);
         });
     }
 
