@@ -2,22 +2,28 @@
 
 ## [Unreleased]
 
+## [2.1.4] - 2017-10-08
+
 ### Added
-- Adds Content-Type application/json to payload headers.
-- Adds getBody function to get the body from a message.
-- Adds getHtmlAndTextBody function to get the proper HtmlBody and TextBody fields.
-- Adds getMimePart function to get a mime part from a message.
-- Adds getTag function to get the tag from a message.
-- Adds getSubject function to get the subject from a message.
-- Adds tests to ensure that the json payload has the proper values.
-- Adds tests to ensure that the json payload has the proper HtmlBody and TextBody values.
-- Adds test to ensure that required fields are in the payload.
+- Added additional test. [`5030f1774d`](https://github.com/coconutcraig/laravel-postmark/commit/5030f1774d)
+- Tests for attachments are in a separate test. [`48bcaa386a`](https://github.com/coconutcraig/laravel-postmark/commit/48bcaa386a)
+- Adds getHtmlAndTextBody function including tests. [`a05aa46b5f`](https://github.com/coconutcraig/laravel-postmark/commit/a05aa46b5f)
+- Adds getMimePart function to get a mime part from a message. [`494cde1cd5`](https://github.com/coconutcraig/laravel-postmark/commit/494cde1cd5)
+- Adds getBody function to get the body from a message. [`3f1b46911e`](https://github.com/coconutcraig/laravel-postmark/commit/3f1b46911e)
+- Adds test to ensure that required fields are in the payload. [`0c15aa1dc2`](https://github.com/coconutcraig/laravel-postmark/commit/0c15aa1dc2)
+- Adds getSubject function to get the subject from a message. [`5317d0d5db`](https://github.com/coconutcraig/laravel-postmark/commit/5317d0d5db)
+- Added getPayload function. [`05fd0244b1`](https://github.com/coconutcraig/laravel-postmark/commit/05fd0244b1)
+- Adds tests to ensure that the json payload has the proper values. [`d7f506907b`](https://github.com/coconutcraig/laravel-postmark/commit/d7f506907b)
+- Adds getTag function to get the tag from a message. [`3389580b29`](https://github.com/coconutcraig/laravel-postmark/commit/3389580b29)
+- Add Content-Type to payload headers. [`d4d79380c4`](https://github.com/coconutcraig/laravel-postmark/commit/d4d79380c4)  
 
 ### Updated
-- Refactor PostmarkTransportTest.
-- Payload does not contain empty keys.
-- Updates docblock getContact can receive a string or array.
-- Updates test for getting contacts into a comma seperated string.
+- Updates docblock and test for getting contacts. [`7e658ceb0e`](https://github.com/coconutcraig/laravel-postmark/commit/7e658ceb0e)
+- Code style. [`77fcc03887`](https://github.com/coconutcraig/laravel-postmark/commit/77fcc03887)
+- Type hint params. [`a17986572d`](https://github.com/coconutcraig/laravel-postmark/commit/a17986572d) 
+- Remove dump. [`05ec702ff1`](https://github.com/coconutcraig/laravel-postmark/commit/05ec702ff1)
+- Payload does not contain empty keys. [`3c12ede434`](https://github.com/coconutcraig/laravel-postmark/commit/3c12ede434)
+- Refactor PostmarkTransportTest. [`e334420982`](https://github.com/coconutcraig/laravel-postmark/commit/e334420982)
 
 ## [2.1.3] - 2017-10-06
 
@@ -134,7 +140,8 @@
 ### Added
 - Adds package skeleton [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.3...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.4...HEAD
+[2.1.4]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.3...v2.1.4
 [2.1.3]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.2...v2.1.3
 [2.1.2]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.1...v2.1.2
 [2.1.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.0...v2.1.1
