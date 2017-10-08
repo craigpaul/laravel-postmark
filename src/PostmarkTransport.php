@@ -2,6 +2,7 @@
 
 namespace Coconuts\Mail;
 
+use Swift_MimePart;
 use Swift_Attachment;
 use Swift_Mime_SimpleMessage;
 use GuzzleHttp\ClientInterface;
@@ -89,7 +90,7 @@ class PostmarkTransport extends Transport
     /**
      * Format the contacts for the API request.
      *
-     * @param array $contacts
+     * @param string|array $contacts
      *
      * @return string
      */
@@ -119,6 +120,99 @@ class PostmarkTransport extends Transport
     }
 
     /**
+     * Get the body for the given message.
+     *
+     * @param \Swift_Mime_SimpleMessage $message
+     *
+     * @return string
+     */
+    protected function getBody(Swift_Mime_SimpleMessage $message)
+    {
+        return $message->getBody() ?: '';
+    }
+
+    /**
+     * Get the text and html fields for the given message.
+     *
+     * @param \Swift_Mime_SimpleMessage $message
+     *
+     * @return array
+     */
+    protected function getHtmlAndTextBody(Swift_Mime_SimpleMessage $message)
+    {
+        $data = [];
+
+        switch ($message->getContentType()) {
+            case 'text/html':
+            case 'multipart/related':
+            case 'multipart/alternative':
+                $data['HtmlBody'] = $this->getBody($message);
+                break;
+            default:
+                $data['TextBody'] = $this->getBody($message);
+                break;
+        }
+
+        if ($text = $this->getMimePart($message, 'text/plain')) {
+            $data['TextBody'] = $text->getBody();
+        }
+
+        if ($html = $this->getMimePart($message, 'text/html')) {
+            $data['HtmlBody'] = $html->getBody();
+        }
+
+        return $data;
+    }
+
+    /**
+     * Get a mime part from the given message.
+     *
+     * @param \Swift_Mime_SimpleMessage $message
+     * @param string $mimeType
+     *
+     * @return \Swift_MimePart
+     */
+    protected function getMimePart(Swift_Mime_SimpleMessage $message, $mimeType)
+    {
+        return collect($message->getChildren())
+            ->filter(function ($child) {
+                return $child instanceof Swift_MimePart;
+            })
+            ->filter(function ($child) use ($mimeType) {
+                return strpos($child->getContentType(), $mimeType) === 0;
+            })
+            ->first();
+    }
+
+    /**
+     * Get the subject for the given message.
+     *
+     * @param \Swift_Mime_SimpleMessage $message
+     *
+     * @return string
+     */
+    protected function getSubject(Swift_Mime_SimpleMessage $message)
+    {
+        return $message->getSubject() ?: '';
+    }
+
+    /**
+     * Get the tag for the given message.
+     *
+     * @param \Swift_Mime_SimpleMessage $message
+     *
+     * @return string
+     */
+    protected function getTag(Swift_Mime_SimpleMessage $message)
+    {
+        return optional(
+            collect($message->getHeaders()->getAll('tag'))
+            ->last()
+        )
+        ->getFieldBody() ?: '';
+    }
+
+    /**
      * Get the HTTP payload for sending the Postmark message.
      *
      * @param \Swift_Mime_SimpleMessage $message
@@ -127,22 +221,29 @@ class PostmarkTransport extends Transport
      */
     protected function payload(Swift_Mime_SimpleMessage $message)
     {
-        return [
+        return collect([
             'headers' => [
                 'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
                 'X-Postmark-Server-Token' => $this->key,
-            ],
-            'json' => [
-                'From' => $this->getContacts($message->getFrom()),
-                'To' => $this->getContacts($message->getTo()),
+            ]
+        ])
+        ->merge([
+            'json' => collect([
                 'Cc' => $this->getContacts($message->getCc()),
                 'Bcc' => $this->getContacts($message->getBcc()),
-                'Tag' => $message->getHeaders()->has('tag') ? $message->getHeaders()->get('tag')->getFieldBody() : '',
-                'Subject' => $message->getSubject(),
-                'HtmlBody' => $message->getBody(),
+                'Tag' => $this->getTag($message),
+                'Subject' => $this->getSubject($message),
                 'ReplyTo' => $this->getContacts($message->getReplyTo()),
                 'Attachments' => $this->getAttachments($message),
-            ],
-        ];
+            ])
+            ->reject(function ($item) {
+                return empty($item);
+            })
+            ->put('From', $this->getContacts($message->getFrom()))
+            ->put('To', $this->getContacts($message->getTo()))
+            ->merge($this->getHtmlAndTextBody($message))
+        ])
+        ->toArray();
     }
 }
