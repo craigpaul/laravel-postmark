@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Fixed
+- Display names containing a comma results in API error 300.
+
 ## [2.1.5] - 2017-11-07
 
 ### Added
@@ -145,7 +148,8 @@
 ### Added
 - Adds package skeleton [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.5...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.6...HEAD
+[2.1.6]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.5...v2.1.6
 [2.1.5]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.4...v2.1.5
 [2.1.4]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.3...v2.1.4
 [2.1.3]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.2...v2.1.3

@@ -388,6 +388,17 @@ class PostmarkTransportTest extends TestCase
     }
 
     /** @test */
+    public function display_name_with_a_comma_should_be_double_quoted_the_payload()
+    {
+        $this->message->setTo('john@example.com', 'Doe, John');
+        $payload = $this->getPayload($this->message);
+
+        tap($payload['json'], function ($json) {
+            $this->assertSame('"Doe, John" <john@example.com>', $json['To']);
+        });
+    }
+
+    /** @test */
     public function can_send_an_email_through_postmarks_api()
     {
         try {
