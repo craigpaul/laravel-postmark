@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Fixed
+- Display names containing a comma results in API error 300.
+
+### Added
 - Added suggestion of mvdnbrk/postmark-inbound to composer.json.
 
 ## [2.1.4] - 2017-10-08

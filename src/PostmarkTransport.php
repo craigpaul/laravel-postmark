@@ -88,6 +88,21 @@ class PostmarkTransport extends Transport
     }
 
     /**
+     * Format the display name.
+     *
+     * @param  string
+     * @return string
+     */
+    protected function getDisplayname($value)
+    {
+        if (strpos($value, ',') !== false) {
+            return '"' . $value . '"';
+        }
+
+        return $value;
+    }
+
+    /**
      * Format the contacts for the API request.
      *
      * @param string|array $contacts
@@ -98,7 +113,7 @@ class PostmarkTransport extends Transport
     {
         return collect($contacts)
             ->map(function ($display, $address) {
-                return $display ? $display . " <{$address}>" : $address;
+                return $display ? $this->getDisplayname($display) . " <{$address}>" : $address;
             })
             ->values()
             ->implode(',');
