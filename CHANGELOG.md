@@ -2,8 +2,10 @@
 
 ## [Unreleased]
 
+## [2.1.6] - 2017-11-07
+
 ### Fixed
-- Display names containing a comma results in API error 300.
+- Display names containing a comma results in API error 300. [`ed09f78472`](https://github.com/coconutcraig/laravel-postmark/commit/ed09f78472) 
 
 ## [2.1.5] - 2017-11-07
 
