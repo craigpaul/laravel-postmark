@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- Added suggestion of mvdnbrk/postmark-inbound to composer.json.
+
 ## [2.1.4] - 2017-10-08
 
 ### Added
@@ -15,12 +17,12 @@
 - Added getPayload function. [`05fd0244b1`](https://github.com/coconutcraig/laravel-postmark/commit/05fd0244b1)
 - Adds tests to ensure that the json payload has the proper values. [`d7f506907b`](https://github.com/coconutcraig/laravel-postmark/commit/d7f506907b)
 - Adds getTag function to get the tag from a message. [`3389580b29`](https://github.com/coconutcraig/laravel-postmark/commit/3389580b29)
-- Add Content-Type to payload headers. [`d4d79380c4`](https://github.com/coconutcraig/laravel-postmark/commit/d4d79380c4)  
+- Add Content-Type to payload headers. [`d4d79380c4`](https://github.com/coconutcraig/laravel-postmark/commit/d4d79380c4)
 
 ### Updated
 - Updates docblock and test for getting contacts. [`7e658ceb0e`](https://github.com/coconutcraig/laravel-postmark/commit/7e658ceb0e)
 - Code style. [`77fcc03887`](https://github.com/coconutcraig/laravel-postmark/commit/77fcc03887)
-- Type hint params. [`a17986572d`](https://github.com/coconutcraig/laravel-postmark/commit/a17986572d) 
+- Type hint params. [`a17986572d`](https://github.com/coconutcraig/laravel-postmark/commit/a17986572d)
 - Remove dump. [`05ec702ff1`](https://github.com/coconutcraig/laravel-postmark/commit/05ec702ff1)
 - Payload does not contain empty keys. [`3c12ede434`](https://github.com/coconutcraig/laravel-postmark/commit/3c12ede434)
 - Refactor PostmarkTransportTest. [`e334420982`](https://github.com/coconutcraig/laravel-postmark/commit/e334420982)
