@@ -84,6 +84,7 @@ class PostmarkTransport extends Transport
                     'ContentType' => $child->getContentType(),
                 ];
             })
+            ->values()
             ->toArray();
     }
 
