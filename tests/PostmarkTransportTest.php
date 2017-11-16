@@ -177,7 +177,7 @@ class PostmarkTransportTest extends TestCase
             $this->assertArrayHasKey('Subject', $json);
             $this->assertArrayHasKey('Tag', $json);
             $this->assertArrayHasKey('HtmlBody', $json);
-            $this->assertArrayHasKey('TextBody', $json);
+            $this->assertArrayNotHasKey('TextBody', $json);
             $this->assertArrayHasKey('ReplyTo', $json);
             $this->assertArrayHasKey('Attachments', $json);
         });
@@ -299,8 +299,8 @@ class PostmarkTransportTest extends TestCase
         $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
-            $this->assertSame('Lorem ipsum.', $json['TextBody']);
             $this->assertSame('<html>', $json['HtmlBody']);
+            $this->assertFalse(isset($json['TextBody']));
         });
     }
 
