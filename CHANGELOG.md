@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [2.1.7] - 2017-11-16
+
+### Fixed
+- Re-indexes attachments collection before converting to an array [`eb39a28689`](https://github.com/coconutcraig/laravel-postmark/commit/eb39a28689)
+
 ## [2.1.6] - 2017-11-07
 
 ### Fixed
@@ -150,7 +155,8 @@
 ### Added
 - Adds package skeleton [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.6...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.7...HEAD
+[2.1.7]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.6...v2.1.7
 [2.1.6]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.5...v2.1.6
 [2.1.5]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.4...v2.1.5
 [2.1.4]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.3...v2.1.4
