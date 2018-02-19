@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [2.2.0] - 2018-02-19
+
+- Updates travis configuration [`ae914ea34a`](https://github.com/coconutcraig/laravel-postmark/commit/ae914ea34a) 
+- Updates compatibility table [`dac237f848`](https://github.com/coconutcraig/laravel-postmark/commit/dac237f848)
+- Updates dependencies for laravel framework upgrade [`932660900b`](https://github.com/coconutcraig/laravel-postmark/commit/932660900b)
+
 ## [2.1.8] - 2017-11-16
 
 ### Updated
@@ -160,7 +166,8 @@
 ### Added
 - Adds package skeleton [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.8...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.8...v2.2.0
 [2.1.8]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.7...v2.1.8
 [2.1.7]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.6...v2.1.7
 [2.1.6]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.5...v2.1.6
