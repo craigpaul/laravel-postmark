@@ -24,7 +24,8 @@ $ composer require coconutcraig/laravel-postmark
 | Laravel | Laravel Postmark |
 |---------|------------------|
 | 5.4     | <= 2.0           |
-| 5.5     | >= 2.1           |
+| 5.5     | 2.1              |
+| 5.6     | 2.2              |
 
 ## Upgrading
 
