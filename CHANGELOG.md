@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Fixed
+- Fixes phpunit.xml.dist file. [`fd75059cd1`](https://github.com/coconutcraig/laravel-postmark/commit/fd75059cd1)
+
 ## [2.2.0] - 2018-02-19
 
 - Updates travis configuration [`ae914ea34a`](https://github.com/coconutcraig/laravel-postmark/commit/ae914ea34a) 
