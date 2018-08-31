@@ -11,6 +11,6 @@ class TransportManagerTest extends TestCase
 
         $transport = $manager->driver('postmark');
 
-        $this->assertEquals(PostmarkTransport::class, get_class($transport));
+        $this->assertInstanceOf(PostmarkTransport::class, $transport);
     }
 }

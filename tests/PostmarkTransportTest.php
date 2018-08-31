@@ -42,10 +42,7 @@ class PostmarkTransportTest extends TestCase
             $message->addPart('<html>', 'text/html');
         });
 
-        $this->transport = new PostmarkTransport(
-            new Client(),
-            $this->app['config']->get('services.postmark.secret')
-        );
+        $this->transport = $this->app['swift.transport']->driver('postmark');
     }
 
     /**
@@ -64,6 +61,7 @@ class PostmarkTransportTest extends TestCase
     public function can_get_given_contacts_into_a_comma_separated_string()
     {
         $to = $this->invokeMethod($this->transport, 'getContacts', [['me@example.com' => '']]);
+
         $this->assertEquals('me@example.com', $to);
 
         $multiple = $this->invokeMethod($this->transport, 'getContacts', [[
@@ -71,6 +69,7 @@ class PostmarkTransportTest extends TestCase
             'jane@example.com' => 'Jane',
             'user@example.com' => 'User',
         ]]);
+
         $this->assertEquals('John <john@example.com>,Jane <jane@example.com>,User <user@example.com>', $multiple);
     }
 
@@ -94,6 +93,7 @@ class PostmarkTransportTest extends TestCase
     public function can_get_a_mime_part_from_message()
     {
         $this->message->addPart('<html>', 'text/html');
+
         $part = $this->invokeMethod($this->transport, 'getMimePart', [$this->message, 'text/html']);
 
         $this->assertSame('<html>', $part->getBody());
@@ -136,6 +136,7 @@ class PostmarkTransportTest extends TestCase
     {
         $this->message->getHeaders()->addTextHeader('Tag', 'TestTag1');
         $this->message->getHeaders()->addTextHeader('Tag', 'TestTag2');
+
         $tag = $this->invokeMethod($this->transport, 'getTag', [$this->message]);
 
         $this->assertSame('TestTag2', $tag);
@@ -204,6 +205,7 @@ class PostmarkTransportTest extends TestCase
     public function payload_has_the_proper_from_address()
     {
         $this->message->setFrom('john@example.com', 'John Doe');
+
         $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
@@ -215,6 +217,7 @@ class PostmarkTransportTest extends TestCase
     public function payload_has_the_proper_to_address()
     {
         $this->message->setTo('jane@example.com', 'Jane Doe');
+
         $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
@@ -226,6 +229,7 @@ class PostmarkTransportTest extends TestCase
     public function payload_has_the_proper_cc_address()
     {
         $this->message->setCc('foo@example.com', 'Foo');
+
         $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
@@ -237,6 +241,7 @@ class PostmarkTransportTest extends TestCase
     public function payload_has_the_proper_bcc_address()
     {
         $this->message->setBcc('bar@example.com', 'Bar');
+
         $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
@@ -248,6 +253,7 @@ class PostmarkTransportTest extends TestCase
     public function payload_has_the_proper_subject()
     {
         $this->message->setSubject('Lorem ipsum.');
+
         $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
@@ -259,6 +265,7 @@ class PostmarkTransportTest extends TestCase
     public function payload_has_the_proper_tag()
     {
         $this->message->getHeaders()->addTextHeader('Tag', 'TestTag');
+
         $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
@@ -270,6 +277,7 @@ class PostmarkTransportTest extends TestCase
     public function payload_has_the_proper_html_body()
     {
         $this->message->setBody('<html>', 'text/html');
+
         $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
@@ -283,6 +291,7 @@ class PostmarkTransportTest extends TestCase
     {
         $message = new \Swift_Message;
         $message->setBody('Lorem ipsum.', 'text/plain');
+
         $payload = $this->getPayload($message);
 
         tap($payload['json'], function ($json) {
@@ -296,6 +305,7 @@ class PostmarkTransportTest extends TestCase
     {
         $this->message->setBody('Lorem ipsum.', 'text/plain');
         $this->message->addPart('<html>', 'text/html');
+
         $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
@@ -310,6 +320,7 @@ class PostmarkTransportTest extends TestCase
         $message = new \Swift_Message;
         $message->setBody('<html>', 'text/html');
         $message->addPart('Lorem ipsum.', 'text/plain');
+
         $payload = $this->getPayload($message);
 
         tap($payload['json'], function ($json) {
@@ -322,6 +333,7 @@ class PostmarkTransportTest extends TestCase
     public function payload_has_the_proper_reply_to_address()
     {
         $this->message->setReplyTo('replyTo@example.com', 'ReplyName');
+
         $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
@@ -363,6 +375,7 @@ class PostmarkTransportTest extends TestCase
     public function empty_fields_are_not_present_in_the_json_payload()
     {
         $message = new \Swift_Message;
+
         $payload = $this->getPayload($message);
 
         tap($payload['json'], function ($json) {
@@ -378,6 +391,7 @@ class PostmarkTransportTest extends TestCase
     public function required_fields_are_present_in_the_json_payload()
     {
         $message = new \Swift_Message;
+
         $payload = $this->getPayload($message);
 
         tap($payload['json'], function ($json) {
@@ -391,6 +405,7 @@ class PostmarkTransportTest extends TestCase
     public function display_name_with_a_comma_should_be_double_quoted_the_payload()
     {
         $this->message->setTo('john@example.com', 'Doe, John');
+
         $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {

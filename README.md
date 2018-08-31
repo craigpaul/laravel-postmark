@@ -31,25 +31,10 @@ Please see [UPGRADE](UPGRADE.md) for details.
 
 ## Usage
 
-Update the `config/services.php` file to hold our Postmark specific config.
-
-```php
-return [
-    // ...
-    
-    'postmark' => [
-        'secret' => env('POSTMARK_SECRET'),    
-    ],
-];
-```
-
-Then we can add the server key to our `.env` file and update our `MAIL_DRIVER`.
+Update your `.env` file by adding your server key and set your mail driver to `postmark`.
 
 ```php
 MAIL_DRIVER=postmark
-
-// ...
-
 POSTMARK_SECRET=YOUR-SERVER-KEY-HERE
 ```
 

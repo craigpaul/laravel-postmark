@@ -8,18 +8,22 @@ use Illuminate\Support\ServiceProvider;
 class PostmarkServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any application services.
+     * Boot the service provider.
      *
      * @return void
      */
     public function boot()
     {
-        $config = $this->app['config']->get('services.postmark', []);
+        $this->publishes([
+            __DIR__ . '/../config/postmark.php' => config_path('postmark.php')
+        ], 'config');
 
-        $this->app['swift.transport']->extend('postmark', function () use ($config) {
+        $this->mergeConfigFrom(__DIR__ . '/../config/postmark.php', 'postmark');
+
+        $this->app['swift.transport']->extend('postmark', function () {
             return new PostmarkTransport(
-                $this->guzzle($config),
-                $config['secret']
+                $this->guzzle(config('postmark.guzzle', [])),
+                config('postmark.secret')
             );
         });
     }
@@ -33,10 +37,6 @@ class PostmarkServiceProvider extends ServiceProvider
      */
     protected function guzzle($config)
     {
-        return new HttpClient(array_add(
-            array_get($config, 'guzzle', []),
-            'connect_timeout',
-            60
-        ));
+        return new HttpClient($config);
     }
 }
