@@ -3,6 +3,7 @@
     "type": "library",
     "description": "Laravel package for sending mail via the Postmark API",
     "keywords": [
+        "wildbit",
         "postmark",
         "laravel",
         "mail",
