@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+- Adds phpunit.xml to .gitignore. [`cb798836a7`](https://github.com/coconutcraig/laravel-postmark/commit/acb798836a7)
+
 ## [2.2.0] - 2018-02-19
 
 - Updates travis configuration [`ae914ea34a`](https://github.com/coconutcraig/laravel-postmark/commit/ae914ea34a) 
