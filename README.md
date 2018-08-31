@@ -9,14 +9,6 @@
 
 > [Postmark](https://postmarkapp.com) is the easiest and most reliable way to be sure your important transactional emails get to your customer's inbox.
 
-## Install
-
-Via Composer
-
-``` bash
-$ composer require coconutcraig/laravel-postmark
-```
-
 ## Support
 
 | Laravel | Laravel Postmark |
@@ -28,6 +20,22 @@ $ composer require coconutcraig/laravel-postmark
 ## Upgrading
 
 Please see [UPGRADE](UPGRADE.md) for details.
+
+## Installation
+
+You can install the package via composer:
+
+``` bash
+$ composer require coconutcraig/laravel-postmark
+```
+
+The package will automatically register itself.
+
+You can optionally publish the config file with:
+
+```bash
+php artisan vendor:publish --provider="Coconuts\Mail\PostmarkServiceProvider" --tag="config"
+```
 
 ## Usage
 
