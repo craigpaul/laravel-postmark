@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Changed
+- Adds a postmark config file. [`e13970dd2d`](https://github.com/coconutcraig/laravel-postmark/commit/e13970dd2d) 
+
 ## [2.2.0] - 2018-02-19
 
 - Updates travis configuration [`ae914ea34a`](https://github.com/coconutcraig/laravel-postmark/commit/ae914ea34a) 
