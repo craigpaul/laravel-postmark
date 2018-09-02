@@ -179,7 +179,7 @@ class PostmarkTransport extends Transport
      * @param \Swift_Mime_SimpleMessage $message
      * @param string $mimeType
      *
-     * @return \Swift_MimePart
+     * @return \Swift_MimePart|null
      */
     protected function getMimePart(Swift_Mime_SimpleMessage $message, $mimeType)
     {
