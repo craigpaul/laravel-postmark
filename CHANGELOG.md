@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Updated
+- Adds support for Laravel 5.5 up to 5.7. [`86b4b3aebd`](https://github.com/coconutcraig/laravel-postmark/commit/86b4b3aebd)
+
 ## [2.2.0] - 2018-02-19
 
 - Updates travis configuration [`ae914ea34a`](https://github.com/coconutcraig/laravel-postmark/commit/ae914ea34a) 
