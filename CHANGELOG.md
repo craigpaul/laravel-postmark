@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Changed
+- Refactors the getHtmlAndTextBody() function by using a collection. [`00c36b8572`](https://github.com/coconutcraig/laravel-postmark/commit/00c36b8572)
+
 ## [2.2.0] - 2018-02-19
 
 - Updates travis configuration [`ae914ea34a`](https://github.com/coconutcraig/laravel-postmark/commit/ae914ea34a) 
