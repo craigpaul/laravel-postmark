@@ -11,13 +11,6 @@
 
 > [Postmark](https://postmarkapp.com) is the easiest and most reliable way to be sure your important transactional emails get to your customer's inbox.
 
-## Support
-
-| Laravel             | Laravel Postmark |
-|---------------------|------------------|
-| 5.4.x               | <= 2.0           |
-| 5.5.x, 5.6.x, 5.7.x | => 2.2           |
-
 ## Upgrading
 
 Please see [UPGRADE](UPGRADE.md) for details.
