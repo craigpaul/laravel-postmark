@@ -6,6 +6,7 @@
 - Adds phpunit.xml to .gitignore. [`cb798836a7`](https://github.com/coconutcraig/laravel-postmark/commit/acb798836a7)
 
 ### Changed
+- Adds a postmark config file. [`e13970dd2d`](https://github.com/coconutcraig/laravel-postmark/commit/e13970dd2d) 
 - Refactors the getHtmlAndTextBody() function by using a collection. [`00c36b8572`](https://github.com/coconutcraig/laravel-postmark/commit/00c36b8572)
 
 ### Fixed

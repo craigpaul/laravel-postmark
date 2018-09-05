@@ -16,9 +16,7 @@ class TestCase extends Orchestra
      */
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('services.postmark', [
-            'secret' => 'POSTMARK_API_TEST',
-        ]);
+        $app['config']->set('postmark.secret', 'POSTMARK_API_TEST');
     }
 
     /**
