@@ -11,47 +11,39 @@
 
 > [Postmark](https://postmarkapp.com) is the easiest and most reliable way to be sure your important transactional emails get to your customer's inbox.
 
-## Install
-
-Via Composer
-
-``` bash
-$ composer require coconutcraig/laravel-postmark
-```
-
 ## Support
 
-| Laravel | Laravel Postmark |
-|---------|------------------|
-| 5.4     | <= 2.0           |
-| 5.5     | 2.1              |
-| 5.6     | 2.2              |
+| Laravel             | Laravel Postmark |
+|---------------------|------------------|
+| 5.4.x               | <= 2.0           |
+| 5.5.x, 5.6.x, 5.7.x | => 2.2           |
 
 ## Upgrading
 
 Please see [UPGRADE](UPGRADE.md) for details.
 
-## Usage
+## Installation
 
-Update the `config/services.php` file to hold our Postmark specific config.
+You can install the package via composer:
 
-```php
-return [
-    // ...
-    
-    'postmark' => [
-        'secret' => env('POSTMARK_SECRET'),    
-    ],
-];
+``` bash
+$ composer require coconutcraig/laravel-postmark
 ```
 
-Then we can add the server key to our `.env` file and update our `MAIL_DRIVER`.
+The package will automatically register itself.
+
+You can optionally publish the config file with:
+
+```bash
+php artisan vendor:publish --provider="Coconuts\Mail\PostmarkServiceProvider" --tag="config"
+```
+
+## Usage
+
+Update your `.env` file by adding your server key and set your mail driver to `postmark`.
 
 ```php
 MAIL_DRIVER=postmark
-
-// ...
-
 POSTMARK_SECRET=YOUR-SERVER-KEY-HERE
 ```
 
