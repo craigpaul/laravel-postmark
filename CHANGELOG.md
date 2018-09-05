@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [2.3.0] - 2018-09-04
+
 ### Added
 - Adds phpunit.xml to .gitignore. [`cb798836a7`](https://github.com/coconutcraig/laravel-postmark/commit/acb798836a7)
 
@@ -181,7 +183,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.2.0...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.0...HEAD
+[2.3.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.2.0...2.3.0
 [2.2.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.8...v2.2.0
 [2.1.8]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.7...v2.1.8
 [2.1.7]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.6...v2.1.7
