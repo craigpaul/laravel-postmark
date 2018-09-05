@@ -402,7 +402,7 @@ class PostmarkTransportTest extends TestCase
     }
 
     /** @test */
-    public function display_name_with_a_comma_should_be_double_quoted_the_payload()
+    public function display_name_with_a_comma_should_be_double_quoted_in_the_json_payload()
     {
         $this->message->setTo('john@example.com', 'Doe, John');
 
