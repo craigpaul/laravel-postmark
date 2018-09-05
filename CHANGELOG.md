@@ -2,24 +2,35 @@
 
 ## [Unreleased]
 
+### Added
+- Adds phpunit.xml to .gitignore. [`cb798836a7`](https://github.com/coconutcraig/laravel-postmark/commit/acb798836a7)
+
 ### Changed
 - Refactors the getHtmlAndTextBody() function by using a collection. [`00c36b8572`](https://github.com/coconutcraig/laravel-postmark/commit/00c36b8572)
 
+### Fixed
+- Fixes naming of a test. [`8b43757939`](https://github.com/coconutcraig/laravel-postmark/commit/8b43757939)
+- Fixes phpunit.xml.dist file. [`fd75059cd1`](https://github.com/coconutcraig/laravel-postmark/commit/fd75059cd1)
+
+### Updated
+- Adds support for Laravel 5.5 up to 5.7. [`86b4b3aebd`](https://github.com/coconutcraig/laravel-postmark/commit/86b4b3aebd)
+
 ## [2.2.0] - 2018-02-19
 
-- Updates travis configuration [`ae914ea34a`](https://github.com/coconutcraig/laravel-postmark/commit/ae914ea34a) 
-- Updates compatibility table [`dac237f848`](https://github.com/coconutcraig/laravel-postmark/commit/dac237f848)
-- Updates dependencies for laravel framework upgrade [`932660900b`](https://github.com/coconutcraig/laravel-postmark/commit/932660900b)
+### Updated
+- Updates travis configuration. [`ae914ea34a`](https://github.com/coconutcraig/laravel-postmark/commit/ae914ea34a) 
+- Updates compatibility table. [`dac237f848`](https://github.com/coconutcraig/laravel-postmark/commit/dac237f848)
+- Updates dependencies for laravel framework upgrade. [`932660900b`](https://github.com/coconutcraig/laravel-postmark/commit/932660900b)
 
 ## [2.1.8] - 2017-11-16
 
 ### Updated
-- Adds multipart/mixed to content types to account for attachments [`e63fdd9e37`](https://github.com/coconutcraig/laravel-postmark/commit/e63fdd9e37)
+- Adds multipart/mixed to content types to account for attachments. [`e63fdd9e37`](https://github.com/coconutcraig/laravel-postmark/commit/e63fdd9e37)
 
 ## [2.1.7] - 2017-11-16
 
 ### Fixed
-- Re-indexes attachments collection before converting to an array [`eb39a28689`](https://github.com/coconutcraig/laravel-postmark/commit/eb39a28689)
+- Re-indexes attachments collection before converting to an array. [`eb39a28689`](https://github.com/coconutcraig/laravel-postmark/commit/eb39a28689)
 
 ## [2.1.6] - 2017-11-07
 
@@ -72,102 +83,102 @@
 ## [2.1.1] - 2017-07-17
 
 ### Added
-- Adds upgrade guide and link to readme [`158742412c`](https://github.com/coconutcraig/laravel-postmark/commit/158742412c)
-- Adds tag link for laravel 5.4 support [`a4b8c64f5c`](https://github.com/coconutcraig/laravel-postmark/commit/a4b8c64f5c)
+- Adds upgrade guide and link to readme. [`158742412c`](https://github.com/coconutcraig/laravel-postmark/commit/158742412c)
+- Adds tag link for laravel 5.4 support. [`a4b8c64f5c`](https://github.com/coconutcraig/laravel-postmark/commit/a4b8c64f5c)
 
 ### Removed
-- Removes redundant getFrom method and test [`81c555b9af`](https://github.com/coconutcraig/laravel-postmark/commit/81c555b9af)
-- Removes line forgotten from previous upgrade guide [`4910872bbe`](https://github.com/coconutcraig/laravel-postmark/commit/4910872bbe)
+- Removes redundant getFrom method and test. [`81c555b9af`](https://github.com/coconutcraig/laravel-postmark/commit/81c555b9af)
+- Removes line forgotten from previous upgrade guide. [`4910872bbe`](https://github.com/coconutcraig/laravel-postmark/commit/4910872bbe)
 
 ### Updated
-- Updates docblocks [`e3af135c8f`](https://github.com/coconutcraig/laravel-postmark/commit/e3af135c8f)
+- Updates docblocks. [`e3af135c8f`](https://github.com/coconutcraig/laravel-postmark/commit/e3af135c8f)
 
 ## [2.1.0] - 2017-07-17
 
 ### Updated
-- Adds support table to readme [`1f6f85b0c0`](https://github.com/coconutcraig/laravel-postmark/commit/1f6f85b0c0)
+- Adds support table to readme. [`1f6f85b0c0`](https://github.com/coconutcraig/laravel-postmark/commit/1f6f85b0c0)
 - Add support for Laravel 5.5. [`d29cdb46f6`](https://github.com/coconutcraig/laravel-postmark/commit/d29cdb46f6)
 
 ## [2.0.0] - 2017-07-17
 
 ### Added
-- Adds upgrade instructions from v1 to v2 [`a3450dde6f`](https://github.com/coconutcraig/laravel-postmark/commit/a3450dde6f)
-- Adds a short description about Postmark [`17056874e6`](https://github.com/coconutcraig/laravel-postmark/commit/17056874e6)
+- Adds upgrade instructions from v1 to v2. [`a3450dde6f`](https://github.com/coconutcraig/laravel-postmark/commit/a3450dde6f)
+- Adds a short description about Postmark. [`17056874e6`](https://github.com/coconutcraig/laravel-postmark/commit/17056874e6)
 - Added a service provider. [`5bf7472003`](https://github.com/coconutcraig/laravel-postmark/commit/5bf7472003)
 
 ### Removed
 - Removed guzzle test param. [`b65d000870`](https://github.com/coconutcraig/laravel-postmark/commit/b65d000870)
-- Removed unused local variable $app [`295c02ae0a`](https://github.com/coconutcraig/laravel-postmark/commit/295c02ae0a)
+- Removed unused local variable $app. [`295c02ae0a`](https://github.com/coconutcraig/laravel-postmark/commit/295c02ae0a)
 
 ### Updated
-- Using helper method instead of static access to class 'Arr' [`c891f714c9`](https://github.com/coconutcraig/laravel-postmark/commit/c891f714c9)
+- Using helper method instead of static access to class 'Arr'. [`c891f714c9`](https://github.com/coconutcraig/laravel-postmark/commit/c891f714c9)
 
 ## [1.1.5] - 2017-07-02
 
 ### Updated
-- Set X-PM-Message-Id into swift message headers [`a7a744d53a`](https://github.com/coconutcraig/laravel-postmark/commit/a7a744d53a)
-- Updates minor code styling [`8dfb904663`](https://github.com/coconutcraig/laravel-postmark/commit/8dfb904663)
+- Set X-PM-Message-Id into swift message headers. [`a7a744d53a`](https://github.com/coconutcraig/laravel-postmark/commit/a7a744d53a)
+- Updates minor code styling. [`8dfb904663`](https://github.com/coconutcraig/laravel-postmark/commit/8dfb904663)
 
 ## [1.1.4] - 2017-05-24
 
 ### Fixed
 
-- Adds check to make sure we only attach swift attachments [`e3a4c7b86b`](https://github.com/coconutcraig/laravel-postmark/commit/e3a4c7b86b)
+- Adds check to make sure we only attach swift attachments. [`e3a4c7b86b`](https://github.com/coconutcraig/laravel-postmark/commit/e3a4c7b86b)
 
 ## [1.1.3] - 2017-05-24
 
 ### Fixed
 
-- Fixes bug with getting filename [`3a03b6f8eb`](https://github.com/coconutcraig/laravel-postmark/commit/3a03b6f8eb)
+- Fixes bug with getting filename. [`3a03b6f8eb`](https://github.com/coconutcraig/laravel-postmark/commit/3a03b6f8eb)
 
 ## [1.1.2] - 2017-05-24
 
 ### Added
 
-- Adds attachment handling [`24d9e889bb`](https://github.com/coconutcraig/laravel-postmark/commit/24d9e889bb)
+- Adds attachment handling. [`24d9e889bb`](https://github.com/coconutcraig/laravel-postmark/commit/24d9e889bb)
 
 ## [1.1.1] - 2017-05-23
 
 ### Added
 
-- Adds reply to header override [`71695a1829`](https://github.com/coconutcraig/laravel-postmark/commit/71695a1829)
+- Adds reply to header override. [`71695a1829`](https://github.com/coconutcraig/laravel-postmark/commit/71695a1829)
 
 ## [1.1.0] - 2017-05-17
 
 ### Changed
-- Separates out addresses into proper fields [`ddbe313660`](https://github.com/coconutcraig/laravel-postmark/commit/ddbe313660)
+- Separates out addresses into proper fields. [`ddbe313660`](https://github.com/coconutcraig/laravel-postmark/commit/ddbe313660)
 
 ## [1.0.0] - 2017-03-24
 
 ### Added
-- Adds documentation for attaching tag headers [`e7f09633c8`](https://github.com/coconutcraig/laravel-postmark/commit/e7f09633c8)
+- Adds documentation for attaching tag headers. [`e7f09633c8`](https://github.com/coconutcraig/laravel-postmark/commit/e7f09633c8)
 
 ## [0.2.1] - 2017-02-03
 
 ### Added
-- Adds setup documentation to readme [`2c2bc36a1b`](https://github.com/coconutcraig/laravel-postmark/commit/2c2bc36a1b)
-- Adds ability to add tags to mail [`7d63060128`](https://github.com/coconutcraig/laravel-postmark/commit/7d63060128)
+- Adds setup documentation to readme. [`2c2bc36a1b`](https://github.com/coconutcraig/laravel-postmark/commit/2c2bc36a1b)
+- Adds ability to add tags to mail. [`7d63060128`](https://github.com/coconutcraig/laravel-postmark/commit/7d63060128)
 
 ### Changed
-- Fixes changelog entries [`e5370029b4`](https://github.com/coconutcraig/laravel-postmark/commit/e5370029b4)
-- Cleans up docblocks and removes useless dot files [`09ecd1b10c`](https://github.com/coconutcraig/laravel-postmark/commit/09ecd1b10c)
+- Fixes changelog entries. [`e5370029b4`](https://github.com/coconutcraig/laravel-postmark/commit/e5370029b4)
+- Cleans up docblocks and removes useless dot files. [`09ecd1b10c`](https://github.com/coconutcraig/laravel-postmark/commit/09ecd1b10c)
 
 ## [0.2.0] - 2017-01-29
 
 ### Changed
-- Removes hhvm from travis.yml file [`bfa3c1739e`](https://github.com/coconutcraig/laravel-postmark/commit/bfa3c1739e)
-- Changes scrutinizer runs to 1 from 3 [`b004ef9439`](https://github.com/coconutcraig/laravel-postmark/commit/b004ef9439)
-- Changes getSender to getFrom [`b1484d0337`](https://github.com/coconutcraig/laravel-postmark/commit/b1484d0337)
+- Removes hhvm from travis.yml file. [`bfa3c1739e`](https://github.com/coconutcraig/laravel-postmark/commit/bfa3c1739e)
+- Changes scrutinizer runs to 1 from 3. [`b004ef9439`](https://github.com/coconutcraig/laravel-postmark/commit/b004ef9439)
+- Changes getSender to getFrom. [`b1484d0337`](https://github.com/coconutcraig/laravel-postmark/commit/b1484d0337)
 
 ## [0.1.0] - 2017-01-29
 
 ### Added
-- Adds service provider, manager and mail driver with appropriate tests [`b3c10cd221`](https://github.com/coconutcraig/laravel-postmark/commit/b3c10cd221)
+- Adds service provider, manager and mail driver with appropriate tests. [`b3c10cd221`](https://github.com/coconutcraig/laravel-postmark/commit/b3c10cd221)
 
 ## 0.0.1 - 2017-01-29
 
 ### Added
-- Adds package skeleton [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
+- Adds package skeleton. [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
 [Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.2.0...HEAD
 [2.2.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.8...v2.2.0

@@ -1,3 +1,5 @@
+<p align="center"><a href="https://postmarkapp.com" target="_blank"><img src="https://postmarkapp.com/images/logo.svg" alt="Postmark" width="240" height="40"></a>
+    
 # Laravel Postmark
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
@@ -19,11 +21,10 @@ $ composer require coconutcraig/laravel-postmark
 
 ## Support
 
-| Laravel | Laravel Postmark |
-|---------|------------------|
-| 5.4     | <= 2.0           |
-| 5.5     | 2.1              |
-| 5.6     | 2.2              |
+| Laravel             | Laravel Postmark |
+|---------------------|------------------|
+| 5.4.x               | <= 2.0           |
+| 5.5.x, 5.6.x, 5.7.x | => 2.2           |
 
 ## Upgrading
 
