@@ -156,29 +156,21 @@ class PostmarkTransport extends Transport
      */
     protected function getHtmlAndTextBody(Swift_Mime_SimpleMessage $message)
     {
-        $data = [];
+        $key = collect([
+            'text/html' => 'HtmlBody',
+            'multipart/mixed' => 'HtmlBody',
+            'multipart/related' => 'HtmlBody',
+            'multipart/alternative' => 'HtmlBody',
+        ])
+        ->get($message->getContentType(), 'TextBody');
 
-        switch ($message->getContentType()) {
-            case 'text/html':
-            case 'multipart/mixed':
-            case 'multipart/related':
-            case 'multipart/alternative':
-                $data['HtmlBody'] = $this->getBody($message);
-                break;
-            default:
-                $data['TextBody'] = $this->getBody($message);
-                break;
-        }
-
-        if ($text = $this->getMimePart($message, 'text/plain')) {
-            $data['TextBody'] = $text->getBody();
-        }
-
-        if ($html = $this->getMimePart($message, 'text/html')) {
-            $data['HtmlBody'] = $html->getBody();
-        }
-
-        return $data;
+        return collect([
+            $key => $this->getBody($message)
+        ])->when($this->getMimePart($message, 'text/plain'), function ($collection, $value) {
+            return $collection->put('TextBody', $value->getBody());
+        })->when($this->getMimePart($message, 'text/html'), function ($collection, $value) {
+            return $collection->put('HtmlBody', $value->getBody());
+        })->all();
     }
 
     /**
@@ -187,7 +179,7 @@ class PostmarkTransport extends Transport
      * @param \Swift_Mime_SimpleMessage $message
      * @param string $mimeType
      *
-     * @return \Swift_MimePart
+     * @return \Swift_MimePart|null
      */
     protected function getMimePart(Swift_Mime_SimpleMessage $message, $mimeType)
     {

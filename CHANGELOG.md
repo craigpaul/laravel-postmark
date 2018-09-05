@@ -5,6 +5,9 @@
 ### Added
 - Adds phpunit.xml to .gitignore. [`cb798836a7`](https://github.com/coconutcraig/laravel-postmark/commit/acb798836a7)
 
+### Changed
+- Refactors the getHtmlAndTextBody() function by using a collection. [`00c36b8572`](https://github.com/coconutcraig/laravel-postmark/commit/00c36b8572)
+
 ### Fixed
 - Fixes naming of a test. [`8b43757939`](https://github.com/coconutcraig/laravel-postmark/commit/8b43757939)
 - Fixes phpunit.xml.dist file. [`fd75059cd1`](https://github.com/coconutcraig/laravel-postmark/commit/fd75059cd1)
