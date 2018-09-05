@@ -1,3 +1,5 @@
+<p align="center"><a href="https://postmarkapp.com" target="_blank"><img src="https://postmarkapp.com/images/logo.svg" alt="Postmark" width="240" height="40"></a>
+    
 # Laravel Postmark
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
