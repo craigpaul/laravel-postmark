@@ -1,10 +1,14 @@
 {
     "name": "coconutcraig/laravel-postmark",
     "type": "library",
-    "description": "A Postmark adapter for Laravel",
+    "description": "Laravel package for sending mail via the Postmark API",
     "keywords": [
-        "coconutcraig",
-        "laravel-postmark"
+        "wildbit",
+        "postmark",
+        "laravel",
+        "mail",
+        "email",
+        "coconutcraig"
     ],
     "homepage": "https://github.com/coconutcraig/laravel-postmark",
     "license": "MIT",
