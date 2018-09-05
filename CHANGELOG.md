@@ -4,6 +4,7 @@
 
 ### Fixed
 - Fixes naming of a test. [`8b43757939`](https://github.com/coconutcraig/laravel-postmark/commit/8b43757939)
+- Fixes phpunit.xml.dist file. [`fd75059cd1`](https://github.com/coconutcraig/laravel-postmark/commit/fd75059cd1)
 
 ## [2.2.0] - 2018-02-19
 
