@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Fixed
+- Throw an exception when POSTMARK_SECRET is not set. [`cabbe42473`](https://github.com/coconutcraig/laravel-postmark/commit/cabbe42473)
+
 ## [2.3.0] - 2018-09-04
 
 ### Added
