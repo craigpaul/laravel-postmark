@@ -7,6 +7,7 @@ use Swift_Attachment;
 use Swift_Mime_SimpleMessage;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Mail\Transport\Transport;
+use Coconuts\Mail\Exceptions\PostmarkException;
 
 class PostmarkTransport extends Transport
 {
@@ -41,6 +42,10 @@ class PostmarkTransport extends Transport
      */
     public function __construct(ClientInterface $client, $key)
     {
+        if (empty($key)) {
+            throw PostmarkException::secretNotSet();
+        }
+
         $this->key = $key;
         $this->client = $client;
     }
