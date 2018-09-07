@@ -39,11 +39,12 @@ class PostmarkTransport extends Transport
      * @param string $key
      *
      * @return void
+     * @throws \Coconuts\Mail\Exceptions\PostmarkException
      */
     public function __construct(ClientInterface $client, $key)
     {
-        if (empty($key)) {
-            throw PostmarkException::secretNotSet();
+        if (empty(trim($key))) {
+            throw new PostmarkException('The Postmark secret is not set. Make sure that the `postmark.secret` config key is set.');
         }
 
         $this->key = $key;
