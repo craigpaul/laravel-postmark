@@ -423,4 +423,18 @@ class PostmarkTransportTest extends TestCase
             $this->fail($e->getMessage());
         }
     }
+
+    /** @test */
+    public function creating_a_new_instance_of_postmark_transport_without_setting_a_postmark_secret_throws_an_exception()
+    {
+        $this->expectException(\Coconuts\Mail\Exceptions\PostmarkException::class);
+        $this->expectExceptionMessage('The Postmark secret is not set. Make sure that the `postmark.secret` config key is set.');
+
+        $this->transport = new PostmarkTransport(
+            new Client(),
+            null
+        );
+
+        $this->transport->send($this->message);
+    }
 }
