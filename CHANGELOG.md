@@ -2,8 +2,14 @@
 
 ## [Unreleased]
 
+## [2.3.1] - 2018-09-11
+
 ### Fixed
 - Throw an exception when POSTMARK_SECRET is not set. [`cabbe42473`](https://github.com/coconutcraig/laravel-postmark/commit/cabbe42473)
+- Fixes long line causing phpcs error [`aa6909137`](https://github.com/coconutcraig/laravel-postmark/commit/9aa6909137)  
+
+### Updated
+- Update PostmarkServiceProvider.php [`2d03a2a0fb`](https://github.com/coconutcraig/laravel-postmark/commit/2d03a2a0fb) 
 
 ## [2.3.0] - 2018-09-04
 
@@ -186,7 +192,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.0...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.1...HEAD
+[2.3.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.0...2.3.1
 [2.3.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.2.0...2.3.0
 [2.2.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.8...v2.2.0
 [2.1.8]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.7...v2.1.8
