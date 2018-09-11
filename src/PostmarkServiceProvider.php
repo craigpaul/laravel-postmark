@@ -23,7 +23,7 @@ class PostmarkServiceProvider extends ServiceProvider
         $this->app['swift.transport']->extend('postmark', function () {
             return new PostmarkTransport(
                 $this->guzzle(config('postmark.guzzle', [])),
-                config('postmark.secret')
+                config('postmark.secret', config('services.postmark.secret'))
             );
         });
     }
