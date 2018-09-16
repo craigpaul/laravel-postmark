@@ -27,6 +27,7 @@ matrix:
       env: LARAVEL='5.5.*' TESTBENCH='3.5.*'
     - php: 7.2
       env: LARAVEL='5.5.*' TESTBENCH='3.5.*'
+  fast_finish: true
 
 before_script:
   - composer config discard-changes true
