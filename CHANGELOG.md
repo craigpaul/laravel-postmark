@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+- Adds build matrix to test against multiple versions. [`ea0b27d9f7`](https://github.com/coconutcraig/laravel-postmark/commit/ea0b27d9f7) 
+
 ## [2.3.1] - 2018-09-11
 
 ### Fixed
