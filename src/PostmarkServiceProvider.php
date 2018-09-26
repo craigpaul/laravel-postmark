@@ -18,6 +18,10 @@ class PostmarkServiceProvider extends ServiceProvider
             __DIR__ . '/../config/postmark.php' => config_path('postmark.php')
         ], 'config');
 
+        if ($this->app['config']['mail.driver'] != 'postmark') {
+            return;
+        }
+
         $this->mergeConfigFrom(__DIR__ . '/../config/postmark.php', 'postmark');
 
         $this->app['swift.transport']->extend('postmark', function () {
