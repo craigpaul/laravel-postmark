@@ -2,8 +2,8 @@
 
 namespace Coconuts\Mail;
 
-use ReflectionClass;
 use Orchestra\Testbench\TestCase as Orchestra;
+use ReflectionClass;
 
 class TestCase extends Orchestra
 {
@@ -16,6 +16,7 @@ class TestCase extends Orchestra
      */
     protected function getEnvironmentSetUp($app)
     {
+        $app['config']->set('mail.driver', 'postmark');
         $app['config']->set('postmark.secret', 'POSTMARK_API_TEST');
     }
 
