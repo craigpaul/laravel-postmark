@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- Adds test to ensure custom creator is not put into framework when mail driver is not postmark [`7c22b536f6`](https://github.com/coconutcraig/laravel-postmark/commit/7c22b536f6)
+
 ## [2.3.1] - 2018-09-27
 
 ### Added
