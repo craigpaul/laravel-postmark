@@ -18,7 +18,7 @@ class PostmarkServiceProvider extends ServiceProvider
             __DIR__ . '/../config/postmark.php' => config_path('postmark.php')
         ], 'config');
 
-        if ($this->app['config']['mail.driver'] != 'postmark') {
+        if ($this->app['config']['mail.driver'] !== 'postmark') {
             return;
         }
 
