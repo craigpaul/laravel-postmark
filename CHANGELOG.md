@@ -2,11 +2,16 @@
 
 ## [Unreleased]
 
+## [2.3.1] - 2018-09-27
+
 ### Added
 - Adds build matrix to test against multiple versions. [`ea0b27d9f7`](https://github.com/coconutcraig/laravel-postmark/commit/ea0b27d9f7) 
 
 ### Fixed
-- Skip swift extension if driver isn't 'postmark' [[`6bb7e3b7e5`](https://github.com/coconutcraig/laravel-postmark/commit/6bb7e3b7e5)
+- Skip swift extension if driver isn't 'postmark' [`6bb7e3b7e5`](https://github.com/coconutcraig/laravel-postmark/commit/6bb7e3b7e5)
+
+### Updated
+- Changes style preset to laravel [`dbabf1e286`](https://github.com/coconutcraig/laravel-postmark/commit/dbabf1e286)
 
 ## [2.3.1] - 2018-09-11
 
@@ -198,7 +203,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.1...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.2...HEAD
+[2.3.2]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.1...2.3.2
 [2.3.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.0...2.3.1
 [2.3.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.2.0...2.3.0
 [2.2.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.1.8...v2.2.0
