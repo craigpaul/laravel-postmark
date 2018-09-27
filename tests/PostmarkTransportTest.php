@@ -152,7 +152,7 @@ class PostmarkTransportTest extends TestCase
                 'Name' => 'test.txt',
                 'Content' => 'dGVzdCBhdHRhY2htZW50',
                 'ContentType' => 'text/plain',
-            ]
+            ],
         ], $attachments);
     }
 

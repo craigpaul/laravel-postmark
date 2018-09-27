@@ -105,7 +105,7 @@ class PostmarkTransport extends Transport
     protected function getDisplayname($value)
     {
         if (strpos($value, ',') !== false) {
-            return '"' . $value . '"';
+            return '"'.$value.'"';
         }
 
         return $value;
@@ -122,7 +122,7 @@ class PostmarkTransport extends Transport
     {
         return collect($contacts)
             ->map(function ($display, $address) {
-                return $display ? $this->getDisplayname($display) . " <{$address}>" : $address;
+                return $display ? $this->getDisplayname($display)." <{$address}>" : $address;
             })
             ->values()
             ->implode(',');
@@ -173,7 +173,7 @@ class PostmarkTransport extends Transport
         ->get($message->getContentType(), 'TextBody');
 
         return collect([
-            $key => $this->getBody($message)
+            $key => $this->getBody($message),
         ])->when($this->getMimePart($message, 'text/plain'), function ($collection, $value) {
             return $collection->put('TextBody', $value->getBody());
         })->when($this->getMimePart($message, 'text/html'), function ($collection, $value) {
@@ -243,7 +243,7 @@ class PostmarkTransport extends Transport
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
                 'X-Postmark-Server-Token' => $this->key,
-            ]
+            ],
         ])
         ->merge([
             'json' => collect([
@@ -259,7 +259,7 @@ class PostmarkTransport extends Transport
             })
             ->put('From', $this->getContacts($message->getFrom()))
             ->put('To', $this->getContacts($message->getTo()))
-            ->merge($this->getHtmlAndTextBody($message))
+            ->merge($this->getHtmlAndTextBody($message)),
         ])
         ->toArray();
     }
