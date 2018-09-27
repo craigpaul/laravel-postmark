@@ -2,8 +2,8 @@
 
 namespace Coconuts\Mail;
 
-use Orchestra\Testbench\TestCase as Orchestra;
 use ReflectionClass;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
