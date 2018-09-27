@@ -40,6 +40,7 @@ class TestCase extends Orchestra
      * @param array $params
      *
      * @return mixed
+     * @throws \ReflectionException
      */
     protected function invokeMethod(&$object, $name, array $params = [])
     {
@@ -57,6 +58,7 @@ class TestCase extends Orchestra
      * @param string $name
      *
      * @return mixed
+     * @throws \ReflectionException
      */
     protected function readProperty(&$object, $name)
     {
