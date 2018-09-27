@@ -5,6 +5,9 @@
 ### Added
 - Adds build matrix to test against multiple versions. [`ea0b27d9f7`](https://github.com/coconutcraig/laravel-postmark/commit/ea0b27d9f7) 
 
+### Fixed
+- Skip swift extension if driver isn't 'postmark' [[`6bb7e3b7e5`](https://github.com/coconutcraig/laravel-postmark/commit/6bb7e3b7e5)
+
 ## [2.3.1] - 2018-09-11
 
 ### Fixed
