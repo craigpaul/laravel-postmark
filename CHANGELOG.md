@@ -2,12 +2,11 @@
 
 ## [Unreleased]
 
-- Adds test to ensure custom creator is not put into framework when mail driver is not postmark [`7c22b536f6`](https://github.com/coconutcraig/laravel-postmark/commit/7c22b536f6)
-
-## [2.3.3] - 2019-02-26
+## [2.4.0] - 2019-02-26
 
 ### Added
-- Adds support for Laravel 5.8 [`#26`](https://github.com/craigpaul/laravel-postmark/pull/26) 
+- Adds support for Laravel 5.8 [`d6aa008ca5`](https://github.com/coconutcraig/laravel-postmark/commit/d6aa008ca5) 
+- Adds test to ensure custom creator is not put into framework when mail driver is not postmark [`7c22b536f6`](https://github.com/coconutcraig/laravel-postmark/commit/7c22b536f6)
 
 ## [2.3.2] - 2018-09-27
 
@@ -210,8 +209,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.3...HEAD
-[2.3.3]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.2...2.3.3
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.4.0...HEAD
+[2.4.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.2...2.4.0
 [2.3.2]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.1...2.3.2
 [2.3.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.0...2.3.1
 [2.3.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.2.0...2.3.0
