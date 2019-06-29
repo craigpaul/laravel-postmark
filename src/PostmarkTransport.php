@@ -318,7 +318,7 @@ class PostmarkTransport extends Transport
                 return empty($item);
             })
             ->put('From', $this->getContacts($message->getFrom()))
-            ->put('To', $this->getContacts($message->getTo()))
+            ->put('To', $this->getContacts($message->getTo())),
         ])
         ->toArray();
     }
