@@ -241,16 +241,16 @@ class PostmarkTransport extends Transport
     }
 
     /**
-     * Get a field value for the given message.
+     * Get the tag for the given message.
      *
      * @param \Swift_Mime_SimpleMessage $message
      *
      * @return string
      */
-    protected function getHeaderField(Swift_Mime_SimpleMessage $message, $field)
+    protected function getTag(Swift_Mime_SimpleMessage $message)
     {
         return optional(
-            collect($message->getHeaders()->getAll($field))
+            collect($message->getHeaders()->getAll('tag'))
             ->last()
         )
         ->getFieldBody() ?: '';
@@ -277,7 +277,7 @@ class PostmarkTransport extends Transport
                 'Cc' => $this->getContacts($message->getCc()),
                 'Bcc' => $this->getContacts($message->getBcc()),
                 'Subject' => $this->getSubject($message),
-                'Tag' => $this->getHeaderField($message, 'tag'),
+                'Tag' => $this->getTag($message),
                 'ReplyTo' => $this->getContacts($message->getReplyTo()),
                 'Attachments' => $this->getAttachments($message),
             ])
