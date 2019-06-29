@@ -75,10 +75,10 @@ class PostmarkTransport extends Transport
         $this->beforeSendPerformed($message);
 
         if ($this->isUsingTemplateApi($message)) {
-            $endpoint = $this->url . $this->emailWithTemplateEndpoint;
+            $endpoint = $this->url.$this->emailWithTemplateEndpoint;
             $payload = $this->payloadWithTemplateApi($message);
         } else {
-            $endpoint = $this->url . $this->emailEndpoint;
+            $endpoint = $this->url.$this->emailEndpoint;
             $payload = $this->payload($message);
         }
 

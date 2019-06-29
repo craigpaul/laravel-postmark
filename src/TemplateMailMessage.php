@@ -2,8 +2,8 @@
 
 namespace Coconuts\Mail;
 
-use Illuminate\Notifications\Messages\MailMessage;
 use Symfony\Component\HttpFoundation\HeaderBag;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class TemplateMailMessage extends MailMessage
 {
