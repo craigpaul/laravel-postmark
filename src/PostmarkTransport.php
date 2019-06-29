@@ -26,11 +26,25 @@ class PostmarkTransport extends Transport
     protected $key;
 
     /**
-     * The Postmark API end-point.
+     * The Postmark API URL.
      *
      * @var string
      */
-    protected $url = 'https://api.postmarkapp.com/email';
+    protected $url = 'https://api.postmarkapp.com';
+
+    /**
+     * Email endpoint.
+     *
+     * @var string
+     */
+    protected $emailEndpoint = '/email';
+
+    /**
+     * Email with template endpoint.
+     *
+     * @var string
+     */
+    protected $emailWithTemplateEndpoint = '/email/withTemplate';
 
     /**
      * Create a new Postmark transport instance.
@@ -60,7 +74,15 @@ class PostmarkTransport extends Transport
     {
         $this->beforeSendPerformed($message);
 
-        $response = $this->client->post($this->url, $this->payload($message));
+        if ($this->isUsingTemplateApi($message)) {
+            $endpoint = $this->url . $this->emailWithTemplateEndpoint;
+            $payload = $this->payloadWithTemplateApi($message);
+        } else {
+            $endpoint = $this->url . $this->emailEndpoint;
+            $payload = $this->payload($message);
+        }
+
+        $response = $this->client->post($endpoint, $payload);
 
         $message->getHeaders()->addTextHeader(
             'X-PM-Message-Id',
@@ -70,6 +92,11 @@ class PostmarkTransport extends Transport
         $this->sendPerformed($message);
 
         return $this->numberOfRecipients($message);
+    }
+
+    public function isUsingTemplateApi(Swift_Mime_SimpleMessage $message): bool
+    {
+        return json_decode($message->getBody()) !== null;
     }
 
     /**
@@ -85,7 +112,7 @@ class PostmarkTransport extends Transport
             ->filter(function ($child) {
                 return $child instanceof Swift_Attachment;
             })
-            ->map(function ($child) {
+            ->map(function (Swift_Attachment $child) {
                 return [
                     'Name' => $child->getHeaders()->get('content-type')->getParameter('name'),
                     'Content' => base64_encode($child->getBody()),
@@ -102,7 +129,7 @@ class PostmarkTransport extends Transport
      * @param  string
      * @return string
      */
-    protected function getDisplayname($value)
+    protected function getDisplayName($value)
     {
         if (strpos($value, ',') !== false) {
             return '"'.$value.'"';
@@ -122,7 +149,7 @@ class PostmarkTransport extends Transport
     {
         return collect($contacts)
             ->map(function ($display, $address) {
-                return $display ? $this->getDisplayname($display)." <{$address}>" : $address;
+                return $display ? $this->getDisplayName($display)." <{$address}>" : $address;
             })
             ->values()
             ->implode(',');
@@ -214,16 +241,16 @@ class PostmarkTransport extends Transport
     }
 
     /**
-     * Get the tag for the given message.
+     * Get a field value for the given message.
      *
      * @param \Swift_Mime_SimpleMessage $message
      *
      * @return string
      */
-    protected function getTag(Swift_Mime_SimpleMessage $message)
+    protected function getHeaderField(Swift_Mime_SimpleMessage $message, $field)
     {
         return optional(
-            collect($message->getHeaders()->getAll('tag'))
+            collect($message->getHeaders()->getAll($field))
             ->last()
         )
         ->getFieldBody() ?: '';
@@ -249,8 +276,8 @@ class PostmarkTransport extends Transport
             'json' => collect([
                 'Cc' => $this->getContacts($message->getCc()),
                 'Bcc' => $this->getContacts($message->getBcc()),
-                'Tag' => $this->getTag($message),
                 'Subject' => $this->getSubject($message),
+                'Tag' => $this->getHeaderField($message, 'tag'),
                 'ReplyTo' => $this->getContacts($message->getReplyTo()),
                 'Attachments' => $this->getAttachments($message),
             ])
@@ -260,6 +287,38 @@ class PostmarkTransport extends Transport
             ->put('From', $this->getContacts($message->getFrom()))
             ->put('To', $this->getContacts($message->getTo()))
             ->merge($this->getHtmlAndTextBody($message)),
+        ])
+        ->toArray();
+    }
+
+    protected function payloadWithTemplateApi(Swift_Mime_SimpleMessage $message): array
+    {
+        $contents = json_decode($message->getBody(), true);
+
+        return collect([
+            'headers' => [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+                'X-Postmark-Server-Token' => $this->key,
+            ],
+        ])
+        ->merge([
+            'json' => collect([
+                'TemplateId' => $contents['templateId'] ?? null,
+                'TemplateAlias' => $contents['templateAlias'] ?? null,
+                'TemplateModel' => $contents['templateModel'] ?? null,
+                'InlineCss' => $contents['inlineCss'] ?? null,
+                'Cc' => $this->getContacts($message->getCc()),
+                'Bcc' => $this->getContacts($message->getBcc()),
+                'Tag' => $contents['tag'] ?? null,
+                'ReplyTo' => $this->getContacts($message->getReplyTo()),
+                'Attachments' => $this->getAttachments($message),
+            ])
+            ->reject(function ($item) {
+                return empty($item);
+            })
+            ->put('From', $this->getContacts($message->getFrom()))
+            ->put('To', $this->getContacts($message->getTo()))
         ])
         ->toArray();
     }
