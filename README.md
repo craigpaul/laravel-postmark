@@ -86,13 +86,13 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 [ico-version]: https://img.shields.io/packagist/v/coconutcraig/laravel-postmark.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/coconutcraig/laravel-postmark/master.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/craigpaul/laravel-postmark/master.svg?style=flat-square
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/coconutcraig/laravel-postmark.svg?style=flat-square
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/coconutcraig/laravel-postmark.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/coconutcraig/laravel-postmark.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/coconutcraig/laravel-postmark
-[link-travis]: https://travis-ci.org/coconutcraig/laravel-postmark
+[link-travis]: https://travis-ci.com/craigpaul/laravel-postmark
 [link-scrutinizer]: https://scrutinizer-ci.com/g/coconutcraig/laravel-postmark/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/coconutcraig/laravel-postmark
 [link-downloads]: https://packagist.org/packages/coconutcraig/laravel-postmark
