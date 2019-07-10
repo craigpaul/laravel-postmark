@@ -214,6 +214,29 @@ class PostmarkTransport extends Transport
     }
 
     /**
+     * Get metadata for the given message.
+     *
+     * @param \Swift_Mime_SimpleMessage $message
+     *
+     * @return array
+     */
+    protected function getMetadata(Swift_Mime_SimpleMessage $message)
+    {
+        return collect($message->getHeaders()->getAll())
+        ->mapWithKeys(function($header){
+            mb_ereg('^metadata-(.*)', $header->getFieldName(), $matches);
+
+            return isset($matches[1]) && $matches[1] !== false
+            ? [
+                $matches[1] => iconv_mime_decode($header->getFieldBody(), 0, 'UTF-8')
+            ]
+            : ['' => null];
+        })
+        ->filter()
+        ->toArray();
+    }
+
+    /**
      * Get the tag for the given message.
      *
      * @param \Swift_Mime_SimpleMessage $message
@@ -250,6 +273,7 @@ class PostmarkTransport extends Transport
                 'Cc' => $this->getContacts($message->getCc()),
                 'Bcc' => $this->getContacts($message->getBcc()),
                 'Tag' => $this->getTag($message),
+                'Metadata' => $this->getMetadata($message),
                 'Subject' => $this->getSubject($message),
                 'ReplyTo' => $this->getContacts($message->getReplyTo()),
                 'Attachments' => $this->getAttachments($message),

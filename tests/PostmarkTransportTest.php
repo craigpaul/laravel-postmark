@@ -39,6 +39,8 @@ class PostmarkTransportTest extends TestCase
             $message->setReplyTo('replyTo@example.com');
             $message->attach($attachment);
             $message->getHeaders()->addTextHeader('Tag', 'Tagged');
+            $message->getHeaders()->addTextHeader('metadata-metadata', 'metadata');
+            $message->getHeaders()->addTextHeader('metadata-other-data', 'some other data');
             $message->addPart('<html>', 'text/html');
         });
 
@@ -436,5 +438,37 @@ class PostmarkTransportTest extends TestCase
         );
 
         $this->transport->send($this->message);
+    }
+
+    /** @test */
+    public function can_get_metadata()
+    {
+        $metadata = $this->invokeMethod($this->transport, 'getMetadata', [$this->message]);
+
+        $this->assertSame([
+            'metadata' => 'metadata',
+            'other-data' => 'some other data'
+        ], $metadata);
+    }
+
+    /** @test */
+    public function metadata_is_empty_array_when_not_set()
+    {
+        $metadata = $this->invokeMethod($this->transport, 'getMetadata', [new \Swift_Message]);
+
+        $this->assertSame([], $metadata);
+    }
+
+    /** @test */
+    public function metadata_can_be_non_ascii()
+    {
+        $message = new \Swift_Message;
+        $message->getHeaders()->addTextHeader('metadata-other-data¹', 'some other data¹');
+
+        $metadata = $this->invokeMethod($this->transport, 'getMetadata', [$message]);
+
+        $this->assertSame([
+            'other-data¹' => 'some other data¹'
+        ], $metadata);
     }
 }
