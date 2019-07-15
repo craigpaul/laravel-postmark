@@ -3,6 +3,7 @@
 namespace Coconuts\Mail;
 
 use Swift_MimePart;
+use function collect;
 use Swift_Attachment;
 use Swift_Mime_SimpleMessage;
 use GuzzleHttp\ClientInterface;
@@ -164,21 +165,23 @@ class PostmarkTransport extends Transport
      */
     protected function getHtmlAndTextBody(Swift_Mime_SimpleMessage $message)
     {
-        $key = collect([
+        $types = [
             'text/html' => 'HtmlBody',
             'multipart/mixed' => 'HtmlBody',
             'multipart/related' => 'HtmlBody',
             'multipart/alternative' => 'HtmlBody',
-        ])
-        ->get($message->getContentType(), 'TextBody');
+        ];
 
-        return collect([
-            $key => $this->getBody($message),
-        ])->when($this->getMimePart($message, 'text/plain'), function ($collection, $value) {
-            return $collection->put('TextBody', $value->getBody());
-        })->when($this->getMimePart($message, 'text/html'), function ($collection, $value) {
-            return $collection->put('HtmlBody', $value->getBody());
-        })->all();
+        $key = collect($types)->get($message->getContentType(), 'TextBody');
+
+        return collect([$key => $this->getBody($message)])
+            ->when($this->getMimePart($message, 'text/plain'), function ($collection, $value) {
+                return $collection->put('TextBody', $value->getBody());
+            })
+            ->when($this->getMimePart($message, 'text/html'), function ($collection, $value) {
+                return $collection->put('HtmlBody', $value->getBody());
+            })
+            ->all();
     }
 
     /**
@@ -223,17 +226,15 @@ class PostmarkTransport extends Transport
     protected function getMetadata(Swift_Mime_SimpleMessage $message)
     {
         return collect($message->getHeaders()->getAll())
-        ->mapWithKeys(function ($header) {
-            mb_ereg('^metadata-(.*)', $header->getFieldName(), $matches);
+            ->mapWithKeys(function ($header) {
+                mb_ereg('^metadata-(.*)', $header->getFieldName(), $matches);
 
-            return isset($matches[1]) && $matches[1] !== false
-            ? [
-                $matches[1] => iconv_mime_decode($header->getFieldBody(), 0, 'UTF-8'),
-            ]
-            : ['' => null];
-        })
-        ->filter()
-        ->toArray();
+                return isset($matches[1]) && $matches[1] !== false ?
+                    [$matches[1] => iconv_mime_decode($header->getFieldBody(), 0, 'UTF-8')] :
+                    ['' => null];
+            })
+            ->filter()
+            ->toArray();
     }
 
     /**
@@ -245,11 +246,9 @@ class PostmarkTransport extends Transport
      */
     protected function getTag(Swift_Mime_SimpleMessage $message)
     {
-        return optional(
-            collect($message->getHeaders()->getAll('tag'))
-            ->last()
-        )
-        ->getFieldBody() ?: '';
+        $tags = collect($message->getHeaders()->getAll('tag'));
+
+        return optional($tags->last())->getFieldBody() ?: '';
     }
 
     /**
@@ -261,30 +260,32 @@ class PostmarkTransport extends Transport
      */
     protected function payload(Swift_Mime_SimpleMessage $message)
     {
-        return collect([
+        $headers = [
             'headers' => [
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
                 'X-Postmark-Server-Token' => $this->key,
             ],
-        ])
-        ->merge([
-            'json' => collect([
-                'Cc' => $this->getContacts($message->getCc()),
-                'Bcc' => $this->getContacts($message->getBcc()),
-                'Tag' => $this->getTag($message),
-                'Metadata' => $this->getMetadata($message),
-                'Subject' => $this->getSubject($message),
-                'ReplyTo' => $this->getContacts($message->getReplyTo()),
-                'Attachments' => $this->getAttachments($message),
+        ];
+
+        return collect($headers)
+            ->merge([
+                'json' => collect([
+                    'Cc' => $this->getContacts($message->getCc()),
+                    'Bcc' => $this->getContacts($message->getBcc()),
+                    'Tag' => $this->getTag($message),
+                    'Metadata' => $this->getMetadata($message),
+                    'Subject' => $this->getSubject($message),
+                    'ReplyTo' => $this->getContacts($message->getReplyTo()),
+                    'Attachments' => $this->getAttachments($message),
+                ])
+                    ->reject(function ($item) {
+                        return empty($item);
+                    })
+                    ->put('From', $this->getContacts($message->getFrom()))
+                    ->put('To', $this->getContacts($message->getTo()))
+                    ->merge($this->getHtmlAndTextBody($message)),
             ])
-            ->reject(function ($item) {
-                return empty($item);
-            })
-            ->put('From', $this->getContacts($message->getFrom()))
-            ->put('To', $this->getContacts($message->getTo()))
-            ->merge($this->getHtmlAndTextBody($message)),
-        ])
-        ->toArray();
+            ->toArray();
     }
 }
