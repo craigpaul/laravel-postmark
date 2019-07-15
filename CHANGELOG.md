@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+## [2.4.1] - 2019-07-15
+
+### Added
+- Add support for postmark custom metadata ([`fc59a7d1d1`](https://github.com/coconutcraig/laravel-postmark/commit/fc59a7d1d1)
+
+### Fixed
+- Updates code style issues ([`4b0b1fbfe5`](https://github.com/coconutcraig/laravel-postmark/commit/4b0b1fbfe5)
+- Fix style [`ea1c81b83b`](https://github.com/coconutcraig/laravel-postmark/commit/ea1c81b83b)
+
 ## [2.4.0] - 2019-02-26
 
 ### Added
@@ -209,7 +218,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.4.0...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.4.1...HEAD
+[2.4.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.4.0...2.4.1
 [2.4.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.2...2.4.0
 [2.3.2]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.1...2.3.2
 [2.3.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.0...2.3.1
