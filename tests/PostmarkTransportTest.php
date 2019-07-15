@@ -447,7 +447,7 @@ class PostmarkTransportTest extends TestCase
 
         $this->assertSame([
             'metadata' => 'metadata',
-            'other-data' => 'some other data'
+            'other-data' => 'some other data',
         ], $metadata);
     }
 
@@ -468,7 +468,7 @@ class PostmarkTransportTest extends TestCase
         $metadata = $this->invokeMethod($this->transport, 'getMetadata', [$message]);
 
         $this->assertSame([
-            'other-data¹' => 'some other data¹'
+            'other-data¹' => 'some other data¹',
         ], $metadata);
     }
 }

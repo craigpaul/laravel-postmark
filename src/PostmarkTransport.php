@@ -223,12 +223,12 @@ class PostmarkTransport extends Transport
     protected function getMetadata(Swift_Mime_SimpleMessage $message)
     {
         return collect($message->getHeaders()->getAll())
-        ->mapWithKeys(function($header){
+        ->mapWithKeys(function ($header) {
             mb_ereg('^metadata-(.*)', $header->getFieldName(), $matches);
 
             return isset($matches[1]) && $matches[1] !== false
             ? [
-                $matches[1] => iconv_mime_decode($header->getFieldBody(), 0, 'UTF-8')
+                $matches[1] => iconv_mime_decode($header->getFieldBody(), 0, 'UTF-8'),
             ]
             : ['' => null];
         })
