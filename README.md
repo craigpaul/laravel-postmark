@@ -57,6 +57,29 @@ public function build()
 }
 ```
 
+## Postmark Metadata
+
+Similar to tags, you can also include [metadata](https://postmarkapp.com/support/article/1125-custom-metadata-faq) by adding a header. Metadata headers should be prefixed with `metadata-` where the string that follows is the metadata key.
+
+```php
+public function build()
+{
+    $this->withSwiftMessage(function (\Swift_Message $message) {
+        $message->getHeaders()->addTextHeader('metadata-field', 'value');
+        $message->getHeaders()->addTextHeader('metadata-another-field', 'another value');
+    });
+}
+```
+
+In this case, the following object will be sent to Postmark as metadata.
+
+```
+{
+    "field": "value",
+    "another-field", "another value"
+}
+```
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
