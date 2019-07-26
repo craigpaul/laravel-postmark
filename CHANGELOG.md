@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [2.5.0] - 2019-07-26
+
 - Adds missing view property. Moves subject and html body generation to only happen when not using the template api [`90dd69631a`](https://github.com/coconutcraig/laravel-postmark/commit/90dd69631a)
 - Adds mail message with tests to utilize new template api ability [`cbc67641ea`](https://github.com/coconutcraig/laravel-postmark/commit/cbc67641ea)
 - Makes identifier into an integer to comply with Postmark API documentation [`3b1e89b0e0`](https://github.com/coconutcraig/laravel-postmark/commit/3b1e89b0e0)
@@ -226,7 +228,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.4.1...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.5.0...HEAD
+[2.5.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.4.1...2.5.0
 [2.4.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.4.0...2.4.1
 [2.4.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.2...2.4.0
 [2.3.2]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.1...2.3.2
