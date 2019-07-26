@@ -44,6 +44,24 @@ That's it! The mail system continues to work the exact same way as before and yo
 
 > Remember, when using Postmark the sending address used in your emails must be a [valid Sender Signature](http://support.postmarkapp.com/category/45-category) that you have already configured.
 
+## Postmark Templates
+
+Postmark offers a fantastic templating service for you to utilize instead of maintaining your templates within your Laravel application. If you would like to take advantage of that, this package offers an extension on the base `MailMessage` provided out of the box with Laravel. Within a Laravel notification, you can do the following to start taking advantage of Postmark templates.
+
+```php
+public function toMail($notifiable)
+{
+    return (new \Coconuts\Mail\MailMessage)
+        ->identifier(8675309)
+        ->include([
+            'name' => 'Customer Name',
+            'action_url' => 'https://example.com/login',
+        ]);
+}
+```
+
+> You may also utilize an alias instead of the template identifier by using the `->alias()` method.
+
 ## Postmark Tags
 
 If you rely on categorizing your outgoing emails using Tags in Postmark, you can simply add a header within your Mailable class's build method.
