@@ -5,6 +5,7 @@ namespace Coconuts\Mail;
 use Swift_MimePart;
 use function collect;
 use Swift_Attachment;
+use function json_decode;
 use Swift_Mime_SimpleMessage;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Mail\Transport\Transport;
@@ -61,7 +62,9 @@ class PostmarkTransport extends Transport
     {
         $this->beforeSendPerformed($message);
 
-        $response = $this->client->post($this->url, $this->payload($message));
+        [$url, $payload] = $this->payload($message);
+
+        $response = $this->client->post($url, $payload);
 
         $message->getHeaders()->addTextHeader(
             'X-PM-Message-Id',
@@ -268,17 +271,29 @@ class PostmarkTransport extends Transport
             ],
         ];
 
-        return collect($headers)
+        $json = [
+            'Cc' => $this->getContacts($message->getCc()),
+            'Bcc' => $this->getContacts($message->getBcc()),
+            'Tag' => $this->getTag($message),
+            'Metadata' => $this->getMetadata($message),
+            'Subject' => $this->getSubject($message),
+            'ReplyTo' => $this->getContacts($message->getReplyTo()),
+            'Attachments' => $this->getAttachments($message),
+        ];
+
+        $url = $this->url;
+
+        if ($contents = $this->templated($message)) {
+            $url .= '/withTemplate';
+
+            $json['TemplateId'] = $contents['id'] ?? null;
+            $json['TemplateAlias'] = $contents['alias'] ?? null;
+            $json['TemplateModel'] = $contents['model'] ?? null;
+        }
+
+        $payload = collect($headers)
             ->merge([
-                'json' => collect([
-                    'Cc' => $this->getContacts($message->getCc()),
-                    'Bcc' => $this->getContacts($message->getBcc()),
-                    'Tag' => $this->getTag($message),
-                    'Metadata' => $this->getMetadata($message),
-                    'Subject' => $this->getSubject($message),
-                    'ReplyTo' => $this->getContacts($message->getReplyTo()),
-                    'Attachments' => $this->getAttachments($message),
-                ])
+                'json' => collect($json)
                     ->reject(function ($item) {
                         return empty($item);
                     })
@@ -287,5 +302,19 @@ class PostmarkTransport extends Transport
                     ->merge($this->getHtmlAndTextBody($message)),
             ])
             ->toArray();
+
+        return [$url, $payload];
+    }
+
+    /**
+     * Determine if the given message is wanting to use the Postmark Template API.
+     *
+     * @param \Swift_Mime_SimpleMessage $message
+     *
+     * @return array|null
+     */
+    protected function templated(Swift_Mime_SimpleMessage $message)
+    {
+        return json_decode($message->getBody(), JSON_OBJECT_AS_ARRAY);
     }
 }
