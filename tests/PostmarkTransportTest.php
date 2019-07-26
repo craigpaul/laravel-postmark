@@ -2,8 +2,11 @@
 
 namespace Coconuts\Mail;
 
+use Swift_Message;
+use Swift_Attachment;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Coconuts\Mail\Exceptions\PostmarkException;
 
 class PostmarkTransportTest extends TestCase
 {
@@ -26,10 +29,10 @@ class PostmarkTransportTest extends TestCase
     {
         parent::setUp();
 
-        $attachment = new \Swift_Attachment('test attachment', 'test.txt');
+        $attachment = new Swift_Attachment('test attachment', 'test.txt');
         $attachment->setContentType('text/plain');
 
-        $this->message = tap(new \Swift_Message, function ($message) use ($attachment) {
+        $this->message = tap(new Swift_Message, function ($message) use ($attachment) {
             $message->setSubject('Foo subject');
             $message->setBody('Bar body', 'text/plain');
             $message->setFrom('myself@example.com');
@@ -86,7 +89,7 @@ class PostmarkTransportTest extends TestCase
     /** @test */
     public function get_body_returns_empty_string_when_there_is_no_body_set()
     {
-        $body = $this->invokeMethod($this->transport, 'getBody', [new \Swift_Message]);
+        $body = $this->invokeMethod($this->transport, 'getBody', [new Swift_Message]);
 
         $this->assertSame('', $body);
     }
@@ -112,7 +115,7 @@ class PostmarkTransportTest extends TestCase
     /** @test */
     public function get_subject_returns_empty_string_when_there_is_no_subject_set()
     {
-        $subject = $this->invokeMethod($this->transport, 'getSubject', [new \Swift_Message]);
+        $subject = $this->invokeMethod($this->transport, 'getSubject', [new Swift_Message]);
 
         $this->assertSame('', $subject);
     }
@@ -128,7 +131,7 @@ class PostmarkTransportTest extends TestCase
     /** @test */
     public function get_tag_returns_empty_string_when_there_is_no_tag_present()
     {
-        $tag = $this->invokeMethod($this->transport, 'getTag', [new \Swift_Message]);
+        $tag = $this->invokeMethod($this->transport, 'getTag', [new Swift_Message]);
 
         $this->assertSame('', $tag);
     }
@@ -291,7 +294,7 @@ class PostmarkTransportTest extends TestCase
     /** @test */
     public function payload_has_the_proper_text_body()
     {
-        $message = new \Swift_Message;
+        $message = new Swift_Message;
         $message->setBody('Lorem ipsum.', 'text/plain');
 
         $payload = $this->getPayload($message);
@@ -319,7 +322,7 @@ class PostmarkTransportTest extends TestCase
     /** @test */
     public function payload_has_the_proper_html_and_text_body_reverse_order()
     {
-        $message = new \Swift_Message;
+        $message = new Swift_Message;
         $message->setBody('<html>', 'text/html');
         $message->addPart('Lorem ipsum.', 'text/plain');
 
@@ -346,13 +349,13 @@ class PostmarkTransportTest extends TestCase
     /** @test */
     public function payload_has_the_proper_attachments()
     {
-        $attachment1 = new \Swift_Attachment('test attachment 1', 'attachment1.txt');
+        $attachment1 = new Swift_Attachment('test attachment 1', 'attachment1.txt');
         $attachment1->setContentType('text/plain');
 
-        $attachment2 = new \Swift_Attachment('test attachment 2', 'attachment2.txt');
+        $attachment2 = new Swift_Attachment('test attachment 2', 'attachment2.txt');
         $attachment2->setContentType('text/plain');
 
-        $message = new \Swift_Message;
+        $message = new Swift_Message;
         $message->attach($attachment1);
         $message->attach($attachment2);
 
@@ -376,7 +379,7 @@ class PostmarkTransportTest extends TestCase
     /** @test */
     public function empty_fields_are_not_present_in_the_json_payload()
     {
-        $message = new \Swift_Message;
+        $message = new Swift_Message;
 
         $payload = $this->getPayload($message);
 
@@ -392,7 +395,7 @@ class PostmarkTransportTest extends TestCase
     /** @test */
     public function required_fields_are_present_in_the_json_payload()
     {
-        $message = new \Swift_Message;
+        $message = new Swift_Message;
 
         $payload = $this->getPayload($message);
 
@@ -429,7 +432,7 @@ class PostmarkTransportTest extends TestCase
     /** @test */
     public function creating_a_new_instance_of_postmark_transport_without_setting_a_postmark_secret_throws_an_exception()
     {
-        $this->expectException(\Coconuts\Mail\Exceptions\PostmarkException::class);
+        $this->expectException(PostmarkException::class);
         $this->expectExceptionMessage('The Postmark secret is not set. Make sure that the `postmark.secret` config key is set.');
 
         $this->transport = new PostmarkTransport(
@@ -454,7 +457,7 @@ class PostmarkTransportTest extends TestCase
     /** @test */
     public function metadata_is_empty_array_when_not_set()
     {
-        $metadata = $this->invokeMethod($this->transport, 'getMetadata', [new \Swift_Message]);
+        $metadata = $this->invokeMethod($this->transport, 'getMetadata', [new Swift_Message]);
 
         $this->assertSame([], $metadata);
     }
@@ -462,7 +465,7 @@ class PostmarkTransportTest extends TestCase
     /** @test */
     public function metadata_can_be_non_ascii()
     {
-        $message = new \Swift_Message;
+        $message = new Swift_Message;
         $message->getHeaders()->addTextHeader('metadata-other-data¹', 'some other data¹');
 
         $metadata = $this->invokeMethod($this->transport, 'getMetadata', [$message]);
