@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+- Adds missing view property. Moves subject and html body generation to only happen when not using the template api [`90dd69631a`](https://github.com/coconutcraig/laravel-postmark/commit/90dd69631a)
+- Adds mail message with tests to utilize new template api ability [`cbc67641ea`](https://github.com/coconutcraig/laravel-postmark/commit/cbc67641ea)
+- Makes identifier into an integer to comply with Postmark API documentation [`3b1e89b0e0`](https://github.com/coconutcraig/laravel-postmark/commit/3b1e89b0e0)
+- Adds custom view for json encoding future template variables [`78a4d55143`](https://github.com/coconutcraig/laravel-postmark/commit/78a4d55143)
+- Fixes method name casing [`f6dcc9e49d`](https://github.com/coconutcraig/laravel-postmark/commit/f6dcc9e49d)
+- Adds ability to utilize a json encoded message body to use the postmark template api [`ae642a78cb`](https://github.com/coconutcraig/laravel-postmark/commit/ae642a78cb)
+- Cleans up test imports [`184b643786`](https://github.com/coconutcraig/laravel-postmark/commit/184b643786)
+
 ## [2.4.1] - 2019-07-15
 
 ### Added
