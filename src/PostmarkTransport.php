@@ -104,9 +104,10 @@ class PostmarkTransport extends Transport
      * Format the display name.
      *
      * @param  string
+     *
      * @return string
      */
-    protected function getDisplayname($value)
+    protected function getDisplayName($value)
     {
         if (strpos($value, ',') !== false) {
             return '"'.$value.'"';
@@ -126,7 +127,7 @@ class PostmarkTransport extends Transport
     {
         return collect($contacts)
             ->map(function ($display, $address) {
-                return $display ? $this->getDisplayname($display)." <{$address}>" : $address;
+                return $display ? $this->getDisplayName($display)." <{$address}>" : $address;
             })
             ->values()
             ->implode(',');
