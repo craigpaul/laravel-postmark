@@ -196,7 +196,7 @@ class PostmarkTransportTest extends TestCase
     {
         $message = tap($this->message, function (Swift_Message $message) {
             $body = [
-                'id' => '12345',
+                'id' => 12345,
                 'alias' => 'aliased-template',
                 'model' => [
                     'random' => 'data',
