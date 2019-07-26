@@ -22,6 +22,11 @@ class MailMessage extends Message
     protected $id;
 
     /**
+     * @var string
+     */
+    public $view = 'postmark::template';
+
+    /**
      * Set the template alias.
      *
      * @param string $alias

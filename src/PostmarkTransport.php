@@ -8,6 +8,7 @@ use Swift_Attachment;
 use function json_decode;
 use Swift_Mime_SimpleMessage;
 use GuzzleHttp\ClientInterface;
+use Illuminate\Support\Collection;
 use Illuminate\Mail\Transport\Transport;
 use Coconuts\Mail\Exceptions\PostmarkException;
 
@@ -277,7 +278,6 @@ class PostmarkTransport extends Transport
             'Bcc' => $this->getContacts($message->getBcc()),
             'Tag' => $this->getTag($message),
             'Metadata' => $this->getMetadata($message),
-            'Subject' => $this->getSubject($message),
             'ReplyTo' => $this->getContacts($message->getReplyTo()),
             'Attachments' => $this->getAttachments($message),
         ];
@@ -300,7 +300,11 @@ class PostmarkTransport extends Transport
                     })
                     ->put('From', $this->getContacts($message->getFrom()))
                     ->put('To', $this->getContacts($message->getTo()))
-                    ->merge($this->getHtmlAndTextBody($message)),
+                    ->when($contents === null, function (Collection $collection) use ($message) {
+                        return $collection
+                            ->merge($this->getHtmlAndTextBody($message))
+                            ->merge(['Subject' => $this->getSubject($message)]);
+                    })
             ])
             ->toArray();
 
