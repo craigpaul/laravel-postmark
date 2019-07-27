@@ -38,7 +38,6 @@ class PostmarkServiceProvider extends ServiceProvider
      * Get a fresh Guzzle HTTP client instance.
      *
      * @param  array  $config
-     *
      * @return \GuzzleHttp\Client
      */
     protected function guzzle($config)

@@ -11,7 +11,6 @@ class TestCase extends Orchestra
      * Define environment setup.
      *
      * @param  \Illuminate\Foundation\Application  $app
-     *
      * @return void
      */
     protected function getEnvironmentSetUp($app)
@@ -24,7 +23,6 @@ class TestCase extends Orchestra
      * Get package providers.
      *
      * @param  \Illuminate\Foundation\Application  $app
-     *
      * @return array
      */
     protected function getPackageProviders($app)
@@ -38,8 +36,8 @@ class TestCase extends Orchestra
      * @param  mixed  $object
      * @param  string  $name
      * @param  array  $params
-     *
      * @return mixed
+     *
      * @throws \ReflectionException
      */
     protected function invokeMethod(&$object, $name, array $params = [])
@@ -56,8 +54,8 @@ class TestCase extends Orchestra
      *
      * @param  mixed  $object
      * @param  string  $name
-     *
      * @return mixed
+     *
      * @throws \ReflectionException
      */
     protected function readProperty(&$object, $name)
