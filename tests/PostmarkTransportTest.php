@@ -55,7 +55,7 @@ class PostmarkTransportTest extends TestCase
     /**
      * Get the json payload for the given message.
      *
-     * @param  \Swift_Message $message
+     * @param  \Swift_Message  $message
      *
      * @return string
      */
