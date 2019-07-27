@@ -1,6 +1,8 @@
 <?php
 
-namespace Coconuts\Mail;
+namespace Coconuts\Mail\Tests;
+
+use Coconuts\Mail\MailMessage;
 
 class MailMessageTest extends TestCase
 {

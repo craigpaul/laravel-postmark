@@ -1,6 +1,8 @@
 <?php
 
-namespace Coconuts\Mail;
+namespace Coconuts\Mail\Tests;
+
+use Coconuts\Mail\PostmarkServiceProvider;
 
 class PostmarkServiceProviderTest extends TestCase
 {
