@@ -29,7 +29,7 @@ class MailMessage extends Message
     /**
      * Set the template alias.
      *
-     * @param string $alias
+     * @param  string  $alias
      *
      * @return $this
      */
@@ -57,7 +57,7 @@ class MailMessage extends Message
     /**
      * Set the template identifier.
      *
-     * @param int $id
+     * @param  int  $id
      *
      * @return $this
      */
@@ -71,7 +71,7 @@ class MailMessage extends Message
     /**
      * Set the data to be available within the template.
      *
-     * @param array $data
+     * @param  array  $data
      *
      * @return $this
      */
