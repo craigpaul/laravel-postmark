@@ -104,7 +104,7 @@ class PostmarkTransport extends Transport
     /**
      * Format the display name.
      *
-     * @param  string
+     * @param  string  $value
      *
      * @return string
      */
