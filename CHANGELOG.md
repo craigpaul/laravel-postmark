@@ -2,6 +2,17 @@
 
 ## [Unreleased]
 
+- Applies suggested change from style-ci [`c0cdf3cdfe`](https://github.com/coconutcraig/laravel-postmark/commit/c0cdf3cdfe)
+- Removes empty lines between @param and @return. [`012247f519`](https://github.com/coconutcraig/laravel-postmark/commit/012247f519)
+- Adds double spaces to the doc blocks. [`6365c7d56b`](https://github.com/coconutcraig/laravel-postmark/commit/6365c7d56b)
+- Adds double spaces to the doc blocks. [`a680f4e0f0`](https://github.com/coconutcraig/laravel-postmark/commit/a680f4e0f0)
+- Place views in the resources folder. [`ed5dca5822`](https://github.com/coconutcraig/laravel-postmark/commit/ed5dca5822)
+- Adds double spaces to the doc blocks. [`95278d5595`](https://github.com/coconutcraig/laravel-postmark/commit/95278d5595)
+- Adds missing variable name. [`2fa260b6f5`](https://github.com/coconutcraig/laravel-postmark/commit/2fa260b6f5)
+- Place tests under "tests" namespace. [`d8aec9020c`](https://github.com/coconutcraig/laravel-postmark/commit/d8aec9020c)
+- Fixes version numbers. [`acd4a59ead`](https://github.com/coconutcraig/laravel-postmark/commit/acd4a59ead)
+- Removes brackets. [`97243985cf`](https://github.com/coconutcraig/laravel-postmark/commit/97243985cf)
+
 ## [2.5.0] - 2019-07-26
 
 - Adds missing view property. Moves subject and html body generation to only happen when not using the template api [`90dd69631a`](https://github.com/coconutcraig/laravel-postmark/commit/90dd69631a)
