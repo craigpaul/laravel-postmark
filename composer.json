@@ -39,7 +39,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Coconuts\\Mail\\": "tests"
+            "Coconuts\\Mail\\Tests\\": "tests"
         }
     },
     "scripts": {
