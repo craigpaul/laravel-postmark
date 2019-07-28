@@ -14,7 +14,7 @@ class PostmarkServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../views', 'postmark');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'postmark');
 
         $this->publishes([
             __DIR__.'/../config/postmark.php' => config_path('postmark.php'),
