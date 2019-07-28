@@ -11,8 +11,7 @@ class TestCase extends Orchestra
     /**
      * Define environment setup.
      *
-     * @param \Illuminate\Foundation\Application $app
-     *
+     * @param  \Illuminate\Foundation\Application  $app
      * @return void
      */
     protected function getEnvironmentSetUp($app)
@@ -24,8 +23,7 @@ class TestCase extends Orchestra
     /**
      * Get package providers.
      *
-     * @param \Illuminate\Foundation\Application $app
-     *
+     * @param  \Illuminate\Foundation\Application  $app
      * @return array
      */
     protected function getPackageProviders($app)
@@ -36,11 +34,11 @@ class TestCase extends Orchestra
     /**
      * Invoke a non-public method.
      *
-     * @param mixed $object
-     * @param string $name
-     * @param array $params
-     *
+     * @param  mixed  $object
+     * @param  string  $name
+     * @param  array  $params
      * @return mixed
+     *
      * @throws \ReflectionException
      */
     protected function invokeMethod(&$object, $name, array $params = [])
@@ -55,10 +53,10 @@ class TestCase extends Orchestra
     /**
      * Read a non-public property.
      *
-     * @param mixed $object
-     * @param string $name
-     *
+     * @param  mixed  $object
+     * @param  string  $name
      * @return mixed
+     *
      * @throws \ReflectionException
      */
     protected function readProperty(&$object, $name)

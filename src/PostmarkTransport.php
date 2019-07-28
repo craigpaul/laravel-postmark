@@ -38,10 +38,10 @@ class PostmarkTransport extends Transport
     /**
      * Create a new Postmark transport instance.
      *
-     * @param \GuzzleHttp\ClientInterface $client
-     * @param string $key
-     *
+     * @param  \GuzzleHttp\ClientInterface  $client
+     * @param  string  $key
      * @return void
+     *
      * @throws \Coconuts\Mail\Exceptions\PostmarkException
      */
     public function __construct(ClientInterface $client, $key)
@@ -80,8 +80,7 @@ class PostmarkTransport extends Transport
     /**
      * Get all attachments for the given message.
      *
-     * @param \Swift_Mime_SimpleMessage $message
-     *
+     * @param  \Swift_Mime_SimpleMessage  $message
      * @return array
      */
     protected function getAttachments(Swift_Mime_SimpleMessage $message)
@@ -104,8 +103,7 @@ class PostmarkTransport extends Transport
     /**
      * Format the display name.
      *
-     * @param  string
-     *
+     * @param  string  $value
      * @return string
      */
     protected function getDisplayName($value)
@@ -120,8 +118,7 @@ class PostmarkTransport extends Transport
     /**
      * Format the contacts for the API request.
      *
-     * @param string|array $contacts
-     *
+     * @param  string|array  $contacts
      * @return string
      */
     protected function getContacts($contacts)
@@ -137,8 +134,7 @@ class PostmarkTransport extends Transport
     /**
      * Get the message ID from the response.
      *
-     * @param \GuzzleHttp\Psr7\Response $response
-     *
+     * @param  \GuzzleHttp\Psr7\Response  $response
      * @return string
      */
     protected function getMessageId($response)
@@ -152,8 +148,7 @@ class PostmarkTransport extends Transport
     /**
      * Get the body for the given message.
      *
-     * @param \Swift_Mime_SimpleMessage $message
-     *
+     * @param  \Swift_Mime_SimpleMessage  $message
      * @return string
      */
     protected function getBody(Swift_Mime_SimpleMessage $message)
@@ -164,8 +159,7 @@ class PostmarkTransport extends Transport
     /**
      * Get the text and html fields for the given message.
      *
-     * @param \Swift_Mime_SimpleMessage $message
-     *
+     * @param  \Swift_Mime_SimpleMessage  $message
      * @return array
      */
     protected function getHtmlAndTextBody(Swift_Mime_SimpleMessage $message)
@@ -192,9 +186,8 @@ class PostmarkTransport extends Transport
     /**
      * Get a mime part from the given message.
      *
-     * @param \Swift_Mime_SimpleMessage $message
-     * @param string $mimeType
-     *
+     * @param  \Swift_Mime_SimpleMessage  $message
+     * @param  string  $mimeType
      * @return \Swift_MimePart|null
      */
     protected function getMimePart(Swift_Mime_SimpleMessage $message, $mimeType)
@@ -212,8 +205,7 @@ class PostmarkTransport extends Transport
     /**
      * Get the subject for the given message.
      *
-     * @param \Swift_Mime_SimpleMessage $message
-     *
+     * @param  \Swift_Mime_SimpleMessage  $message
      * @return string
      */
     protected function getSubject(Swift_Mime_SimpleMessage $message)
@@ -224,8 +216,7 @@ class PostmarkTransport extends Transport
     /**
      * Get metadata for the given message.
      *
-     * @param \Swift_Mime_SimpleMessage $message
-     *
+     * @param  \Swift_Mime_SimpleMessage  $message
      * @return array
      */
     protected function getMetadata(Swift_Mime_SimpleMessage $message)
@@ -245,8 +236,7 @@ class PostmarkTransport extends Transport
     /**
      * Get the tag for the given message.
      *
-     * @param \Swift_Mime_SimpleMessage $message
-     *
+     * @param  \Swift_Mime_SimpleMessage  $message
      * @return string
      */
     protected function getTag(Swift_Mime_SimpleMessage $message)
@@ -259,8 +249,7 @@ class PostmarkTransport extends Transport
     /**
      * Get the HTTP payload for sending the Postmark message.
      *
-     * @param \Swift_Mime_SimpleMessage $message
-     *
+     * @param  \Swift_Mime_SimpleMessage  $message
      * @return array
      */
     protected function payload(Swift_Mime_SimpleMessage $message)
@@ -304,7 +293,7 @@ class PostmarkTransport extends Transport
                         return $collection
                             ->merge($this->getHtmlAndTextBody($message))
                             ->merge(['Subject' => $this->getSubject($message)]);
-                    })
+                    }),
             ])
             ->toArray();
 
@@ -314,8 +303,7 @@ class PostmarkTransport extends Transport
     /**
      * Determine if the given message is wanting to use the Postmark Template API.
      *
-     * @param \Swift_Mime_SimpleMessage $message
-     *
+     * @param  \Swift_Mime_SimpleMessage  $message
      * @return array|null
      */
     protected function templated(Swift_Mime_SimpleMessage $message)
