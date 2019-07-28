@@ -293,7 +293,7 @@ class PostmarkTransport extends Transport
                         return $collection
                             ->merge($this->getHtmlAndTextBody($message))
                             ->merge(['Subject' => $this->getSubject($message)]);
-                    })
+                    }),
             ])
             ->toArray();
 
