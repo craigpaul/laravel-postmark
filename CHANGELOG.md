@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+- Updated version contraints for Laravel 6.0. [`2ca003724f`](https://github.com/coconutcraig/laravel-postmark/commit/2ca003724f)
 - Applies suggested change from style-ci [`c0cdf3cdfe`](https://github.com/coconutcraig/laravel-postmark/commit/c0cdf3cdfe)
 - Removes empty lines between @param and @return. [`012247f519`](https://github.com/coconutcraig/laravel-postmark/commit/012247f519)
 - Adds double spaces to the doc blocks. [`6365c7d56b`](https://github.com/coconutcraig/laravel-postmark/commit/6365c7d56b)
