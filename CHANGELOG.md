@@ -2,36 +2,42 @@
 
 ## [Unreleased]
 
+### Changed
+- Place tests under "tests" namespace. [`d8aec9020c`](https://github.com/coconutcraig/laravel-postmark/commit/d8aec9020c)
+- Place views in the resources folder. [`ed5dca5822`](https://github.com/coconutcraig/laravel-postmark/commit/ed5dca5822)
 - Updated version contraints for Laravel 6.0. [`2ca003724f`](https://github.com/coconutcraig/laravel-postmark/commit/2ca003724f)
-- Applies suggested change from style-ci [`c0cdf3cdfe`](https://github.com/coconutcraig/laravel-postmark/commit/c0cdf3cdfe)
-- Removes empty lines between @param and @return. [`012247f519`](https://github.com/coconutcraig/laravel-postmark/commit/012247f519)
+
+### Fixed
+- Removes brackets. [`97243985cf`](https://github.com/coconutcraig/laravel-postmark/commit/97243985cf)
+- Fixes version numbers. [`acd4a59ead`](https://github.com/coconutcraig/laravel-postmark/commit/acd4a59ead)
+- Adds missing variable name. [`2fa260b6f5`](https://github.com/coconutcraig/laravel-postmark/commit/2fa260b6f5)
+- Adds double spaces to the doc blocks. [`95278d5595`](https://github.com/coconutcraig/laravel-postmark/commit/95278d5595)
 - Adds double spaces to the doc blocks. [`6365c7d56b`](https://github.com/coconutcraig/laravel-postmark/commit/6365c7d56b)
 - Adds double spaces to the doc blocks. [`a680f4e0f0`](https://github.com/coconutcraig/laravel-postmark/commit/a680f4e0f0)
-- Place views in the resources folder. [`ed5dca5822`](https://github.com/coconutcraig/laravel-postmark/commit/ed5dca5822)
-- Adds double spaces to the doc blocks. [`95278d5595`](https://github.com/coconutcraig/laravel-postmark/commit/95278d5595)
-- Adds missing variable name. [`2fa260b6f5`](https://github.com/coconutcraig/laravel-postmark/commit/2fa260b6f5)
-- Place tests under "tests" namespace. [`d8aec9020c`](https://github.com/coconutcraig/laravel-postmark/commit/d8aec9020c)
-- Fixes version numbers. [`acd4a59ead`](https://github.com/coconutcraig/laravel-postmark/commit/acd4a59ead)
-- Removes brackets. [`97243985cf`](https://github.com/coconutcraig/laravel-postmark/commit/97243985cf)
+- Applies suggested change from style-ci [`c0cdf3cdfe`](https://github.com/coconutcraig/laravel-postmark/commit/c0cdf3cdfe)
+- Removes empty lines between @param and @return. [`012247f519`](https://github.com/coconutcraig/laravel-postmark/commit/012247f519)
 
 ## [2.5.0] - 2019-07-26
 
-- Adds missing view property. Moves subject and html body generation to only happen when not using the template api [`90dd69631a`](https://github.com/coconutcraig/laravel-postmark/commit/90dd69631a)
-- Adds mail message with tests to utilize new template api ability [`cbc67641ea`](https://github.com/coconutcraig/laravel-postmark/commit/cbc67641ea)
-- Makes identifier into an integer to comply with Postmark API documentation [`3b1e89b0e0`](https://github.com/coconutcraig/laravel-postmark/commit/3b1e89b0e0)
-- Adds custom view for json encoding future template variables [`78a4d55143`](https://github.com/coconutcraig/laravel-postmark/commit/78a4d55143)
-- Fixes method name casing [`f6dcc9e49d`](https://github.com/coconutcraig/laravel-postmark/commit/f6dcc9e49d)
-- Adds ability to utilize a json encoded message body to use the postmark template api [`ae642a78cb`](https://github.com/coconutcraig/laravel-postmark/commit/ae642a78cb)
-- Cleans up test imports [`184b643786`](https://github.com/coconutcraig/laravel-postmark/commit/184b643786)
+### Added
+- Adds custom view for json encoding future template variables. [`78a4d55143`](https://github.com/coconutcraig/laravel-postmark/commit/78a4d55143)
+- Adds mail message with tests to utilize new template api ability. [`cbc67641ea`](https://github.com/coconutcraig/laravel-postmark/commit/cbc67641ea)
+- Adds ability to utilize a json encoded message body to use the postmark template api. [`ae642a78cb`](https://github.com/coconutcraig/laravel-postmark/commit/ae642a78cb)
+
+### Fixed
+- Cleans up test imports. [`184b643786`](https://github.com/coconutcraig/laravel-postmark/commit/184b643786)
+- Fixes method name casing. [`f6dcc9e49d`](https://github.com/coconutcraig/laravel-postmark/commit/f6dcc9e49d)
+- Makes identifier into an integer to comply with Postmark API documentation. [`3b1e89b0e0`](https://github.com/coconutcraig/laravel-postmark/commit/3b1e89b0e0)
+- Adds missing view property. Moves subject and html body generation to only happen when not using the template api. [`90dd69631a`](https://github.com/coconutcraig/laravel-postmark/commit/90dd69631a)
 
 ## [2.4.1] - 2019-07-15
 
 ### Added
-- Add support for postmark custom metadata [`fc59a7d1d1`](https://github.com/coconutcraig/laravel-postmark/commit/fc59a7d1d1)
+- Add support for postmark custom metadata. [`fc59a7d1d1`](https://github.com/coconutcraig/laravel-postmark/commit/fc59a7d1d1)
 
 ### Fixed
-- Updates code style issues [`4b0b1fbfe5`](https://github.com/coconutcraig/laravel-postmark/commit/4b0b1fbfe5)
-- Fix style [`ea1c81b83b`](https://github.com/coconutcraig/laravel-postmark/commit/ea1c81b83b)
+- Fix style. [`ea1c81b83b`](https://github.com/coconutcraig/laravel-postmark/commit/ea1c81b83b)
+- Updates code style issues. [`4b0b1fbfe5`](https://github.com/coconutcraig/laravel-postmark/commit/4b0b1fbfe5)
 
 ## [2.4.0] - 2019-02-26
 
@@ -45,16 +51,16 @@
 - Adds build matrix to test against multiple versions. [`ea0b27d9f7`](https://github.com/coconutcraig/laravel-postmark/commit/ea0b27d9f7) 
 
 ### Fixed
-- Skip swift extension if driver isn't 'postmark' [`6bb7e3b7e5`](https://github.com/coconutcraig/laravel-postmark/commit/6bb7e3b7e5)
+- Skip swift extension if driver isn't 'postmark'. [`6bb7e3b7e5`](https://github.com/coconutcraig/laravel-postmark/commit/6bb7e3b7e5)
 
 ### Updated
-- Changes style preset to laravel [`dbabf1e286`](https://github.com/coconutcraig/laravel-postmark/commit/dbabf1e286)
+- Changes style preset to laravel. [`dbabf1e286`](https://github.com/coconutcraig/laravel-postmark/commit/dbabf1e286)
 
 ## [2.3.1] - 2018-09-11
 
 ### Fixed
 - Throw an exception when POSTMARK_SECRET is not set. [`cabbe42473`](https://github.com/coconutcraig/laravel-postmark/commit/cabbe42473)
-- Fixes long line causing phpcs error [`aa6909137`](https://github.com/coconutcraig/laravel-postmark/commit/9aa6909137)  
+- Fixes long line causing phpcs error. [`aa6909137`](https://github.com/coconutcraig/laravel-postmark/commit/9aa6909137)  
 
 ### Updated
 - Update PostmarkServiceProvider.php [`2d03a2a0fb`](https://github.com/coconutcraig/laravel-postmark/commit/2d03a2a0fb) 
