@@ -6,6 +6,7 @@
 - Place tests under "tests" namespace. [`d8aec9020c`](https://github.com/coconutcraig/laravel-postmark/commit/d8aec9020c)
 - Place views in the resources folder. [`ed5dca5822`](https://github.com/coconutcraig/laravel-postmark/commit/ed5dca5822)
 - Updated version contraints for Laravel 6.0. [`2ca003724f`](https://github.com/coconutcraig/laravel-postmark/commit/2ca003724f)
+- Updated Travis matrix to test against Laravel 6.0 [`#37`](https://github.com/craigpaul/laravel-postmark/pull/37)
 
 ### Fixed
 - Removes brackets. [`97243985cf`](https://github.com/coconutcraig/laravel-postmark/commit/97243985cf)
