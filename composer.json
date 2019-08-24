@@ -42,7 +42,7 @@
         }
     },
     "scripts": {
-        "test": "phpunit",
+        "test": "vendor/bin/phpunit",
     },
     "suggest": {
         "mvdnbrk/postmark-inbound": "Allows you to process Postmark Inbound Webhooks."
