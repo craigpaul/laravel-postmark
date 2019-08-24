@@ -52,7 +52,6 @@ install:
   - travis_retry composer install --prefer-dist --no-interaction --no-suggest
 
 script:
-  - vendor/bin/phpcs --standard=psr2 src/
   - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
 after_script:
