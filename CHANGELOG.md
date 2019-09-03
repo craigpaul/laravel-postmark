@@ -2,10 +2,12 @@
 
 ## [Unreleased]
 
+## [2.6.0] - 2019-09-03
+
 ### Changed
 - Place tests under "tests" namespace. [`d8aec9020c`](https://github.com/coconutcraig/laravel-postmark/commit/d8aec9020c)
 - Place views in the resources folder. [`ed5dca5822`](https://github.com/coconutcraig/laravel-postmark/commit/ed5dca5822)
-- Updated version contraints for Laravel 6.0. [`2ca003724f`](https://github.com/coconutcraig/laravel-postmark/commit/2ca003724f)
+- Updated version constraints for Laravel 6.0. [`2ca003724f`](https://github.com/coconutcraig/laravel-postmark/commit/2ca003724f)
 - Updated Travis matrix to test against Laravel 6.0 [`#37`](https://github.com/craigpaul/laravel-postmark/pull/37)
 
 ### Fixed
@@ -247,7 +249,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.5.0...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.6.0...HEAD
+[2.6.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.5.0...v2.6.0
 [2.5.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.4.1...v2.5.0
 [2.4.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.4.0...v2.4.1
 [2.4.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.3.2...v2.4.0
