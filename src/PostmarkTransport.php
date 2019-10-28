@@ -15,6 +15,11 @@ use Coconuts\Mail\Exceptions\PostmarkException;
 class PostmarkTransport extends Transport
 {
     /**
+     * The Postmark API endpoint.
+     */
+    const API_ENDPOINT = 'https://api.postmarkapp.com/email';
+
+    /**
      * Guzzle client instance.
      *
      * @var \GuzzleHttp\ClientInterface
@@ -29,11 +34,11 @@ class PostmarkTransport extends Transport
     protected $key;
 
     /**
-     * The Postmark API end-point.
+     * The Postmark API endpoint.
      *
      * @var string
      */
-    protected $url = 'https://api.postmarkapp.com/email';
+    protected $apiEndpoint = self::API_ENDPOINT;
 
     /**
      * Create a new Postmark transport instance.
@@ -57,15 +62,28 @@ class PostmarkTransport extends Transport
     }
 
     /**
+     * Get the Postmark API endpoint.
+     *
+     * @param  \Swift_Mime_SimpleMessage  $message
+     * @return string
+     */
+    public function getApiEndpoint(Swift_Mime_SimpleMessage $message)
+    {
+        if ($this->templated($message)) {
+            $this->apiEndpoint.'/withTemplate';
+        }
+
+        return $this->apiEndpoint;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
     {
         $this->beforeSendPerformed($message);
 
-        [$url, $payload] = $this->payload($message);
-
-        $response = $this->client->post($url, $payload);
+        $response = $this->client->post($this->getApiEndpoint($message), $this->payload($message));
 
         $message->getHeaders()->addTextHeader(
             'X-PM-Message-Id',
@@ -271,17 +289,13 @@ class PostmarkTransport extends Transport
             'Attachments' => $this->getAttachments($message),
         ];
 
-        $url = $this->url;
-
         if ($contents = $this->templated($message)) {
-            $url .= '/withTemplate';
-
             $json['TemplateId'] = $contents['id'] ?? null;
             $json['TemplateAlias'] = $contents['alias'] ?? null;
             $json['TemplateModel'] = $contents['model'] ?? null;
         }
 
-        $payload = collect($headers)
+        return collect($headers)
             ->merge([
                 'json' => collect($json)
                     ->reject(function ($item) {
@@ -296,8 +310,6 @@ class PostmarkTransport extends Transport
                     }),
             ])
             ->toArray();
-
-        return [$url, $payload];
     }
 
     /**

@@ -66,6 +66,14 @@ class PostmarkTransportTest extends TestCase
     }
 
     /** @test */
+    public function can_get_the_api_endpoint()
+    {
+       $endpoint = $this->invokeMethod($this->transport, 'getApiEndpoint', [$this->message]);
+
+       $this->assertSame('https://api.postmarkapp.com/email', $endpoint);
+    }
+
+    /** @test */
     public function can_get_given_contacts_into_a_comma_separated_string()
     {
         $to = $this->invokeMethod($this->transport, 'getContacts', [['me@example.com' => '']]);
@@ -167,7 +175,7 @@ class PostmarkTransportTest extends TestCase
     /** @test */
     public function can_create_the_proper_payload_structure_for_a_message()
     {
-        [, $payload] = $this->getPayload($this->message);
+        $payload = $this->getPayload($this->message);
 
         $this->assertArrayHasKey('headers', $payload);
         $this->assertArrayHasKey('json', $payload);
@@ -207,7 +215,7 @@ class PostmarkTransportTest extends TestCase
             $message->setBody(json_encode($body), 'text/plain');
         });
 
-        [, $payload] = $this->getPayload($message);
+        $payload = $this->getPayload($message);
 
         $this->assertArrayHasKey('headers', $payload);
         $this->assertArrayHasKey('json', $payload);
@@ -241,7 +249,7 @@ class PostmarkTransportTest extends TestCase
             'super-secret-token'
         );
 
-        [, $payload] = $this->getPayload($this->message);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['headers'], function ($headers) {
             $this->assertSame('application/json', $headers['Content-Type']);
@@ -255,7 +263,7 @@ class PostmarkTransportTest extends TestCase
     {
         $this->message->setFrom('john@example.com', 'John Doe');
 
-        [, $payload] = $this->getPayload($this->message);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('John Doe <john@example.com>', $json['From']);
@@ -267,7 +275,7 @@ class PostmarkTransportTest extends TestCase
     {
         $this->message->setTo('jane@example.com', 'Jane Doe');
 
-        [, $payload] = $this->getPayload($this->message);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('Jane Doe <jane@example.com>', $json['To']);
@@ -279,7 +287,7 @@ class PostmarkTransportTest extends TestCase
     {
         $this->message->setCc('foo@example.com', 'Foo');
 
-        [, $payload] = $this->getPayload($this->message);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('Foo <foo@example.com>', $json['Cc']);
@@ -291,7 +299,7 @@ class PostmarkTransportTest extends TestCase
     {
         $this->message->setBcc('bar@example.com', 'Bar');
 
-        [, $payload] = $this->getPayload($this->message);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('Bar <bar@example.com>', $json['Bcc']);
@@ -303,7 +311,7 @@ class PostmarkTransportTest extends TestCase
     {
         $this->message->setSubject('Lorem ipsum.');
 
-        [, $payload] = $this->getPayload($this->message);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('Lorem ipsum.', $json['Subject']);
@@ -315,7 +323,7 @@ class PostmarkTransportTest extends TestCase
     {
         $this->message->getHeaders()->addTextHeader('Tag', 'TestTag');
 
-        [, $payload] = $this->getPayload($this->message);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('TestTag', $json['Tag']);
@@ -327,7 +335,7 @@ class PostmarkTransportTest extends TestCase
     {
         $this->message->setBody('<html>', 'text/html');
 
-        [, $payload] = $this->getPayload($this->message);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('<html>', $json['HtmlBody']);
@@ -341,7 +349,7 @@ class PostmarkTransportTest extends TestCase
         $message = new Swift_Message;
         $message->setBody('Lorem ipsum.', 'text/plain');
 
-        [, $payload] = $this->getPayload($message);
+        $payload = $this->getPayload($message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('Lorem ipsum.', $json['TextBody']);
@@ -355,7 +363,7 @@ class PostmarkTransportTest extends TestCase
         $this->message->setBody('Lorem ipsum.', 'text/plain');
         $this->message->addPart('<html>', 'text/html');
 
-        [, $payload] = $this->getPayload($this->message);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('<html>', $json['HtmlBody']);
@@ -370,7 +378,7 @@ class PostmarkTransportTest extends TestCase
         $message->setBody('<html>', 'text/html');
         $message->addPart('Lorem ipsum.', 'text/plain');
 
-        [, $payload] = $this->getPayload($message);
+        $payload = $this->getPayload($message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('Lorem ipsum.', $json['TextBody']);
@@ -383,7 +391,7 @@ class PostmarkTransportTest extends TestCase
     {
         $this->message->setReplyTo('replyTo@example.com', 'ReplyName');
 
-        [, $payload] = $this->getPayload($this->message);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('ReplyName <replyTo@example.com>', $json['ReplyTo']);
@@ -403,7 +411,7 @@ class PostmarkTransportTest extends TestCase
         $message->attach($attachment1);
         $message->attach($attachment2);
 
-        [, $payload] = $this->getPayload($message);
+        $payload = $this->getPayload($message);
 
         tap($payload['json']['Attachments'], function ($json) {
             $this->assertCount(2, $json);
@@ -425,7 +433,7 @@ class PostmarkTransportTest extends TestCase
     {
         $message = new Swift_Message;
 
-        [, $payload] = $this->getPayload($message);
+        $payload = $this->getPayload($message);
 
         tap($payload['json'], function ($json) {
             $this->assertArrayNotHasKey('Cc', $json);
@@ -441,7 +449,7 @@ class PostmarkTransportTest extends TestCase
     {
         $message = new Swift_Message;
 
-        [, $payload] = $this->getPayload($message);
+        $payload = $this->getPayload($message);
 
         tap($payload['json'], function ($json) {
             $this->assertArrayHasKey('From', $json);
@@ -455,7 +463,7 @@ class PostmarkTransportTest extends TestCase
     {
         $this->message->setTo('john@example.com', 'Doe, John');
 
-        [, $payload] = $this->getPayload($this->message);
+        $payload = $this->getPayload($this->message);
 
         tap($payload['json'], function ($json) {
             $this->assertSame('"Doe, John" <john@example.com>', $json['To']);
