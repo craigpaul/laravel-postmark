@@ -70,7 +70,7 @@ class PostmarkTransport extends Transport
     public function getApiEndpoint(Swift_Mime_SimpleMessage $message)
     {
         if ($this->templated($message)) {
-            $this->apiEndpoint.'/withTemplate';
+            $this->apiEndpoint.='/withTemplate';
         }
 
         return $this->apiEndpoint;
