@@ -8,6 +8,7 @@ use GuzzleHttp\ClientInterface;
 use Illuminate\Mail\Transport\Transport;
 use Illuminate\Support\Collection;
 use function json_decode;
+use Illuminate\Support\Str;
 use Swift_Attachment;
 use Swift_Mime_SimpleMessage;
 use Swift_MimePart;
