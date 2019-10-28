@@ -2,9 +2,9 @@
 
 namespace Coconuts\Mail\Tests;
 
-use ReflectionClass;
 use Coconuts\Mail\PostmarkServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use ReflectionClass;
 
 class TestCase extends Orchestra
 {

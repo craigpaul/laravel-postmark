@@ -2,14 +2,14 @@
 
 namespace Coconuts\Mail\Tests;
 
-use function tap;
-use Swift_Message;
-use Swift_Attachment;
-use GuzzleHttp\Client;
-use function json_encode;
-use Coconuts\Mail\PostmarkTransport;
-use GuzzleHttp\Exception\RequestException;
 use Coconuts\Mail\Exceptions\PostmarkException;
+use Coconuts\Mail\PostmarkTransport;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use function json_encode;
+use Swift_Attachment;
+use Swift_Message;
+use function tap;
 
 class PostmarkTransportTest extends TestCase
 {
