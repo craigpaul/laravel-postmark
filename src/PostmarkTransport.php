@@ -7,6 +7,7 @@ use function collect;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Mail\Transport\Transport;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use function json_decode;
 use Swift_Attachment;
 use Swift_Mime_SimpleMessage;
@@ -126,7 +127,7 @@ class PostmarkTransport extends Transport
      */
     protected function getDisplayName($value)
     {
-        if (strpos($value, ',') !== false) {
+        if (Str::contains($value, ',')) {
             return '"'.$value.'"';
         }
 
