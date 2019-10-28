@@ -2,15 +2,15 @@
 
 namespace Coconuts\Mail;
 
-use Swift_MimePart;
-use function collect;
-use Swift_Attachment;
-use function json_decode;
-use Swift_Mime_SimpleMessage;
-use GuzzleHttp\ClientInterface;
-use Illuminate\Support\Collection;
-use Illuminate\Mail\Transport\Transport;
 use Coconuts\Mail\Exceptions\PostmarkException;
+use function collect;
+use GuzzleHttp\ClientInterface;
+use Illuminate\Mail\Transport\Transport;
+use Illuminate\Support\Collection;
+use function json_decode;
+use Swift_Attachment;
+use Swift_Mime_SimpleMessage;
+use Swift_MimePart;
 
 class PostmarkTransport extends Transport
 {
