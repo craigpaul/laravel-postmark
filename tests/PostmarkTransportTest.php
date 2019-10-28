@@ -68,9 +68,9 @@ class PostmarkTransportTest extends TestCase
     /** @test */
     public function can_get_the_api_endpoint()
     {
-       $endpoint = $this->invokeMethod($this->transport, 'getApiEndpoint', [$this->message]);
+        $endpoint = $this->invokeMethod($this->transport, 'getApiEndpoint', [$this->message]);
 
-       $this->assertSame('https://api.postmarkapp.com/email', $endpoint);
+        $this->assertSame('https://api.postmarkapp.com/email', $endpoint);
     }
 
     /** @test */
