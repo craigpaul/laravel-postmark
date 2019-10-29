@@ -127,7 +127,7 @@ class PostmarkTransport extends Transport
      */
     protected function getDisplayName($value)
     {
-        if (strpos($value, ',') !== false) {
+        if (Str::contains($value, ',')) {
             return '"'.$value.'"';
         }
 
