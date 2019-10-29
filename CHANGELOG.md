@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+### Changed
+- Refactored the `getMetadata` by using the`Str` helper. [`#47`](https://github.com/craigpaul/laravel-postmark/pull/47)
 - Sort imports in alphabetical order. [`#45`](https://github.com/craigpaul/laravel-postmark/pull/45)
 
 ## [2.6.0] - 2019-09-03

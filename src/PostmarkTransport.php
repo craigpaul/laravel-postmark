@@ -7,6 +7,7 @@ use function collect;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Mail\Transport\Transport;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use function json_decode;
 use Swift_Attachment;
 use Swift_Mime_SimpleMessage;
@@ -240,14 +241,14 @@ class PostmarkTransport extends Transport
     protected function getMetadata(Swift_Mime_SimpleMessage $message)
     {
         return collect($message->getHeaders()->getAll())
-            ->mapWithKeys(function ($header) {
-                mb_ereg('^metadata-(.*)', $header->getFieldName(), $matches);
-
-                return isset($matches[1]) && $matches[1] !== false ?
-                    [$matches[1] => iconv_mime_decode($header->getFieldBody(), 0, 'UTF-8')] :
-                    ['' => null];
+            ->filter(function ($header) {
+                return Str::startsWith($header->getFieldName(), 'metadata-');
             })
-            ->filter()
+            ->mapWithKeys(function ($header) {
+                return [
+                    Str::after($header->getFieldName(), 'metadata-') => iconv_mime_decode($header->getFieldBody(), 0, 'UTF-8'),
+                ];
+            })
             ->toArray();
     }
 
