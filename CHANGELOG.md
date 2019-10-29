@@ -2,8 +2,14 @@
 
 ## [Unreleased]
 
+## [2.7.0] - 2019-10-29
+
+### Added
+- Adds ability to add custom headers. [`#48`](https://github.com/craigpaul/laravel-postmark/pull/48)
+
 ### Changed
 - Refactored the `getMetadata` by using the`Str` helper. [`#47`](https://github.com/craigpaul/laravel-postmark/pull/47)
+- Refactor payload function. [`#46`](https://github.com/craigpaul/laravel-postmark/pull/46)
 - Sort imports in alphabetical order. [`#45`](https://github.com/craigpaul/laravel-postmark/pull/45)
 
 ## [2.6.0] - 2019-09-03
@@ -253,7 +259,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.6.0...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.7.0...HEAD
+[2.7.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.6.0...v2.7.0
 [2.6.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.5.0...v2.6.0
 [2.5.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.4.1...v2.5.0
 [2.4.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.4.0...v2.4.1
