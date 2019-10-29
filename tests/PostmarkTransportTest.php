@@ -45,6 +45,7 @@ class PostmarkTransportTest extends TestCase
             $message->setReplyTo('replyTo@example.com');
             $message->attach($attachment);
             $message->getHeaders()->addTextHeader('Tag', 'Tagged');
+            $message->getHeaders()->addTextHeader('Custom-Header', 'Custom-Value');
             $message->getHeaders()->addTextHeader('metadata-metadata', 'metadata');
             $message->getHeaders()->addTextHeader('metadata-other-data', 'some other data');
             $message->addPart('<html>', 'text/html');
@@ -170,6 +171,19 @@ class PostmarkTransportTest extends TestCase
                 'ContentType' => 'text/plain',
             ],
         ], $attachments);
+    }
+
+    /** @test */
+    public function can_get_given_headers_into_array()
+    {
+        $headers = $this->invokeMethod($this->transport, 'getHeaders', [$this->message]);
+
+        $this->assertEquals([
+            [
+                'Name' => 'Custom-Header',
+                'Value' => 'Custom-Value',
+            ],
+        ], $headers);
     }
 
     /** @test */

@@ -233,6 +233,41 @@ class PostmarkTransport extends Transport
     }
 
     /**
+     * Get headers for the given message.
+     *
+     * @param  \Swift_Mime_SimpleMessage  $message
+     * @return array
+     */
+    protected function getHeaders(Swift_Mime_SimpleMessage $message)
+    {
+        return collect($message->getHeaders()->getAll())
+            ->reject(function ($header) {
+                return Str::startsWith($header->getFieldName(), 'metadata-') ||
+                    $header->getFieldName() == 'Message-ID' && Str::contains($header->getFieldBody(), 'swift.generated') ||
+                    collect([
+                        'To',
+                        'Cc',
+                        'Bcc',
+                        'Tag',
+                        'Date',
+                        'From',
+                        'Subject',
+                        'Reply-To',
+                        'Content-Type',
+                        'MIME-Version',
+                    ])->contains($header->getFieldName());
+            })
+            ->map(function ($header) {
+                return [
+                    'Name' => $header->getFieldName(),
+                    'Value' => $header->getFieldBody(),
+                ];
+            })
+            ->values()
+            ->toArray();
+    }
+
+    /**
      * Get metadata for the given message.
      *
      * @param  \Swift_Mime_SimpleMessage  $message
@@ -285,6 +320,7 @@ class PostmarkTransport extends Transport
             'Cc' => $this->getContacts($message->getCc()),
             'Bcc' => $this->getContacts($message->getBcc()),
             'Tag' => $this->getTag($message),
+            'Headers' => $this->getHeaders($message),
             'Metadata' => $this->getMetadata($message),
             'ReplyTo' => $this->getContacts($message->getReplyTo()),
             'Attachments' => $this->getAttachments($message),
