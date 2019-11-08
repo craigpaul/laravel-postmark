@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Fixed
+- Fixed retrieving the API endpoint. [`#52`](https://github.com/craigpaul/laravel-postmark/pull/52)
+
 ## [2.7.0] - 2019-10-29
 
 ### Added

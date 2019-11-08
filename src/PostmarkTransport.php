@@ -35,13 +35,6 @@ class PostmarkTransport extends Transport
     protected $key;
 
     /**
-     * The Postmark API endpoint.
-     *
-     * @var string
-     */
-    protected $apiEndpoint = self::API_ENDPOINT;
-
-    /**
      * Create a new Postmark transport instance.
      *
      * @param  \GuzzleHttp\ClientInterface  $client
@@ -71,10 +64,10 @@ class PostmarkTransport extends Transport
     public function getApiEndpoint(Swift_Mime_SimpleMessage $message)
     {
         if ($this->templated($message)) {
-            $this->apiEndpoint .= '/withTemplate';
+            return self::API_ENDPOINT.'/withTemplate';
         }
 
-        return $this->apiEndpoint;
+        return self::API_ENDPOINT;
     }
 
     /**
