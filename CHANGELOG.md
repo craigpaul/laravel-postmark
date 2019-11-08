@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [2.7.1] - 2019-11-08
+
 ### Fixed
 - Fixed retrieving the API endpoint. [`#52`](https://github.com/craigpaul/laravel-postmark/pull/52)
 
@@ -262,7 +264,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.7.0...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.7.1...HEAD
+[2.7.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.7.0...v2.7.1
 [2.7.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.6.0...v2.7.0
 [2.6.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.5.0...v2.6.0
 [2.5.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.4.1...v2.5.0
