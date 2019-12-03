@@ -24,28 +24,18 @@
         "php": ">=7.1.3",
         "ext-json": "*",
         "guzzlehttp/guzzle": "~6.0",
-        "illuminate/mail": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0",
-        "illuminate/support": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0"
+        "illuminate/mail": "~5.5.0 || ~5.6.0 || ~5.7.0 || ~5.8.0 || ^6.0",
+        "illuminate/support": "~5.5.0 || ~5.6.0 || ~5.7.0 || ~5.8.0 || ^6.0"
     },
     "require-dev": {
-        "orchestra/testbench": "~3.5.0|~3.6.0|~3.7.0|~3.8.0|^4.0",
-        "phpunit/phpunit": "~6.0|~7.0|~8.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Coconuts\\Mail\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Coconuts\\Mail\\Tests\\": "tests"
-        }
-    },
-    "scripts": {
-        "test": "vendor/bin/phpunit"
+        "orchestra/testbench": "~3.5.0 || ~3.6.0 || ~3.7.0 || ~3.8.0 || ^4.0",
+        "phpunit/phpunit": "~6.0 || ~7.0 || ~8.0"
     },
     "suggest": {
         "mvdnbrk/postmark-inbound": "Allows you to process Postmark Inbound Webhooks."
+    },
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
@@ -57,9 +47,19 @@
             ]
         }
     },
-    "config": {
-        "sort-packages": true
+    "autoload": {
+        "psr-4": {
+            "Coconuts\\Mail\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Coconuts\\Mail\\Tests\\": "tests"
+        }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    }
 }
