@@ -39,6 +39,10 @@ matrix:
       env: LARAVEL='5.8.*' TESTBENCH='3.8.*'
     - php: 7.3
       env: LARAVEL='6.*' TESTBENCH='4.*'
+    - php: 7.4
+      env: LARAVEL='5.8.*' TESTBENCH='3.8.*'
+    - php: 7.4
+      env: LARAVEL='6.*' TESTBENCH='4.*'
   fast_finish: true
 
 before_script:
