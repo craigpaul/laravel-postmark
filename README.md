@@ -29,7 +29,7 @@ The package will automatically register itself.
 You can optionally publish the config file with:
 
 ```bash
-php artisan vendor:publish --provider="Coconuts\Mail\PostmarkServiceProvider" --tag="config"
+php artisan vendor:publish --tag="postmark-config"
 ```
 
 ## Usage
