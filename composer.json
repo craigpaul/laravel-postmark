@@ -29,7 +29,7 @@
     },
     "require-dev": {
         "orchestra/testbench": "~3.5.0 || ~3.6.0 || ~3.7.0 || ~3.8.0 || ^4.0",
-        "phpunit/phpunit": "~6.0 || ~7.0 || ~8.0"
+        "phpunit/phpunit": "^6.0 || ^7.0 || ^8.0 || ^9.0"
     },
     "suggest": {
         "mvdnbrk/postmark-inbound": "Allows you to process Postmark Inbound Webhooks."
