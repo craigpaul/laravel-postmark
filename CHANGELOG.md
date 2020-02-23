@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+- Adds support for Guzzle 7.0. [`#62`](https://github.com/craigpaul/laravel-postmark/pull/62)
+
 ## [2.7.1] - 2019-11-08
 
 ### Fixed
