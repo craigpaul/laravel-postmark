@@ -14,16 +14,13 @@ class PostmarkServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'postmark');
-
-        $this->publishes([
-            __DIR__.'/../config/postmark.php' => config_path('postmark.php'),
-        ], 'postmark-config');
+        $this->registerPublishing();
 
         if ($this->app['config']['mail.driver'] !== 'postmark') {
             return;
         }
 
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'postmark');
         $this->mergeConfigFrom(__DIR__.'/../config/postmark.php', 'postmark');
 
         $this->app['swift.transport']->extend('postmark', function () {
@@ -32,6 +29,20 @@ class PostmarkServiceProvider extends ServiceProvider
                 config('postmark.secret', config('services.postmark.secret'))
             );
         });
+    }
+
+    /**
+     * Register the publishable resources for this package.
+     *
+     * @return void
+     */
+    private function registerPublishing()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../config/postmark.php' => config_path('postmark.php'),
+            ], 'postmark-config');
+        }
     }
 
     /**
