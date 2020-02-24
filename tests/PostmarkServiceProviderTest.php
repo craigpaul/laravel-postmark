@@ -13,7 +13,7 @@ class PostmarkServiceProviderTest extends TestCase
 
         (new PostmarkServiceProvider($this->app))->boot();
 
-        $this->assertEmpty($this->readProperty($this->app['swift.transport'], 'customCreators'));
+        $this->assertEmpty($this->readProperty($this->app['mail.manager'], 'customCreators'));
     }
 
     /**

@@ -26,7 +26,7 @@ class PostmarkServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(__DIR__.'/../config/postmark.php', 'postmark');
 
-        $this->app['swift.transport']->extend('postmark', function () {
+        $this->app['mail.manager']->extend('postmark', function () {
             return new PostmarkTransport(
                 $this->guzzle(config('postmark.guzzle', [])),
                 config('postmark.secret', config('services.postmark.secret'))
