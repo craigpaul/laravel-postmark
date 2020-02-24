@@ -18,7 +18,7 @@ class PostmarkServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../config/postmark.php' => config_path('postmark.php'),
-        ], 'config');
+        ], 'postmark-config');
 
         if ($this->app['config']['mail.driver'] !== 'postmark') {
             return;
