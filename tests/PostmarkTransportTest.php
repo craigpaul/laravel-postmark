@@ -51,7 +51,7 @@ class PostmarkTransportTest extends TestCase
             $message->addPart('<html>', 'text/html');
         });
 
-        $this->transport = $this->app['swift.transport']->driver('postmark');
+        $this->transport = app('mailer')->getSwiftMailer()->getTransport();
     }
 
     /**
