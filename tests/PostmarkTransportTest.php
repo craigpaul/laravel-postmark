@@ -59,7 +59,7 @@ class PostmarkTransportTest extends TestCase
      *
      * @param  \Swift_Message  $message
      *
-     * @return string
+     * @return array
      */
     private function getPayload($message)
     {
