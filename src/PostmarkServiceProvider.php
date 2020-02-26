@@ -14,11 +14,7 @@ class PostmarkServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'postmark');
-
-        $this->publishes([
-            __DIR__.'/../config/postmark.php' => config_path('postmark.php'),
-        ], 'postmark-config');
+        $this->registerPublishing();
 
         $this->mergeConfigFrom(__DIR__.'/../config/postmark.php', 'postmark');
 
@@ -36,6 +32,9 @@ class PostmarkServiceProvider extends ServiceProvider
             return;
         }
 
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'postmark');
+        $this->mergeConfigFrom(__DIR__.'/../config/postmark.php', 'postmark');
+
         $this->app['swift.transport']->extend('postmark', function () {
             return new PostmarkTransport(
                 $this->guzzle(config('postmark.guzzle', [])),
@@ -52,6 +51,20 @@ class PostmarkServiceProvider extends ServiceProvider
     protected function shouldRegisterPostmarkDriver()
     {
         return $this->app['config']['mail.driver'] === 'postmark';
+    }
+
+    /**
+     * Register the publishable resources for this package.
+     *
+     * @return void
+     */
+    private function registerPublishing()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../config/postmark.php' => config_path('postmark.php'),
+            ], 'postmark-config');
+        }
     }
 
     /**

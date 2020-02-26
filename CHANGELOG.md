@@ -2,6 +2,22 @@
 
 ## [Unreleased]
 
+## [2.7.2] - 2020-02-25
+
+### Added
+- Adds support for Guzzle 7.0. [`#62`](https://github.com/craigpaul/laravel-postmark/pull/62)
+- Adds support for testing against Laravel 6 and PHP 7.4 [`01ed4276f3`](https://github.com/craigpaul/laravel-postmark/pull/54)
+
+### Changed
+- Updates incorrect docblock return parameter [`e13be2acc4`](https://github.com/craigpaul/laravel-postmark/pull/68)
+- Updates tests in preparation for Laravel 7 changes [`9daa1003d4`](https://github.com/craigpaul/laravel-postmark/pull/66)
+- Simplifies usage of vendor publish command [`5ed55a6410`](https://github.com/craigpaul/laravel-postmark/pull/61)
+- Allow PHPunit v9.0 [`61497dfb59`](https://github.com/craigpaul/laravel-postmark/pull/60)
+- Changes to caret operator for maximum interoperability [`226c9e11e1`](https://github.com/craigpaul/laravel-postmark/pull/59)
+- Updates out of date homepage url [`df43595fa9`](https://github.com/craigpaul/laravel-postmark/pull/57)
+- Normalizes composer.json [`d2d72000e5`](https://github.com/craigpaul/laravel-postmark/pull/56)
+- Moves files into .github folder for ease of use [`5761ed147f`](https://github.com/craigpaul/laravel-postmark/pull/55)
+
 ## [2.7.1] - 2019-11-08
 
 ### Fixed
@@ -264,7 +280,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.7.1...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.7.2...HEAD
+[2.7.2]: https://github.com/coconutcraig/laravel-postmark/compare/v2.7.1...v2.7.2
 [2.7.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.7.0...v2.7.1
 [2.7.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.6.0...v2.7.0
 [2.6.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.5.0...v2.6.0
