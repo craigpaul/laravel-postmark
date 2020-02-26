@@ -16,7 +16,19 @@ class PostmarkServiceProvider extends ServiceProvider
     {
         $this->registerPublishing();
 
-        if ($this->app['config']['mail.driver'] !== 'postmark') {
+        $this->mergeConfigFrom(__DIR__.'/../config/postmark.php', 'postmark');
+
+        $this->registerPostmarkDriver();
+    }
+
+    /**
+     * Register the Postmark driver.
+     *
+     * @return void
+     */
+    private function registerPostmarkDriver()
+    {
+        if (! $this->shouldRegisterPostmarkDriver()) {
             return;
         }
 
@@ -29,6 +41,16 @@ class PostmarkServiceProvider extends ServiceProvider
                 config('postmark.secret', config('services.postmark.secret'))
             );
         });
+    }
+
+    /**
+     * Determine if we should register the Postmark driver.
+     *
+     * @return bool
+     */
+    protected function shouldRegisterPostmarkDriver()
+    {
+        return $this->app['config']['mail.driver'] === 'postmark';
     }
 
     /**
