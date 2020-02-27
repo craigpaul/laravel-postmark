@@ -35,12 +35,26 @@ class PostmarkServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'postmark');
         $this->mergeConfigFrom(__DIR__.'/../config/postmark.php', 'postmark');
 
-        $this->app['swift.transport']->extend('postmark', function () {
+        $this->resolveTransportManager()->extend('postmark', function () {
             return new PostmarkTransport(
                 $this->guzzle(config('postmark.guzzle', [])),
                 config('postmark.secret', config('services.postmark.secret'))
             );
         });
+    }
+
+    /**
+     * Resolve the mail manager.
+     *
+     * @return \Illuminate\Mail\TransportManager|\Illuminate\Mail\MailManager
+     */
+    public function resolveTransportManager()
+    {
+        if ($this->app->has('mail.manager')) {
+            return $this->app['mail.manager'];
+        }
+
+        return $this->app['swift.transport'];
     }
 
     /**
