@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- Adds support for Laravel 7.0. [`#67`](https://github.com/craigpaul/laravel-postmark/pull/67)
+
 ## [2.7.2] - 2020-02-25
 
 ### Added
