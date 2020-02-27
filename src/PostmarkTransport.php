@@ -346,7 +346,7 @@ class PostmarkTransport extends Transport
      * Determine if the given message is wanting to use the Postmark Template API.
      *
      * @param  \Swift_Mime_SimpleMessage  $message
-     * @return array|null
+     * @return array|string
      */
     protected function templated(Swift_Mime_SimpleMessage $message)
     {
