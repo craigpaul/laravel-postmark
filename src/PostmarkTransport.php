@@ -43,7 +43,7 @@ class PostmarkTransport extends Transport
      *
      * @throws \Coconuts\Mail\Exceptions\PostmarkException
      */
-    public function __construct(ClientInterface $client, $key)
+    public function __construct(ClientInterface $client, ?string $key)
     {
         if (empty(trim($key))) {
             throw new PostmarkException(
@@ -61,7 +61,7 @@ class PostmarkTransport extends Transport
      * @param  \Swift_Mime_SimpleMessage  $message
      * @return string
      */
-    public function getApiEndpoint(Swift_Mime_SimpleMessage $message)
+    public function getApiEndpoint(Swift_Mime_SimpleMessage $message): string
     {
         if ($this->templated($message)) {
             return self::API_ENDPOINT.'/withTemplate';
@@ -73,7 +73,7 @@ class PostmarkTransport extends Transport
     /**
      * {@inheritdoc}
      */
-    public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
+    public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null): int
     {
         $this->beforeSendPerformed($message);
 
@@ -95,7 +95,7 @@ class PostmarkTransport extends Transport
      * @param  \Swift_Mime_SimpleMessage  $message
      * @return array
      */
-    protected function getAttachments(Swift_Mime_SimpleMessage $message)
+    protected function getAttachments(Swift_Mime_SimpleMessage $message): array
     {
         return collect($message->getChildren())
             ->filter(function ($child) {
@@ -118,7 +118,7 @@ class PostmarkTransport extends Transport
      * @param  string  $value
      * @return string
      */
-    protected function getDisplayName($value)
+    protected function getDisplayName(string $value): string
     {
         if (Str::contains($value, ',')) {
             return '"'.$value.'"';
@@ -133,7 +133,7 @@ class PostmarkTransport extends Transport
      * @param  string|array  $contacts
      * @return string
      */
-    protected function getContacts($contacts)
+    protected function getContacts($contacts): string
     {
         return collect($contacts)
             ->map(function ($display, $address) {
@@ -149,7 +149,7 @@ class PostmarkTransport extends Transport
      * @param  \GuzzleHttp\Psr7\Response  $response
      * @return string
      */
-    protected function getMessageId($response)
+    protected function getMessageId($response): string
     {
         return object_get(
             json_decode($response->getBody()->getContents()),
@@ -163,7 +163,7 @@ class PostmarkTransport extends Transport
      * @param  \Swift_Mime_SimpleMessage  $message
      * @return string
      */
-    protected function getBody(Swift_Mime_SimpleMessage $message)
+    protected function getBody(Swift_Mime_SimpleMessage $message): string
     {
         return $message->getBody() ?: '';
     }
@@ -174,7 +174,7 @@ class PostmarkTransport extends Transport
      * @param  \Swift_Mime_SimpleMessage  $message
      * @return array
      */
-    protected function getHtmlAndTextBody(Swift_Mime_SimpleMessage $message)
+    protected function getHtmlAndTextBody(Swift_Mime_SimpleMessage $message): array
     {
         $types = [
             'text/html' => 'HtmlBody',
@@ -202,7 +202,7 @@ class PostmarkTransport extends Transport
      * @param  string  $mimeType
      * @return \Swift_MimePart|null
      */
-    protected function getMimePart(Swift_Mime_SimpleMessage $message, $mimeType)
+    protected function getMimePart(Swift_Mime_SimpleMessage $message, string $mimeType)
     {
         return collect($message->getChildren())
             ->filter(function ($child) {
@@ -220,7 +220,7 @@ class PostmarkTransport extends Transport
      * @param  \Swift_Mime_SimpleMessage  $message
      * @return string
      */
-    protected function getSubject(Swift_Mime_SimpleMessage $message)
+    protected function getSubject(Swift_Mime_SimpleMessage $message): string
     {
         return $message->getSubject() ?: '';
     }
@@ -231,7 +231,7 @@ class PostmarkTransport extends Transport
      * @param  \Swift_Mime_SimpleMessage  $message
      * @return array
      */
-    protected function getHeaders(Swift_Mime_SimpleMessage $message)
+    protected function getHeaders(Swift_Mime_SimpleMessage $message): array
     {
         return collect($message->getHeaders()->getAll())
             ->reject(function ($header) {
@@ -266,7 +266,7 @@ class PostmarkTransport extends Transport
      * @param  \Swift_Mime_SimpleMessage  $message
      * @return array
      */
-    protected function getMetadata(Swift_Mime_SimpleMessage $message)
+    protected function getMetadata(Swift_Mime_SimpleMessage $message): array
     {
         return collect($message->getHeaders()->getAll())
             ->filter(function ($header) {
@@ -286,7 +286,7 @@ class PostmarkTransport extends Transport
      * @param  \Swift_Mime_SimpleMessage  $message
      * @return string
      */
-    protected function getTag(Swift_Mime_SimpleMessage $message)
+    protected function getTag(Swift_Mime_SimpleMessage $message): string
     {
         $tags = collect($message->getHeaders()->getAll('tag'));
 
@@ -299,7 +299,7 @@ class PostmarkTransport extends Transport
      * @param  \Swift_Mime_SimpleMessage  $message
      * @return array
      */
-    protected function payload(Swift_Mime_SimpleMessage $message)
+    protected function payload(Swift_Mime_SimpleMessage $message): array
     {
         $headers = [
             'headers' => [

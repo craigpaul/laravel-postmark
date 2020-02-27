@@ -32,7 +32,7 @@ class MailMessage extends Message
      * @param  string  $alias
      * @return $this
      */
-    public function alias($alias)
+    public function alias(string $alias): self
     {
         $this->alias = $alias;
 
@@ -44,7 +44,7 @@ class MailMessage extends Message
      *
      * @return array
      */
-    public function data()
+    public function data(): array
     {
         return [
             'id' => $this->id,
@@ -59,7 +59,7 @@ class MailMessage extends Message
      * @param  int  $id
      * @return $this
      */
-    public function identifier($id)
+    public function identifier(int $id): self
     {
         $this->id = $id;
 
@@ -72,7 +72,7 @@ class MailMessage extends Message
      * @param  array  $data
      * @return $this
      */
-    public function include($data)
+    public function include(array $data): self
     {
         $this->data = $data;
 

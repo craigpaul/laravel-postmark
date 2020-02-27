@@ -41,7 +41,7 @@ class TestCase extends Orchestra
      *
      * @throws \ReflectionException
      */
-    protected function invokeMethod(&$object, $name, array $params = [])
+    protected function invokeMethod(&$object, string $name, array $params = [])
     {
         $reflection = new ReflectionClass(get_class($object));
         $method = $reflection->getMethod($name);
@@ -59,7 +59,7 @@ class TestCase extends Orchestra
      *
      * @throws \ReflectionException
      */
-    protected function readProperty(&$object, $name)
+    protected function readProperty(&$object, string $name)
     {
         $reflection = new ReflectionClass(get_class($object));
         $property = $reflection->getProperty($name);
