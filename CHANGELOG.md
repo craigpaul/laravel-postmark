@@ -2,7 +2,16 @@
 
 ## [Unreleased]
 
+## [2.8.0] - 2020-02-27
+
+### Added
+- Adds scrutinizer/ocular package for code quality [`778234210d`](https://github.com/craigpaul/laravel-postmark/pull/71)
 - Adds support for Laravel 7.0. [`#67`](https://github.com/craigpaul/laravel-postmark/pull/67)
+
+### Changed
+
+- Refactors registration of postmark driver [`24e8b3fe04`](https://github.com/craigpaul/laravel-postmark/pull/64)
+- Refactors publishing of postmark config [`33ffef8dda`](https://github.com/craigpaul/laravel-postmark/pull/63)
 
 ## [2.7.2] - 2020-02-25
 
@@ -282,7 +291,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.7.2...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.8.0...HEAD
+[2.8.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.7.2...v2.8.0
 [2.7.2]: https://github.com/coconutcraig/laravel-postmark/compare/v2.7.1...v2.7.2
 [2.7.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.7.0...v2.7.1
 [2.7.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.6.0...v2.7.0
