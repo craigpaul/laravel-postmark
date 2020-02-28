@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+## [2.8.1] - 2020-02-27
+
+### Removed
+
+- Removes incompatible scrutinizer/ocular package [`80d113b373`](https://github.com/craigpaul/laravel-postmark/pull/75)
+- Removes year from copyright file [`8411ac5cd6`](https://github.com/craigpaul/laravel-postmark/pull/72)
+
 ## [2.8.0] - 2020-02-27
 
 ### Added
@@ -291,7 +298,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.8.0...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.8.1...HEAD
+[2.8.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.8.0...v2.8.1
 [2.8.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.7.2...v2.8.0
 [2.7.2]: https://github.com/coconutcraig/laravel-postmark/compare/v2.7.1...v2.7.2
 [2.7.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.7.0...v2.7.1
