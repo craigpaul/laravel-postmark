@@ -71,7 +71,13 @@ class PostmarkTransport extends Transport
     }
 
     /**
-     * {@inheritdoc}
+     * Send the given Message.
+     *
+     * @param  Swift_Mime_SimpleMessage  $message
+     * @param  array  $failedRecipients
+     * @return int
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
     {
