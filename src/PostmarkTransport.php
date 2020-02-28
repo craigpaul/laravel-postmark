@@ -71,7 +71,7 @@ class PostmarkTransport extends Transport
     }
 
     /**
-     * Send the given Message.
+     * Send the given message.
      *
      * @param  Swift_Mime_SimpleMessage  $message
      * @param  array  $failedRecipients
