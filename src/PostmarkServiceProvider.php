@@ -64,6 +64,10 @@ class PostmarkServiceProvider extends ServiceProvider
      */
     protected function shouldRegisterPostmarkDriver()
     {
+        if ($this->app->has('mail.manager')) {
+            return true;
+        }
+
         return $this->app['config']['mail.driver'] === 'postmark';
     }
 
