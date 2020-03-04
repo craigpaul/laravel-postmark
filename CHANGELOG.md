@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Fixed
+- Always register the Postmark driver on Laravel 7 [`#79`](https://github.com/craigpaul/laravel-postmark/pull/79)
+
 ## [2.8.1] - 2020-02-27
 
 ### Removed
