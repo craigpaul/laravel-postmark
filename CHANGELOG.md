@@ -2,8 +2,16 @@
 
 ## [Unreleased]
 
+## [2.8.2] - 2020-03-04
+
+### Changed
+- Allow for newest version of testbench [`#78`](https://github.com/craigpaul/laravel-postmark/pull/78)
+- Updates readme with correct scrutinizer link [`#77`](https://github.com/craigpaul/laravel-postmark/pull/77)
+
 ### Fixed
+- Fixes incorrect links in changelog [`#80`](https://github.com/craigpaul/laravel-postmark/pull/80)
 - Always register the Postmark driver on Laravel 7 [`#79`](https://github.com/craigpaul/laravel-postmark/pull/79)
+- Fixes incorrect docblock [`#76`](https://github.com/craigpaul/laravel-postmark/pull/76)
 
 ## [2.8.1] - 2020-02-27
 
@@ -300,7 +308,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.8.1...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.8.2...HEAD
+[2.8.2]: https://github.com/coconutcraig/laravel-postmark/compare/v2.8.1...v2.8.2
 [2.8.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.8.0...v2.8.1
 [2.8.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.7.2...v2.8.0
 [2.7.2]: https://github.com/coconutcraig/laravel-postmark/compare/v2.7.1...v2.7.2
