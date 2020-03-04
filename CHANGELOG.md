@@ -5,36 +5,35 @@
 ## [2.8.1] - 2020-02-27
 
 ### Removed
-
-- Removes incompatible scrutinizer/ocular package [`80d113b373`](https://github.com/craigpaul/laravel-postmark/pull/75)
-- Removes year from copyright file [`8411ac5cd6`](https://github.com/craigpaul/laravel-postmark/pull/72)
+- Removes incompatible scrutinizer/ocular package [`#75`](https://github.com/craigpaul/laravel-postmark/pull/75)
+- Removes year from copyright file [`#72`](https://github.com/craigpaul/laravel-postmark/pull/72)
 
 ## [2.8.0] - 2020-02-27
 
 ### Added
-- Adds scrutinizer/ocular package for code quality [`778234210d`](https://github.com/craigpaul/laravel-postmark/pull/71)
+- Adds scrutinizer/ocular package for code quality [`#71`](https://github.com/craigpaul/laravel-postmark/pull/71)
 - Adds support for Laravel 7.0. [`#67`](https://github.com/craigpaul/laravel-postmark/pull/67)
 
 ### Changed
 
-- Refactors registration of postmark driver [`24e8b3fe04`](https://github.com/craigpaul/laravel-postmark/pull/64)
-- Refactors publishing of postmark config [`33ffef8dda`](https://github.com/craigpaul/laravel-postmark/pull/63)
+- Refactors registration of postmark driver [`#64`](https://github.com/craigpaul/laravel-postmark/pull/64)
+- Refactors publishing of postmark config [`#63`](https://github.com/craigpaul/laravel-postmark/pull/63)
 
 ## [2.7.2] - 2020-02-25
 
 ### Added
 - Adds support for Guzzle 7.0. [`#62`](https://github.com/craigpaul/laravel-postmark/pull/62)
-- Adds support for testing against Laravel 6 and PHP 7.4 [`01ed4276f3`](https://github.com/craigpaul/laravel-postmark/pull/54)
+- Adds support for testing against Laravel 6 and PHP 7.4 [`#54`](https://github.com/craigpaul/laravel-postmark/pull/54)
 
 ### Changed
-- Updates incorrect docblock return parameter [`e13be2acc4`](https://github.com/craigpaul/laravel-postmark/pull/68)
-- Updates tests in preparation for Laravel 7 changes [`9daa1003d4`](https://github.com/craigpaul/laravel-postmark/pull/66)
-- Simplifies usage of vendor publish command [`5ed55a6410`](https://github.com/craigpaul/laravel-postmark/pull/61)
-- Allow PHPunit v9.0 [`61497dfb59`](https://github.com/craigpaul/laravel-postmark/pull/60)
-- Changes to caret operator for maximum interoperability [`226c9e11e1`](https://github.com/craigpaul/laravel-postmark/pull/59)
-- Updates out of date homepage url [`df43595fa9`](https://github.com/craigpaul/laravel-postmark/pull/57)
-- Normalizes composer.json [`d2d72000e5`](https://github.com/craigpaul/laravel-postmark/pull/56)
-- Moves files into .github folder for ease of use [`5761ed147f`](https://github.com/craigpaul/laravel-postmark/pull/55)
+- Updates incorrect docblock return parameter [`#68`](https://github.com/craigpaul/laravel-postmark/pull/68)
+- Updates tests in preparation for Laravel 7 changes [`#66`](https://github.com/craigpaul/laravel-postmark/pull/66)
+- Simplifies usage of vendor publish command [`#61`](https://github.com/craigpaul/laravel-postmark/pull/61)
+- Allow PHPunit v9.0 [`#60`](https://github.com/craigpaul/laravel-postmark/pull/60)
+- Changes to caret operator for maximum interoperability [`#59`](https://github.com/craigpaul/laravel-postmark/pull/59)
+- Updates out of date homepage url [`#57`](https://github.com/craigpaul/laravel-postmark/pull/57)
+- Normalizes composer.json [`#56`](https://github.com/craigpaul/laravel-postmark/pull/56)
+- Moves files into .github folder for ease of use [`#55`](https://github.com/craigpaul/laravel-postmark/pull/55)
 
 ## [2.7.1] - 2019-11-08
 
@@ -94,13 +93,13 @@
 ## [2.4.0] - 2019-02-26
 
 ### Added
-- Adds support for Laravel 5.8 [`d6aa008ca5`](https://github.com/coconutcraig/laravel-postmark/commit/d6aa008ca5) 
+- Adds support for Laravel 5.8 [`d6aa008ca5`](https://github.com/coconutcraig/laravel-postmark/commit/d6aa008ca5)
 - Adds test to ensure custom creator is not put into framework when mail driver is not postmark [`7c22b536f6`](https://github.com/coconutcraig/laravel-postmark/commit/7c22b536f6)
 
 ## [2.3.2] - 2018-09-27
 
 ### Added
-- Adds build matrix to test against multiple versions. [`ea0b27d9f7`](https://github.com/coconutcraig/laravel-postmark/commit/ea0b27d9f7) 
+- Adds build matrix to test against multiple versions. [`ea0b27d9f7`](https://github.com/coconutcraig/laravel-postmark/commit/ea0b27d9f7)
 
 ### Fixed
 - Skip swift extension if driver isn't 'postmark'. [`6bb7e3b7e5`](https://github.com/coconutcraig/laravel-postmark/commit/6bb7e3b7e5)
@@ -112,10 +111,10 @@
 
 ### Fixed
 - Throw an exception when POSTMARK_SECRET is not set. [`cabbe42473`](https://github.com/coconutcraig/laravel-postmark/commit/cabbe42473)
-- Fixes long line causing phpcs error. [`aa6909137`](https://github.com/coconutcraig/laravel-postmark/commit/9aa6909137)  
+- Fixes long line causing phpcs error. [`aa6909137`](https://github.com/coconutcraig/laravel-postmark/commit/9aa6909137)
 
 ### Updated
-- Update PostmarkServiceProvider.php [`2d03a2a0fb`](https://github.com/coconutcraig/laravel-postmark/commit/2d03a2a0fb) 
+- Update PostmarkServiceProvider.php [`2d03a2a0fb`](https://github.com/coconutcraig/laravel-postmark/commit/2d03a2a0fb)
 
 ## [2.3.0] - 2018-09-04
 
@@ -123,7 +122,7 @@
 - Adds phpunit.xml to .gitignore. [`cb798836a7`](https://github.com/coconutcraig/laravel-postmark/commit/acb798836a7)
 
 ### Changed
-- Adds a postmark config file. [`e13970dd2d`](https://github.com/coconutcraig/laravel-postmark/commit/e13970dd2d) 
+- Adds a postmark config file. [`e13970dd2d`](https://github.com/coconutcraig/laravel-postmark/commit/e13970dd2d)
 - Refactors the getHtmlAndTextBody() function by using a collection. [`00c36b8572`](https://github.com/coconutcraig/laravel-postmark/commit/00c36b8572)
 
 ### Fixed
@@ -136,7 +135,7 @@
 ## [2.2.0] - 2018-02-19
 
 ### Updated
-- Updates travis configuration. [`ae914ea34a`](https://github.com/coconutcraig/laravel-postmark/commit/ae914ea34a) 
+- Updates travis configuration. [`ae914ea34a`](https://github.com/coconutcraig/laravel-postmark/commit/ae914ea34a)
 - Updates compatibility table. [`dac237f848`](https://github.com/coconutcraig/laravel-postmark/commit/dac237f848)
 - Updates dependencies for laravel framework upgrade. [`932660900b`](https://github.com/coconutcraig/laravel-postmark/commit/932660900b)
 
@@ -153,7 +152,7 @@
 ## [2.1.6] - 2017-11-07
 
 ### Fixed
-- Display names containing a comma results in API error 300. [`ed09f78472`](https://github.com/coconutcraig/laravel-postmark/commit/ed09f78472) 
+- Display names containing a comma results in API error 300. [`ed09f78472`](https://github.com/coconutcraig/laravel-postmark/commit/ed09f78472)
 
 ## [2.1.5] - 2017-11-07
 
