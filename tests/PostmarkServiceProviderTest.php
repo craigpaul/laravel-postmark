@@ -37,9 +37,10 @@ class PostmarkServiceProviderTest extends TestCase
             $provider->boot();
         });
 
-        $this->assertNotEmpty(
-            $this->readProperty($this->app['mail.manager'], 'customCreators')
-        );
+        tap($this->readProperty($this->app['mail.manager'], 'customCreators'), function ($customCreators) {
+            $this->assertNotEmpty($customCreators);
+            $this->assertArrayHasKey('postmark', $customCreators);
+        });
     }
 
     /**
