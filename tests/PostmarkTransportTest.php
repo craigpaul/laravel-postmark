@@ -61,7 +61,7 @@ class PostmarkTransportTest extends TestCase
      *
      * @return array
      */
-    private function getPayload($message)
+    private function getPayload($message): array
     {
         return $this->invokeMethod($this->transport, 'payload', [$message]);
     }

@@ -12,7 +12,7 @@ class PostmarkServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerPublishing();
 
@@ -26,7 +26,7 @@ class PostmarkServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    private function registerPostmarkDriver()
+    private function registerPostmarkDriver(): void
     {
         if (! $this->shouldRegisterPostmarkDriver()) {
             return;
@@ -62,7 +62,7 @@ class PostmarkServiceProvider extends ServiceProvider
      *
      * @return bool
      */
-    protected function shouldRegisterPostmarkDriver()
+    protected function shouldRegisterPostmarkDriver(): bool
     {
         if ($this->app->has('mail.manager')) {
             return true;
@@ -76,7 +76,7 @@ class PostmarkServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    private function registerPublishing()
+    private function registerPublishing(): void
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
@@ -91,7 +91,7 @@ class PostmarkServiceProvider extends ServiceProvider
      * @param  array  $config
      * @return \GuzzleHttp\Client
      */
-    protected function guzzle($config)
+    protected function guzzle(array $config): HttpClient
     {
         return new HttpClient($config);
     }
