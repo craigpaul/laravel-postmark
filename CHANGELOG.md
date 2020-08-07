@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+- Adds support for Laravel 8.0. [`#82`](https://github.com/craigpaul/laravel-postmark/pull/82)
+
 ## [2.8.2] - 2020-03-04
 
 ### Changed
