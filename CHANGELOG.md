@@ -316,7 +316,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/coconutcraig/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.8.2...HEAD
+[Unreleased]: https://github.com/coconutcraig/laravel-postmark/compare/v2.9.0...HEAD
+[2.9.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.8.2...v2.9.0
 [2.8.2]: https://github.com/coconutcraig/laravel-postmark/compare/v2.8.1...v2.8.2
 [2.8.1]: https://github.com/coconutcraig/laravel-postmark/compare/v2.8.0...v2.8.1
 [2.8.0]: https://github.com/coconutcraig/laravel-postmark/compare/v2.7.2...v2.8.0
