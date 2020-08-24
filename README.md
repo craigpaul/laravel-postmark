@@ -37,9 +37,11 @@ php artisan vendor:publish --tag="postmark-config"
 Update your `.env` file by adding your server key and set your mail driver to `postmark`.
 
 ```php
-MAIL_DRIVER=postmark
+MAIL_MAILER=postmark
 POSTMARK_SECRET=YOUR-SERVER-KEY-HERE
 ```
+
+> Please note, starting at Laravel 7, the MAIL_DRIVER environment variable was renamed to MAIL_MAILER. Your application might still use MAIL_DRIVER, so please refer to your mail.php configuration file.
 
 That's it! The mail system continues to work the exact same way as before and you can switch out Postmark for any of the pre-packaged Laravel mail drivers (smtp, mailgun, log, etc...).
 
