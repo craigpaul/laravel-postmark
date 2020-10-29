@@ -19,11 +19,6 @@ class PostmarkTransportTest extends TestCase
     /** @var \Coconuts\Mail\PostmarkTransport */
     protected $transport;
 
-    /**
-     * Setup the test environment.
-     *
-     * @return void
-     */
     public function setUp(): void
     {
         parent::setUp();
