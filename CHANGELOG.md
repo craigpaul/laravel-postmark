@@ -3,7 +3,7 @@
 ## [Unreleased]
 
 ### Changed
-- Updates documentation surrounding an update to the MAIL_DRIVER environment variable [`27aa7cd`](https://github.com/craigpaul/laravel-postmark/commit/27aa7cdb890bffccc892b5a732c8ceceb86e1782)
+- Updates documentation surrounding an update to the `MAIL_DRIVER` environment variable [`27aa7cd`](https://github.com/craigpaul/laravel-postmark/commit/27aa7cdb890bffccc892b5a732c8ceceb86e1782)
 
 ## [2.9.0] - 2020-08-08
 
