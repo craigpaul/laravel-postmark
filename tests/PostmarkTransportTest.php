@@ -1,9 +1,9 @@
 <?php
 
-namespace Coconuts\Mail\Tests;
+namespace CraigPaul\Mail\Tests;
 
-use Coconuts\Mail\Exceptions\PostmarkException;
-use Coconuts\Mail\PostmarkTransport;
+use CraigPaul\Mail\Exceptions\PostmarkException;
+use CraigPaul\Mail\PostmarkTransport;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use function json_encode;
@@ -18,9 +18,7 @@ class PostmarkTransportTest extends TestCase
      */
     protected $message;
 
-    /**
-     * @var \Coconuts\Mail\PostmarkTransport
-     */
+    /** @var \CraigPaul\Mail\PostmarkTransport */
     protected $transport;
 
     /**

@@ -52,7 +52,7 @@ Postmark offers a fantastic templating service for you to utilize instead of mai
 ```php
 public function toMail($notifiable)
 {
-    return (new \Coconuts\Mail\MailMessage)
+    return (new \CraigPaul\Mail\MailMessage)
         ->identifier(8675309)
         ->include([
             'name' => 'Customer Name',

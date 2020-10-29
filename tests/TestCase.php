@@ -1,8 +1,8 @@
 <?php
 
-namespace Coconuts\Mail\Tests;
+namespace CraigPaul\Mail\Tests;
 
-use Coconuts\Mail\PostmarkServiceProvider;
+use CraigPaul\Mail\PostmarkServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use ReflectionClass;
 

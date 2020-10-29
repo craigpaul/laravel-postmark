@@ -1,8 +1,8 @@
 <?php
 
-namespace Coconuts\Mail;
+namespace CraigPaul\Mail;
 
-use Coconuts\Mail\Exceptions\PostmarkException;
+use CraigPaul\Mail\Exceptions\PostmarkException;
 use function collect;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Mail\Transport\Transport;
@@ -41,7 +41,7 @@ class PostmarkTransport extends Transport
      * @param  string  $key
      * @return void
      *
-     * @throws \Coconuts\Mail\Exceptions\PostmarkException
+     * @throws \CraigPaul\Mail\Exceptions\PostmarkException
      */
     public function __construct(ClientInterface $client, ?string $key)
     {
