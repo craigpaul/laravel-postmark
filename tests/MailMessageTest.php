@@ -6,8 +6,7 @@ use CraigPaul\Mail\MailMessage;
 
 class MailMessageTest extends TestCase
 {
-    /** @var \CraigPaul\Mail\MailMessage */
-    protected $message;
+    protected MailMessage $message;
 
     protected function setUp(): void
     {
