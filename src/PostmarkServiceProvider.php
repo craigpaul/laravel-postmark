@@ -23,7 +23,6 @@ class PostmarkServiceProvider extends ServiceProvider
         }
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'postmark');
-        $this->mergeConfigFrom(__DIR__.'/../config/postmark.php', 'postmark');
 
         $this->resolveTransportManager()->extend('postmark', function () {
             return new PostmarkTransport(
