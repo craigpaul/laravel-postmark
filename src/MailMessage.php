@@ -18,12 +18,6 @@ class MailMessage extends Message
     /** @var string */
     public $view = 'postmark::template';
 
-    /**
-     * Set the template alias.
-     *
-     * @param  string  $alias
-     * @return $this
-     */
     public function alias(string $alias): self
     {
         $this->alias = $alias;
@@ -31,11 +25,6 @@ class MailMessage extends Message
         return $this;
     }
 
-    /**
-     * Get the data array for the mail message.
-     *
-     * @return array
-     */
     public function data(): array
     {
         return [
@@ -45,12 +34,6 @@ class MailMessage extends Message
         ];
     }
 
-    /**
-     * Set the template identifier.
-     *
-     * @param  int  $id
-     * @return $this
-     */
     public function identifier(int $id): self
     {
         $this->id = $id;
@@ -58,12 +41,6 @@ class MailMessage extends Message
         return $this;
     }
 
-    /**
-     * Set the data to be available within the template.
-     *
-     * @param  array  $data
-     * @return $this
-     */
     public function include(array $data): self
     {
         $this->data = $data;

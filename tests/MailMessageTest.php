@@ -9,11 +9,6 @@ class MailMessageTest extends TestCase
     /** @var \Coconuts\Mail\MailMessage */
     protected $message;
 
-    /**
-     * Setup the test environment.
-     *
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
