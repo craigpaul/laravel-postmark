@@ -154,13 +154,6 @@ class PostmarkTransport extends Transport
             ->all();
     }
 
-    /**
-     * Get a mime part from the given message.
-     *
-     * @param  \Swift_Mime_SimpleMessage  $message
-     * @param  string  $mimeType
-     * @return \Swift_MimePart|null
-     */
     protected function getMimePart(Swift_Mime_SimpleMessage $message, string $mimeType): ?Swift_MimePart
     {
         return collect($message->getChildren())
