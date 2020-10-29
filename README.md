@@ -111,9 +111,9 @@ $ composer test
 
 Please see [CONTRIBUTING](.github/CONTRIBUTING.md) and [CONDUCT](.github/CODE_OF_CONDUCT.md) for details.
 
-## Security
+## Security Vulnerabilities
 
-If you discover any security related issues, please email craig.paul@coconutcalendar.com instead of using the issue tracker.
+Please review our [security policy](.github/SECURITY.md) on how to report security vulnerabilities.
 
 ## Credits
 
