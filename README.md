@@ -133,6 +133,6 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-packagist]: https://packagist.org/packages/coconutcraig/laravel-postmark
 [link-style-ci]: https://styleci.io/repos/80351847
 [link-downloads]: https://packagist.org/packages/coconutcraig/laravel-postmark
-[link-author]: https://github.com/coconutcraig
+[link-author]: https://github.com/craigpaul
 [link-contributors]: ../../contributors
 [link-20-tag]: https://github.com/coconutcraig/laravel-postmark/tree/v2.0.0
