@@ -15,9 +15,6 @@ use Swift_MimePart;
 
 class PostmarkTransport extends Transport
 {
-    /**
-     * The Postmark API endpoint.
-     */
     const API_ENDPOINT = 'https://api.postmarkapp.com/email';
 
     /** @var \GuzzleHttp\ClientInterface */
