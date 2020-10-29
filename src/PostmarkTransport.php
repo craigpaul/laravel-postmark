@@ -17,11 +17,9 @@ class PostmarkTransport extends Transport
 {
     const API_ENDPOINT = 'https://api.postmarkapp.com/email';
 
-    /** @var \GuzzleHttp\ClientInterface */
-    protected $client;
+    protected ClientInterface $client;
 
-    /** @var string */
-    protected $key;
+    protected ?string $key;
 
     /**
      * @throws \CraigPaul\Mail\Exceptions\PostmarkException

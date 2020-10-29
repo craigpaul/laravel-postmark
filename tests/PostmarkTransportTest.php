@@ -13,11 +13,9 @@ use function tap;
 
 class PostmarkTransportTest extends TestCase
 {
-    /** @var \Swift_Message */
-    protected $message;
+    protected Swift_Message $message;
 
-    /** @var \CraigPaul\Mail\PostmarkTransport */
-    protected $transport;
+    protected PostmarkTransport $transport;
 
     public function setUp(): void
     {
