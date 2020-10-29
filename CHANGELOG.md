@@ -2,8 +2,14 @@
 
 ## [Unreleased]
 
+## [2.9.1] - 2020-10-29
+
 ### Changed
-- Updates documentation surrounding an update to the MAIL_DRIVER environment variable [`27aa7cd`](https://github.com/craigpaul/laravel-postmark/commit/27aa7cdb890bffccc892b5a732c8ceceb86e1782)
+- Updates documentation surrounding an update to the `MAIL_DRIVER` environment variable [`27aa7cd`](https://github.com/craigpaul/laravel-postmark/commit/27aa7cdb890bffccc892b5a732c8ceceb86e1782)
+
+### Fixed
+- Use request method on `ClientInterface` [`#111`](https://github.com/craigpaul/laravel-postmark/pull/111)
+- Removed duplicate call to `mergeConfigFrom` method [`#112`](https://github.com/craigpaul/laravel-postmark/pull/112)
 
 ## [2.9.0] - 2020-08-08
 
@@ -319,7 +325,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/craigpaul/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/craigpaul/laravel-postmark/compare/v2.9.0...HEAD
+[Unreleased]: https://github.com/craigpaul/laravel-postmark/compare/v2.9.1...HEAD
+[2.9.1]: https://github.com/craigpaul/laravel-postmark/compare/v2.9.0...v2.9.1
 [2.9.0]: https://github.com/craigpaul/laravel-postmark/compare/v2.8.2...v2.9.0
 [2.8.2]: https://github.com/craigpaul/laravel-postmark/compare/v2.8.1...v2.8.2
 [2.8.1]: https://github.com/craigpaul/laravel-postmark/compare/v2.8.0...v2.8.1
