@@ -119,7 +119,8 @@ If you discover any security related issues, please email craig.paul@coconutcale
 
 ## Credits
 
-- [Craig Paul][link-author]
+- [Craig Paul][link-author-paul]
+- [Mark van den Broek][link-author-mark]
 - [All Contributors][link-contributors]
 
 ## License
@@ -136,6 +137,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-tests]: https://github.com/craigpaul/laravel-postmark/actions?query=workflow%3Atests
 [link-style-ci]: https://styleci.io/repos/80351847
 [link-downloads]: https://packagist.org/packages/coconutcraig/laravel-postmark
-[link-author]: https://github.com/craigpaul
+[link-author-paul]: https://github.com/craigpaul
+[link-author-mark]: https://github.com/mvdnbrk
 [link-contributors]: ../../contributors
 [link-20-tag]: https://github.com/coconutcraig/laravel-postmark/tree/v2.0.0
