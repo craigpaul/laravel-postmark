@@ -2,8 +2,8 @@
 
 namespace CraigPaul\Mail;
 
-use CraigPaul\Mail\Exceptions\PostmarkException;
 use function collect;
+use CraigPaul\Mail\Exceptions\PostmarkException;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Mail\Transport\Transport;
 use Illuminate\Support\Collection;
