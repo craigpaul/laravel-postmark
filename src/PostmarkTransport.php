@@ -20,18 +20,10 @@ class PostmarkTransport extends Transport
      */
     const API_ENDPOINT = 'https://api.postmarkapp.com/email';
 
-    /**
-     * Guzzle client instance.
-     *
-     * @var \GuzzleHttp\ClientInterface
-     */
+    /** @var \GuzzleHttp\ClientInterface */
     protected $client;
 
-    /**
-     * The Postmark API key.
-     *
-     * @var string
-     */
+    /** @var string */
     protected $key;
 
     /**

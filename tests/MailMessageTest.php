@@ -6,9 +6,7 @@ use Coconuts\Mail\MailMessage;
 
 class MailMessageTest extends TestCase
 {
-    /**
-     * @var \Coconuts\Mail\MailMessage
-     */
+    /** @var \Coconuts\Mail\MailMessage */
     protected $message;
 
     /**
