@@ -2,6 +2,8 @@
 
 namespace CraigPaul\Mail\Exceptions;
 
-class PostmarkException extends \Exception
+use Exception;
+
+class PostmarkException extends Exception
 {
 }
