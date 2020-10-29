@@ -52,7 +52,7 @@ class PostmarkTransportTest extends TestCase
      *
      * @return array
      */
-    private function getPayload($message): array
+    private function getPayload(Swift_Message $message): array
     {
         return $this->invokeMethod($this->transport, 'payload', [$message]);
     }
