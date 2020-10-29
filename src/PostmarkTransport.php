@@ -15,32 +15,15 @@ use Swift_MimePart;
 
 class PostmarkTransport extends Transport
 {
-    /**
-     * The Postmark API endpoint.
-     */
     const API_ENDPOINT = 'https://api.postmarkapp.com/email';
 
-    /**
-     * Guzzle client instance.
-     *
-     * @var \GuzzleHttp\ClientInterface
-     */
+    /** @var \GuzzleHttp\ClientInterface */
     protected $client;
 
-    /**
-     * The Postmark API key.
-     *
-     * @var string
-     */
+    /** @var string */
     protected $key;
 
     /**
-     * Create a new Postmark transport instance.
-     *
-     * @param  \GuzzleHttp\ClientInterface  $client
-     * @param  string  $key
-     * @return void
-     *
      * @throws \Coconuts\Mail\Exceptions\PostmarkException
      */
     public function __construct(ClientInterface $client, ?string $key)
@@ -55,12 +38,6 @@ class PostmarkTransport extends Transport
         $this->client = $client;
     }
 
-    /**
-     * Get the Postmark API endpoint.
-     *
-     * @param  \Swift_Mime_SimpleMessage  $message
-     * @return string
-     */
     public function getApiEndpoint(Swift_Mime_SimpleMessage $message): string
     {
         if ($this->templated($message)) {
@@ -95,12 +72,6 @@ class PostmarkTransport extends Transport
         return $this->numberOfRecipients($message);
     }
 
-    /**
-     * Get all attachments for the given message.
-     *
-     * @param  \Swift_Mime_SimpleMessage  $message
-     * @return array
-     */
     protected function getAttachments(Swift_Mime_SimpleMessage $message): array
     {
         return collect($message->getChildren())
@@ -118,12 +89,6 @@ class PostmarkTransport extends Transport
             ->toArray();
     }
 
-    /**
-     * Format the display name.
-     *
-     * @param  string  $value
-     * @return string
-     */
     protected function getDisplayName(string $value): string
     {
         if (Str::contains($value, ',')) {
@@ -163,23 +128,11 @@ class PostmarkTransport extends Transport
         );
     }
 
-    /**
-     * Get the body for the given message.
-     *
-     * @param  \Swift_Mime_SimpleMessage  $message
-     * @return string
-     */
     protected function getBody(Swift_Mime_SimpleMessage $message): string
     {
         return $message->getBody() ?: '';
     }
 
-    /**
-     * Get the text and html fields for the given message.
-     *
-     * @param  \Swift_Mime_SimpleMessage  $message
-     * @return array
-     */
     protected function getHtmlAndTextBody(Swift_Mime_SimpleMessage $message): array
     {
         $types = [
@@ -201,14 +154,7 @@ class PostmarkTransport extends Transport
             ->all();
     }
 
-    /**
-     * Get a mime part from the given message.
-     *
-     * @param  \Swift_Mime_SimpleMessage  $message
-     * @param  string  $mimeType
-     * @return \Swift_MimePart|null
-     */
-    protected function getMimePart(Swift_Mime_SimpleMessage $message, string $mimeType)
+    protected function getMimePart(Swift_Mime_SimpleMessage $message, string $mimeType): ?Swift_MimePart
     {
         return collect($message->getChildren())
             ->filter(function ($child) {
@@ -220,23 +166,11 @@ class PostmarkTransport extends Transport
             ->first();
     }
 
-    /**
-     * Get the subject for the given message.
-     *
-     * @param  \Swift_Mime_SimpleMessage  $message
-     * @return string
-     */
     protected function getSubject(Swift_Mime_SimpleMessage $message): string
     {
         return $message->getSubject() ?: '';
     }
 
-    /**
-     * Get headers for the given message.
-     *
-     * @param  \Swift_Mime_SimpleMessage  $message
-     * @return array
-     */
     protected function getHeaders(Swift_Mime_SimpleMessage $message): array
     {
         return collect($message->getHeaders()->getAll())
@@ -266,12 +200,6 @@ class PostmarkTransport extends Transport
             ->toArray();
     }
 
-    /**
-     * Get metadata for the given message.
-     *
-     * @param  \Swift_Mime_SimpleMessage  $message
-     * @return array
-     */
     protected function getMetadata(Swift_Mime_SimpleMessage $message): array
     {
         return collect($message->getHeaders()->getAll())
@@ -286,12 +214,6 @@ class PostmarkTransport extends Transport
             ->toArray();
     }
 
-    /**
-     * Get the tag for the given message.
-     *
-     * @param  \Swift_Mime_SimpleMessage  $message
-     * @return string
-     */
     protected function getTag(Swift_Mime_SimpleMessage $message): string
     {
         $tags = collect($message->getHeaders()->getAll('tag'));
@@ -299,12 +221,6 @@ class PostmarkTransport extends Transport
         return optional($tags->last())->getFieldBody() ?: '';
     }
 
-    /**
-     * Get the HTTP payload for sending the Postmark message.
-     *
-     * @param  \Swift_Mime_SimpleMessage  $message
-     * @return array
-     */
     protected function payload(Swift_Mime_SimpleMessage $message): array
     {
         $headers = [
@@ -348,13 +264,7 @@ class PostmarkTransport extends Transport
             ->toArray();
     }
 
-    /**
-     * Determine if the given message is wanting to use the Postmark Template API.
-     *
-     * @param  \Swift_Mime_SimpleMessage  $message
-     * @return array|null
-     */
-    protected function templated(Swift_Mime_SimpleMessage $message)
+    protected function templated(Swift_Mime_SimpleMessage $message): ?array
     {
         return json_decode($message->getBody(), JSON_OBJECT_AS_ARRAY);
     }

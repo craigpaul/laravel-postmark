@@ -13,21 +13,12 @@ use function tap;
 
 class PostmarkTransportTest extends TestCase
 {
-    /**
-     * @var \Swift_Message
-     */
+    /** @var \Swift_Message */
     protected $message;
 
-    /**
-     * @var \Coconuts\Mail\PostmarkTransport
-     */
+    /** @var \Coconuts\Mail\PostmarkTransport */
     protected $transport;
 
-    /**
-     * Setup the test environment.
-     *
-     * @return void
-     */
     public function setUp(): void
     {
         parent::setUp();
@@ -54,14 +45,7 @@ class PostmarkTransportTest extends TestCase
         $this->transport = app('mailer')->getSwiftMailer()->getTransport();
     }
 
-    /**
-     * Get the json payload for the given message.
-     *
-     * @param  \Swift_Message  $message
-     *
-     * @return array
-     */
-    private function getPayload($message): array
+    private function getPayload(Swift_Message $message): array
     {
         return $this->invokeMethod($this->transport, 'payload', [$message]);
     }

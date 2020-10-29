@@ -7,11 +7,6 @@ use Illuminate\Support\ServiceProvider;
 
 class PostmarkServiceProvider extends ServiceProvider
 {
-    /**
-     * Boot the service provider.
-     *
-     * @return void
-     */
     public function boot(): void
     {
         $this->registerPublishing();
@@ -21,11 +16,6 @@ class PostmarkServiceProvider extends ServiceProvider
         $this->registerPostmarkDriver();
     }
 
-    /**
-     * Register the Postmark driver.
-     *
-     * @return void
-     */
     private function registerPostmarkDriver(): void
     {
         if (! $this->shouldRegisterPostmarkDriver()) {
@@ -57,11 +47,6 @@ class PostmarkServiceProvider extends ServiceProvider
         return $this->app['swift.transport'];
     }
 
-    /**
-     * Determine if we should register the Postmark driver.
-     *
-     * @return bool
-     */
     protected function shouldRegisterPostmarkDriver(): bool
     {
         if ($this->app->has('mail.manager')) {
@@ -71,11 +56,6 @@ class PostmarkServiceProvider extends ServiceProvider
         return $this->app['config']['mail.driver'] === 'postmark';
     }
 
-    /**
-     * Register the publishable resources for this package.
-     *
-     * @return void
-     */
     private function registerPublishing(): void
     {
         if ($this->app->runningInConsole()) {
@@ -85,12 +65,6 @@ class PostmarkServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * Get a fresh Guzzle HTTP client instance.
-     *
-     * @param  array  $config
-     * @return \GuzzleHttp\Client
-     */
     protected function guzzle(array $config): HttpClient
     {
         return new HttpClient($config);
