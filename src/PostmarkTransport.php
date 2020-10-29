@@ -264,12 +264,6 @@ class PostmarkTransport extends Transport
             ->toArray();
     }
 
-    /**
-     * Determine if the given message is wanting to use the Postmark Template API.
-     *
-     * @param  \Swift_Mime_SimpleMessage  $message
-     * @return array|null
-     */
     protected function templated(Swift_Mime_SimpleMessage $message): ?array
     {
         return json_decode($message->getBody(), JSON_OBJECT_AS_ARRAY);
