@@ -270,7 +270,7 @@ class PostmarkTransport extends Transport
      * @param  \Swift_Mime_SimpleMessage  $message
      * @return array|null
      */
-    protected function templated(Swift_Mime_SimpleMessage $message)
+    protected function templated(Swift_Mime_SimpleMessage $message): ?array
     {
         return json_decode($message->getBody(), JSON_OBJECT_AS_ARRAY);
     }
