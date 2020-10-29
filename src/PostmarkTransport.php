@@ -60,7 +60,11 @@ class PostmarkTransport extends Transport
     {
         $this->beforeSendPerformed($message);
 
-        $response = $this->client->post($this->getApiEndpoint($message), $this->payload($message));
+        $response = $this->client->request(
+            'POST',
+            $this->getApiEndpoint($message),
+            $this->payload($message)
+        );
 
         $message->getHeaders()->addTextHeader(
             'X-PM-Message-Id',
