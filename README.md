@@ -39,8 +39,6 @@ MAIL_MAILER=postmark
 POSTMARK_SECRET=YOUR-SERVER-KEY-HERE
 ```
 
-> Please note, starting at Laravel 7, the MAIL_DRIVER environment variable was renamed to MAIL_MAILER. Your application might still use MAIL_DRIVER, so please refer to your mail.php configuration file.
-
 That's it! The mail system continues to work the exact same way as before and you can switch out Postmark for any of the pre-packaged Laravel mail drivers (smtp, mailgun, log, etc...).
 
 > Remember, when using Postmark the sending address used in your emails must be a [valid Sender Signature](http://support.postmarkapp.com/category/45-category) that you have already configured.
