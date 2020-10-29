@@ -1,12 +1,12 @@
 <?php
 
-namespace Coconuts\Mail\Tests;
+namespace CraigPaul\Mail\Tests;
 
-use Coconuts\Mail\MailMessage;
+use CraigPaul\Mail\MailMessage;
 
 class MailMessageTest extends TestCase
 {
-    /** @var \Coconuts\Mail\MailMessage */
+    /** @var \CraigPaul\Mail\MailMessage */
     protected $message;
 
     protected function setUp(): void

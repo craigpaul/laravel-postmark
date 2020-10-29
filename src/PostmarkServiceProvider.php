@@ -1,6 +1,6 @@
 <?php
 
-namespace Coconuts\Mail;
+namespace CraigPaul\Mail;
 
 use GuzzleHttp\Client as HttpClient;
 use Illuminate\Support\ServiceProvider;

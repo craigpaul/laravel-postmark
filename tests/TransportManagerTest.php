@@ -1,8 +1,8 @@
 <?php
 
-namespace Coconuts\Mail\Tests;
+namespace CraigPaul\Mail\Tests;
 
-use Coconuts\Mail\PostmarkTransport;
+use CraigPaul\Mail\PostmarkTransport;
 
 class TransportManagerTest extends TestCase
 {
