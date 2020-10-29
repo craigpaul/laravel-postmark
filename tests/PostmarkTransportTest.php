@@ -45,13 +45,6 @@ class PostmarkTransportTest extends TestCase
         $this->transport = app('mailer')->getSwiftMailer()->getTransport();
     }
 
-    /**
-     * Get the json payload for the given message.
-     *
-     * @param  \Swift_Message  $message
-     *
-     * @return array
-     */
     private function getPayload(Swift_Message $message): array
     {
         return $this->invokeMethod($this->transport, 'payload', [$message]);
