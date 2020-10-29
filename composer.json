@@ -7,8 +7,7 @@
         "postmark",
         "laravel",
         "mail",
-        "email",
-        "coconutcraig"
+        "email"
     ],
     "homepage": "https://github.com/craigpaul/laravel-postmark",
     "license": "MIT",
