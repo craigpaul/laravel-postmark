@@ -3,7 +3,7 @@
 ## [Unreleased]
 
 ### Added
-- `X-Message-ID` header to a sent message [`#119`](https://github.com/craigpaul/laravel-postmark/pull/119)
+- `X-Message-ID` header to sent messages. [`#119`](https://github.com/craigpaul/laravel-postmark/pull/119)
 - Support for PHP 8. [`#117`](https://github.com/craigpaul/laravel-postmark/pull/117)
 
 ## [2.9.1] - 2020-10-29
