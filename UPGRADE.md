@@ -1,5 +1,9 @@
 # Upgrade Guide
 
+## From v2.x to v3.0
+
+- The `X-PM-Message-Id` header was removed from sent messages. You should update this to `X-Message-ID`.
+
 ## From v2.2 to v2.3
 
 You may remove the `postmark` specific key from  the `config/services.php` file.
