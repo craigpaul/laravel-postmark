@@ -471,7 +471,7 @@ class PostmarkTransportTest extends TestCase
     {
         try {
             $this->transport->send($this->message);
-            $this->assertNotNull($this->message->getHeaders()->get('X-PM-Message-Id'));
+            $this->assertNotNull($this->message->getHeaders()->get('X-Message-ID'));
         } catch (RequestException $e) {
             $this->fail($e->getMessage());
         }

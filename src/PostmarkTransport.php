@@ -65,7 +65,7 @@ class PostmarkTransport extends Transport
         );
 
         $message->getHeaders()->addTextHeader(
-            'X-PM-Message-Id',
+            'X-Message-ID',
             $this->getMessageId($response)
         );
 
