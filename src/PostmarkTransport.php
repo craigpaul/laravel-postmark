@@ -4,11 +4,12 @@ namespace Coconuts\Mail;
 
 use Coconuts\Mail\Exceptions\PostmarkException;
 use function collect;
+use function json_decode;
 use GuzzleHttp\ClientInterface;
 use Illuminate\Mail\Transport\Transport;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use function json_decode;
+use Psr\Http\Message\ResponseInterface;
 use Swift_Attachment;
 use Swift_Mime_SimpleMessage;
 use Swift_MimePart;
@@ -118,13 +119,7 @@ class PostmarkTransport extends Transport
             ->implode(',');
     }
 
-    /**
-     * Get the message ID from the response.
-     *
-     * @param  \GuzzleHttp\Psr7\Response  $response
-     * @return string
-     */
-    protected function getMessageId($response): string
+    protected function getMessageId(ResponseInterface $response): string
     {
         return object_get(
             json_decode($response->getBody()->getContents()),
