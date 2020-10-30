@@ -5,6 +5,9 @@
 ### Added
 - Support for PHP 8 [#115](https://github.com/craigpaul/laravel-postmark/pull/115)
 
+### Removed
+- `X-PM-Message-Id` header from sent messages in favor of `X-Message-ID`. [#121](https://github.com/craigpaul/laravel-postmark/pull/121)
+
 ## [2.9.1] - 2020-10-29
 
 ### Changed
