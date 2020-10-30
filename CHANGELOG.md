@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+- Support for PHP 8. [`#117`](https://github.com/craigpaul/laravel-postmark/pull/117)
+
 ## [2.9.1] - 2020-10-29
 
 ### Changed
