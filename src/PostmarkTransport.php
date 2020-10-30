@@ -119,12 +119,6 @@ class PostmarkTransport extends Transport
             ->implode(',');
     }
 
-    /**
-     * Get the message ID from the response.
-     *
-     * @param  \GuzzleHttp\Psr7\Response  $response
-     * @return string
-     */
     protected function getMessageId(ResponseInterface $response): string
     {
         return object_get(
