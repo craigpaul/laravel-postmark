@@ -2,9 +2,14 @@
 
 ## [Unreleased]
 
+## [2.10.0] - 2020-10-30
+
 ### Added
 - `X-Message-ID` header to sent messages. [`#119`](https://github.com/craigpaul/laravel-postmark/pull/119)
 - Support for PHP 8. [`#117`](https://github.com/craigpaul/laravel-postmark/pull/117)
+
+### Deprecated
+- `X-PM-Message-Id` header in sent messages. Please use the new `X-Message-ID` header.
 
 ## [2.9.1] - 2020-10-29
 
@@ -329,7 +334,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/craigpaul/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/craigpaul/laravel-postmark/compare/v2.9.1...HEAD
+[Unreleased]: https://github.com/craigpaul/laravel-postmark/compare/v2.10.0...HEAD
+[2.10.0]: https://github.com/craigpaul/laravel-postmark/compare/v2.9.1...v2.10.0
 [2.9.1]: https://github.com/craigpaul/laravel-postmark/compare/v2.9.0...v2.9.1
 [2.9.0]: https://github.com/craigpaul/laravel-postmark/compare/v2.8.2...v2.9.0
 [2.8.2]: https://github.com/craigpaul/laravel-postmark/compare/v2.8.1...v2.8.2
