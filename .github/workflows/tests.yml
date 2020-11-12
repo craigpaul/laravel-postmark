@@ -40,17 +40,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.composer/cache/files
-          key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-${{ matrix.stability }}-${{ hashFiles('composer.json') }}
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
           coverage: none
+
+      - name: Setup problem matchers
+        run: |
+          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Install dependencies
         run: |
