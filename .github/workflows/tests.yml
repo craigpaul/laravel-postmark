@@ -22,7 +22,7 @@ jobs:
             testbench: ^6.0
         exclude:
           - laravel: ^5.5
-            dependency-version: prefer-lowest
+            stability: prefer-lowest
           - php: 7.1
             laravel: ^6.0
           - php: 7.1
