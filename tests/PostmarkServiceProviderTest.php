@@ -45,13 +45,13 @@ class PostmarkServiceProviderTest extends TestCase
     }
 
     /** @test */
-    public function will_register_http_client_with_temporary_base_url_depending_on_environment_setup()
+    public function will_allow_base_uri_to_be_overridden_from_config_value()
     {
         if (! $this->app->has('swift.transport')) {
             $this->markTestSkipped('swift.transport is only available for Laravel 6.0 and lower.');
         }
 
-        $this->app['config']->set('postmark.validating.tls', true);
+        $this->app['config']->set('postmark.guzzle.base_uri', 'https://api-ssl-temp.postmarkapp.com');
 
         tap(new PostmarkServiceProvider($this->app), function ($provider) {
             $provider->boot();

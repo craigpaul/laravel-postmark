@@ -2,7 +2,7 @@
 
 namespace Coconuts\Mail;
 
-use DateTime;
+use function array_merge;
 use function config;
 use GuzzleHttp\Client as HttpClient;
 use Illuminate\Support\ServiceProvider;
@@ -68,14 +68,10 @@ class PostmarkServiceProvider extends ServiceProvider
 
     protected function guzzle(array $config): HttpClient
     {
-        $now = new DateTime();
-        $expiresAt = new DateTime('2021-04-13T00:00:00');
-        $expired = $now > $expiresAt;
-
-        return new HttpClient($config + [
-            'base_uri' => config('postmark.validating.tls') && !$expired
-                ? 'https://api-ssl-temp.postmarkapp.com'
-                : 'https://api.postmarkapp.com',
-        ]);
+        return new HttpClient(array_merge($config, [
+            'base_uri' => empty($config['base_uri'])
+                ? 'https://api.postmarkapp.com'
+                : $config['base_uri']
+        ]));
     }
 }
