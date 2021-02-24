@@ -27,4 +27,23 @@ return [
         'timeout' => 10,
         'connect_timeout' => 10,
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Validate TLS Upgrade
+    |--------------------------------------------------------------------------
+    |
+    | On February 16, 2021 Postmark announced some upcoming TLS
+    | configuration changes for API users. Use this field to
+    | change the hostname to their temporary endpoint.
+    | This option will cease to work after the
+    | April 13th cut off date.
+    |
+    | https://postmarkapp.com/updates/upcoming-tls-configuration-changes-for-api-users-action-may-be-required
+    |
+    */
+
+    'validating' => [
+        'tls' => env('POSTMARK_VALIDATING_TLS', false),
+    ],
 ];

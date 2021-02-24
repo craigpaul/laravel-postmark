@@ -3,6 +3,7 @@
 namespace Coconuts\Mail\Tests;
 
 use Coconuts\Mail\PostmarkServiceProvider;
+use function tap;
 
 class PostmarkServiceProviderTest extends TestCase
 {
@@ -40,6 +41,29 @@ class PostmarkServiceProviderTest extends TestCase
         tap($this->readProperty($this->app['mail.manager'], 'customCreators'), function ($customCreators) {
             $this->assertNotEmpty($customCreators);
             $this->assertArrayHasKey('postmark', $customCreators);
+        });
+    }
+
+    /** @test */
+    public function will_register_http_client_with_temporary_base_url_depending_on_environment_setup()
+    {
+        if (! $this->app->has('swift.transport')) {
+            $this->markTestSkipped('swift.transport is only available for Laravel 6.0 and lower.');
+        }
+
+        $this->app['config']->set('postmark.validating.tls', true);
+
+        tap(new PostmarkServiceProvider($this->app), function ($provider) {
+            $provider->boot();
+        });
+
+        $driver = $this->app['swift.transport']->driver('postmark');
+
+        tap($this->readProperty($driver, 'client'), function ($client) {
+            $this->assertSame(
+                'api-ssl-temp.postmarkapp.com',
+                $client->getConfig('base_uri')->getHost()
+            );
         });
     }
 

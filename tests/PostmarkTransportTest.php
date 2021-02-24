@@ -4,12 +4,12 @@ namespace Coconuts\Mail\Tests;
 
 use Coconuts\Mail\Exceptions\PostmarkException;
 use Coconuts\Mail\PostmarkTransport;
+use function json_encode;
+use function tap;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use function json_encode;
 use Swift_Attachment;
 use Swift_Message;
-use function tap;
 
 class PostmarkTransportTest extends TestCase
 {
@@ -55,7 +55,7 @@ class PostmarkTransportTest extends TestCase
     {
         $endpoint = $this->invokeMethod($this->transport, 'getApiEndpoint', [$this->message]);
 
-        $this->assertSame('https://api.postmarkapp.com/email', $endpoint);
+        $this->assertSame('/email', $endpoint);
     }
 
     /** @test */
