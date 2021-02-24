@@ -24,6 +24,7 @@ return [
     */
 
     'guzzle' => [
+        'base_uri' => env('POSTMARK_BASE_URI', 'https://api.postmarkapp.com'),
         'timeout' => 10,
         'connect_timeout' => 10,
     ],

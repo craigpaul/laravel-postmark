@@ -2,6 +2,8 @@
 
 namespace Coconuts\Mail;
 
+use function array_merge;
+use function config;
 use GuzzleHttp\Client as HttpClient;
 use Illuminate\Support\ServiceProvider;
 
@@ -66,6 +68,10 @@ class PostmarkServiceProvider extends ServiceProvider
 
     protected function guzzle(array $config): HttpClient
     {
-        return new HttpClient($config);
+        return new HttpClient(array_merge($config, [
+            'base_uri' => empty($config['base_uri'])
+                ? 'https://api.postmarkapp.com'
+                : $config['base_uri']
+        ]));
     }
 }

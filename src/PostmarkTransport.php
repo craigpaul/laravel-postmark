@@ -16,8 +16,6 @@ use Swift_MimePart;
 
 class PostmarkTransport extends Transport
 {
-    const API_ENDPOINT = 'https://api.postmarkapp.com/email';
-
     /** @var \GuzzleHttp\ClientInterface */
     protected $client;
 
@@ -42,10 +40,10 @@ class PostmarkTransport extends Transport
     public function getApiEndpoint(Swift_Mime_SimpleMessage $message): string
     {
         if ($this->templated($message)) {
-            return self::API_ENDPOINT.'/withTemplate';
+            return '/email/withTemplate';
         }
 
-        return self::API_ENDPOINT;
+        return '/email';
     }
 
     /**
