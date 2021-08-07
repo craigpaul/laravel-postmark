@@ -10,7 +10,7 @@ use Illuminate\Mail\Transport\Transport;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Psr\Http\Message\ResponseInterface;
-use Swift_Attachment;
+use Swift_Mime_Attachment;
 use Swift_Mime_SimpleMessage;
 use Swift_MimePart;
 
@@ -79,14 +79,20 @@ class PostmarkTransport extends Transport
     {
         return collect($message->getChildren())
             ->filter(function ($child) {
-                return $child instanceof Swift_Attachment;
+                return $child instanceof Swift_Mime_Attachment;
             })
             ->map(function ($child) {
-                return [
+                $attributes = [
                     'Name' => $child->getHeaders()->get('content-type')->getParameter('name'),
                     'Content' => base64_encode($child->getBody()),
                     'ContentType' => $child->getContentType(),
                 ];
+
+                if ($child->getDisposition() !== 'attachment' && $child->getId() !== null) {
+                    $attributes['ContentID'] = 'cid:' . $child->getId();
+                }
+
+                return $attributes;
             })
             ->values()
             ->toArray();
