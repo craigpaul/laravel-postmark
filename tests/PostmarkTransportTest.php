@@ -8,6 +8,7 @@ use function json_encode;
 use function tap;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Support\Str;
 use Swift_Attachment;
 use Swift_Message;
 
@@ -524,5 +525,30 @@ class PostmarkTransportTest extends TestCase
         $this->assertSame([
             'other-data¹' => 'some other data¹',
         ], $metadata);
+    }
+
+    /** @test */
+    public function can_handle_inline_attachments()
+    {
+        $id = Str::random(32) . '@default';
+
+        $attachment = new Swift_Attachment('test attachment 1', 'attachment1.txt');
+        $attachment->setContentType('text/plain');
+        $attachment->setDisposition('inline');
+        $attachment->setId($id);
+
+        $message = new Swift_Message;
+        $message->attach($attachment);
+
+        $payload = $this->getPayload($message);
+
+        $this->assertArrayHasKey('json', $payload);
+
+        tap($payload['json'], function ($json) use ($id) {
+            $this->assertArrayHasKey('Attachments', $json);
+            $this->assertCount(1, $json['Attachments']);
+            $this->assertArrayHasKey('ContentID', $json['Attachments'][0]);
+            $this->assertSame('cid:' . $id, $json['Attachments'][0]['ContentID']);
+        });
     }
 }
