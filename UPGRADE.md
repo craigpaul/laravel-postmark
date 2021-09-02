@@ -1,5 +1,9 @@
 # Upgrade Guide
 
+## From v2.10 to v2.11
+
+If you were previously catching either `\GuzzleHttp\Exception\ConnectException` or `GuzzleHttp\Exception\ServerException`, they will now be rethrown as `\Swift_TransportException` with the appropriate message, code and previous exception. This change was made to support Laravel's mail [failover configuration](https://laravel.com/docs/8.x/mail#failover-configuration).
+
 ## From v2.2 to v2.3
 
 You may remove the `postmark` specific key from  the `config/services.php` file.
