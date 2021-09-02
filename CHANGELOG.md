@@ -2,10 +2,14 @@
 
 ## [Unreleased]
 
+## [2.11.0] - 2021-09-02
+
+- Adds support for Laravel's mail failover configuration [`76651966f8`](https://github.com/craigpaul/laravel-postmark/pull/127)
+
 ## [2.10.2] - 2021-08-07
 
 ### Fixed
-- Adds a ContentID key for handling inline attachments that have an actual identifier. Fixes [`#126`](https://github.com/craigpaul/laravel-postmark/pull/126) [`4a121f0a0a`](https://github.com/craigpaul/laravel-postmark/commit/4a121f0a0a)
+- Adds a ContentID key for handling inline attachments that have an actual identifier. Fixes [`#126`](https://github.com/craigpaul/laravel-postmark/issues/126) [`4a121f0a0a`](https://github.com/craigpaul/laravel-postmark/commit/4a121f0a0a)
 - Adds test to ensure we can appropriately handle inline attachments [`9662d1afc0`](https://github.com/craigpaul/laravel-postmark/commit/9662d1afc0)
   
 ## [2.10.1] - 2021-02-24
@@ -345,7 +349,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/craigpaul/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/craigpaul/laravel-postmark/compare/v2.10.2...HEAD
+[Unreleased]: https://github.com/craigpaul/laravel-postmark/compare/v2.11.0...HEAD
+[2.11.0]: https://github.com/craigpaul/laravel-postmark/compare/v2.10.2...v2.11.0
 [2.10.2]: https://github.com/craigpaul/laravel-postmark/compare/v2.10.1...v2.10.2
 [2.10.1]: https://github.com/craigpaul/laravel-postmark/compare/v2.10.0...v2.10.1
 [2.10.0]: https://github.com/craigpaul/laravel-postmark/compare/v2.9.1...v2.10.0
