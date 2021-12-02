@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [ 8.0, 7.4, 7.3, 7.2, 7.1 ]
+        php: [ 8.1, 8.0, 7.4, 7.3, 7.2, 7.1 ]
         laravel: [ ^8.0, ^7.0, ^6.0, ^5.5 ]
         stability: [ prefer-lowest, prefer-stable ]
         include:
@@ -32,6 +32,8 @@ jobs:
           - php: 7.2
             laravel: ^8.0
           - php: 8.0
+            laravel: ^5.5
+          - php: 8.1
             laravel: ^5.5
 
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - ${{ matrix.stability }}
