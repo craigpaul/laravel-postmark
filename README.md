@@ -47,6 +47,8 @@ That's it! The mail system continues to work the exact same way as before and yo
 
 ## Postmark Templates
 
+### Notification
+
 Postmark offers a fantastic templating service for you to utilize instead of maintaining your templates within your Laravel application. If you would like to take advantage of that, this package offers an extension on the base `MailMessage` provided out of the box with Laravel. Within a Laravel notification, you can do the following to start taking advantage of Postmark templates.
 
 ```php
@@ -61,7 +63,26 @@ public function toMail($notifiable)
 }
 ```
 
-> You may also utilize an alias instead of the template identifier by using the `->alias()` method.
+### Mailable
+
+It is also possible to use templates via a Mailable.
+
+```php
+use Illuminate\Support\Facades\Mail;
+use Coconuts\Mail\PostmarkTemplateMailable;
+
+Mail::to('mail@example.com')
+    ->send((new PostmarkTemplateMailable())
+        ->identifier(8675309)
+        ->include([
+            'name' => 'Customer Name',
+            'action_url' => 'https://example.com/login',
+        ])
+    );
+
+```
+
+> You may also utilize an alias instead of the template identifier by using the `->alias()` method in both cases.
 
 ## Postmark Tags
 
