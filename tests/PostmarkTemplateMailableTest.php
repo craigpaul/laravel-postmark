@@ -2,6 +2,7 @@
 
 namespace Coconuts\Mail\Tests;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Coconuts\Mail\PostmarkTemplateMailable;
 
@@ -90,8 +91,15 @@ class PostmarkTemplateMailableTest extends TestCase
             ->include([
                 'random' => 'data'
             ]);
-
-        $mailable->assertSeeInHtml('"alias":"test-with-alias"');
-        $mailable->assertSeeInHtml('"model":{"random":"data"}');
+        
+        // assertSeeInHtml is only available from Laravel 8.x onwards.
+        if (method_exists($mailable, 'assertSeeInHtml')) {
+            $mailable->assertSeeInHtml('"alias":"test-with-alias"');
+            $mailable->assertSeeInHtml('"model":{"random":"data"}');
+        } else {
+            $html = $mailable->render();
+            $this->assertTrue(Str::contains($html, '"alias":"test-with-alias"'));
+            $this->assertTrue(Str::contains($html, '"model":{"random":"data"}'));
+        }
     }
 }
