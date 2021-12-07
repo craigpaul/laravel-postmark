@@ -2,9 +2,15 @@
 
 ## [Unreleased]
 
+## [2.11.1] - 2021-12-07
+
+### Added
+- Adds PostmarkTemplateMailable [`#130`](https://github.com/craigpaul/laravel-postmark/pull/130)
+
 ## [2.11.0] - 2021-09-02
 
-- Adds support for Laravel's mail failover configuration [`76651966f8`](https://github.com/craigpaul/laravel-postmark/pull/127)
+### Added
+- Adds support for Laravel's mail failover configuration [`#127`](https://github.com/craigpaul/laravel-postmark/pull/127)
 
 ## [2.10.2] - 2021-08-07
 
@@ -349,7 +355,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/craigpaul/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/craigpaul/laravel-postmark/compare/v2.11.0...HEAD
+[Unreleased]: https://github.com/craigpaul/laravel-postmark/compare/v2.11.1...HEAD
+[2.11.1]: https://github.com/craigpaul/laravel-postmark/compare/v2.11.0...v2.11.1
 [2.11.0]: https://github.com/craigpaul/laravel-postmark/compare/v2.10.2...v2.11.0
 [2.10.2]: https://github.com/craigpaul/laravel-postmark/compare/v2.10.1...v2.10.2
 [2.10.1]: https://github.com/craigpaul/laravel-postmark/compare/v2.10.0...v2.10.1
