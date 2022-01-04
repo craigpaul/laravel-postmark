@@ -18,7 +18,10 @@ class PostmarkServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'postmark');
 
         $this->app['mail.manager']->extend('postmark', function () {
-            return new PostmarkTransport($this->app->make(Factory::class));
+            return new PostmarkTransport(
+                $this->app->make(Factory::class),
+                $this->app->make('config')->get('services.postmark.token'),
+            );
         });
     }
 }
