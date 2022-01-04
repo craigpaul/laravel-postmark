@@ -1,6 +1,6 @@
 <?php
 
-namespace Coconuts\Mail\Exceptions;
+namespace CraigPaul\Mail\Exceptions;
 
 use Exception;
 

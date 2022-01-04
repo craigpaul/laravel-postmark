@@ -43,18 +43,18 @@
         },
         "laravel": {
             "providers": [
-                "Coconuts\\Mail\\PostmarkServiceProvider"
+                "CraigPaul\\Mail\\PostmarkServiceProvider"
             ]
         }
     },
     "autoload": {
         "psr-4": {
-            "Coconuts\\Mail\\": "src"
+            "CraigPaul\\Mail\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Coconuts\\Mail\\Tests\\": "tests"
+            "CraigPaul\\Mail\\Tests\\": "tests"
         }
     },
     "minimum-stability": "dev",

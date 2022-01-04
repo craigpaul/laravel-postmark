@@ -1,6 +1,6 @@
 <?php
 
-namespace Coconuts\Mail;
+namespace CraigPaul\Mail;
 
 use Illuminate\Support\ServiceProvider;
 
