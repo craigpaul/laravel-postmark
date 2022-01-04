@@ -2,16 +2,21 @@
 
 namespace CraigPaul\Mail;
 
+use Symfony\Component\Mime\Address;
 use Illuminate\Http\Client\Factory as Http;
 use Symfony\Component\Mime\RawMessage;
 use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mailer\SentMessage;
+use Symfony\Component\Mime\MessageConverter;
 use Symfony\Component\Mailer\Transport\TransportInterface;
+use function implode;
+use function array_map;
 
 class PostmarkTransport implements TransportInterface
 {
     public function __construct(
         protected Http $http,
+        protected string $token,
     ) {
     }
 
@@ -19,7 +24,19 @@ class PostmarkTransport implements TransportInterface
     {
         $sentMessage = new SentMessage($message, $envelope ?? Envelope::create($message));
 
-        $response = $this->http->post('https://api.postmarkapp.com/email', []);
+        $email = MessageConverter::toEmail($sentMessage->getOriginalMessage());
+
+        $response = $this->http
+            ->acceptJson()
+            ->withHeaders([
+                'X-Postmark-Server-Token' => $this->token,
+            ])
+            ->post('https://api.postmarkapp.com/email', [
+                'From' => $envelope->getSender()->toString(),
+                'To' => implode(',', array_map(fn (Address $address) => $address->toString(), $envelope->getRecipients())),
+                'Subject' => $email->getSubject(),
+                'TextBody' => $email->getTextBody(),
+            ]);
 
         $sentMessage->setMessageId($response->json('MessageID'));
 
