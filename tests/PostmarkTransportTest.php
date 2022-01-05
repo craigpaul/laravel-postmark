@@ -41,7 +41,7 @@ class PostmarkTransportTest extends TestCase
                 && $request->isJson()
                 && $request->hasHeader('X-Postmark-Server-Token', $this->getToken())
                 && $request['From'] === $email->getFrom()
-                && $request['To'] === '"' . $email->getToName() . '" <' . $email->getToAddress() . '>'
+                && $request['To'] === '"'.$email->getToName().'" <'.$email->getToAddress().'>'
                 && $request['Subject'] === $email->getSubject()
                 && $request['HtmlBody'] === $email->getHtmlBody()
                 && $request['TextBody'] === $email->getTextBody()
@@ -71,7 +71,7 @@ class PostmarkTransportTest extends TestCase
         $this->assertSame($email->getMessageId(), $sentMessage->getMessageId());
 
         $factory->assertSent(function (Request $request) use ($email) {
-            return $request['To'] === '"' . $email->getToName() . '" <' . $email->getToAddress() . '>'
+            return $request['To'] === '"'.$email->getToName().'" <'.$email->getToAddress().'>'
                 && $request['Cc'] === $email->getCc()
                 && $request['Bcc'] === $email->getBcc();
         });
