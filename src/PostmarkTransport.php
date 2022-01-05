@@ -2,6 +2,7 @@
 
 namespace CraigPaul\Mail;
 
+use function json_decode;
 use function array_filter;
 use function array_map;
 use function array_merge;
@@ -17,6 +18,7 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\MessageConverter;
 use Symfony\Component\Mime\RawMessage;
+use const JSON_OBJECT_AS_ARRAY;
 
 class PostmarkTransport implements TransportInterface
 {
@@ -51,7 +53,7 @@ class PostmarkTransport implements TransportInterface
             ->withHeaders([
                 'X-Postmark-Server-Token' => $this->token,
             ])
-            ->post('https://api.postmarkapp.com/email', $this->getPayload($email, $envelope));
+            ->post($this->getApiEndpoint($email), $this->getPayload($email, $envelope));
 
         if ($response->ok()) {
             $sentMessage->setMessageId($response->json('MessageID'));
@@ -64,6 +66,17 @@ class PostmarkTransport implements TransportInterface
             $response->json('ErrorCode'),
             $response->toException(),
         );
+    }
+
+    protected function getApiEndpoint(Email $email): string
+    {
+        $url = 'https://api.postmarkapp.com/email';
+
+        if ($this->getTemplatedContent($email) === null) {
+            return $url;
+        }
+
+        return $url . '/withTemplate';
     }
 
     protected function getAttachments(Email $email): array
@@ -130,6 +143,14 @@ class PostmarkTransport implements TransportInterface
             ];
         }
 
+        if ($content = $this->getTemplatedContent($email)) {
+            $payload['TemplateId'] = $content['id'] ?? null;
+            $payload['TemplateAlias'] = $content['alias'] ?? null;
+            $payload['TemplateModel'] = $content['model'] ?? null;
+
+            unset($payload['Subject'], $payload['HtmlBody'], $payload['TextBody']);
+        }
+
         return array_filter($payload);
     }
 
@@ -140,6 +161,11 @@ class PostmarkTransport implements TransportInterface
         return array_filter($envelope->getRecipients(), function (Address $address) use ($copies) {
             return in_array($address, $copies, true) === false;
         });
+    }
+
+    protected function getTemplatedContent(Email $email): ?array
+    {
+        return json_decode($email->getHtmlBody(), flags: JSON_OBJECT_AS_ARRAY);
     }
 
     protected function stringifyAddresses(array $addresses): string
