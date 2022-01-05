@@ -24,6 +24,7 @@ class PostmarkTransportTest extends TestCase
             ->subject($email->getSubject())
             ->to($email->getTo())
             ->from($email->getFrom())
+            ->replyTo($email->getReplyTo())
             ->html($email->getHtmlBody())
             ->text($email->getTextBody());
 
@@ -43,7 +44,8 @@ class PostmarkTransportTest extends TestCase
                 && $request['To'] === $email->getTo()
                 && $request['Subject'] === $email->getSubject()
                 && $request['HtmlBody'] === $email->getHtmlBody()
-                && $request['TextBody'] === $email->getTextBody();
+                && $request['TextBody'] === $email->getTextBody()
+                && $request['ReplyTo'] === $email->getReplyTo();
         });
     }
 
