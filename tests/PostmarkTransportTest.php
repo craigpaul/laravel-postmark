@@ -3,7 +3,6 @@
 namespace CraigPaul\Mail\Tests;
 
 use Illuminate\Mail\Message;
-use Symfony\Component\Mime\Email;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
@@ -11,19 +10,21 @@ use Illuminate\Support\Facades\Date;
 use CraigPaul\Mail\PostmarkTransport;
 use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mailer\SentMessage;
-use CraigPaul\Mail\Tests\Factories\EmailFactory;
+use CraigPaul\Mail\Tests\Factories\Email;
+use Symfony\Component\Mime\Email as SymfonyEmail;
 
 class PostmarkTransportTest extends TestCase
 {
     public function testTransportSendsMessageSuccessfully()
     {
-        $email = $this->createFakeAttributes();
+        $email = Email::createBasic();
 
         $message = $this->newMessage()
             ->subject($email->getSubject())
             ->to($email->getTo())
             ->from($email->getFrom())
-            ->text($email->getBody());
+            ->html($email->getHtmlBody())
+            ->text($email->getTextBody());
 
         $symfonyMessage = $message->getSymfonyMessage();
 
@@ -50,31 +51,24 @@ class PostmarkTransportTest extends TestCase
                 && $request['From'] === $email->getFrom()
                 && $request['To'] === $email->getTo()
                 && $request['Subject'] === $email->getSubject()
-                && $request['TextBody'] === $email->getBody();
+                && $request['HtmlBody'] === $email->getHtmlBody()
+                && $request['TextBody'] === $email->getTextBody();
         });
-    }
-
-    protected function createFakeAttributes(): EmailFactory
-    {
-        return EmailFactory::create();
     }
 
     protected function newMessage(): Message
     {
-        return new Message(new Email());
+        return new Message(new SymfonyEmail());
     }
 
-    protected function sendMessage(Email $symfonyMessage): ?SentMessage
+    protected function sendMessage(SymfonyEmail $symfonyMessage): ?SentMessage
     {
         return $this->app->makeWith(PostmarkTransport::class, [
             'token' => $this->getToken(),
         ])->send($symfonyMessage, Envelope::create($symfonyMessage));
     }
 
-    /**
-     * @return mixed
-     */
-    protected function getToken()
+    protected function getToken(): string
     {
         return $this->app['config']->get('services.postmark.token');
     }
