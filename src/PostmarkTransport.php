@@ -45,6 +45,7 @@ class PostmarkTransport implements TransportInterface
                 'Subject' => $email->getSubject(),
                 'HtmlBody' => $email->getHtmlBody(),
                 'TextBody' => $email->getTextBody(),
+                'ReplyTo' => $this->stringifyAddresses($email->getReplyTo()),
             ]);
 
         $sentMessage->setMessageId($response->json('MessageID'));
