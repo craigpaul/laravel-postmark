@@ -2,6 +2,8 @@
 
 namespace CraigPaul\Mail\Tests;
 
+use Illuminate\Http\Response;
+use CraigPaul\Mail\PostmarkTransportException;
 use function basename;
 use CraigPaul\Mail\PostmarkTransport;
 use CraigPaul\Mail\Tests\Factories\Email;
@@ -44,6 +46,7 @@ class PostmarkTransportTest extends TestCase
             return $request->method() === 'POST'
                 && $request->isJson()
                 && $request->hasHeader('X-Postmark-Server-Token', $this->getToken())
+                && $request->url() === 'https://api.postmarkapp.com/email'
                 && $request['From'] === $email->getFrom()
                 && $request['To'] === '"'.$email->getToName().'" <'.$email->getToAddress().'>'
                 && $request['Subject'] === $email->getSubject()
@@ -181,6 +184,29 @@ class PostmarkTransportTest extends TestCase
         });
     }
 
+    public function testTransportHandlesErrorsWhileAttemptingToSendMessage()
+    {
+        $email = Email::createBasic();
+
+        $message = $this->newMessage()
+            ->subject($email->getSubject())
+            ->to($email->getToAddress(), $email->getToName())
+            ->from($email->getFrom())
+            ->replyTo($email->getReplyTo())
+            ->html($email->getHtmlBody())
+            ->text($email->getTextBody());
+
+        $symfonyMessage = $message->getSymfonyMessage();
+
+        $this->fakeFailureEmail(402, 'Invalid JSON');
+
+        $this->expectException(PostmarkTransportException::class);
+        $this->expectExceptionCode(402);
+        $this->expectExceptionMessage('Invalid JSON');
+
+        $this->sendMessage($symfonyMessage);
+    }
+
     protected function getMessageStreamId(): ?string
     {
         return $this->app['config']->get('mail.mailers.postmark.message_stream_id');
@@ -189,6 +215,20 @@ class PostmarkTransportTest extends TestCase
     protected function getToken(): string
     {
         return $this->app['config']->get('services.postmark.token');
+    }
+
+    protected function fakeFailureEmail(int $error, string $message): Factory
+    {
+        $factory = Http::fake([
+            'https://api.postmarkapp.com/email' => Http::response([
+                'ErrorCode' => $error,
+                'Message' => $message,
+            ], Response::HTTP_UNPROCESSABLE_ENTITY),
+        ]);
+
+        $this->instance(Factory::class, $factory);
+
+        return $factory;
     }
 
     protected function fakeSuccessfulEmail(Email $email): Factory
