@@ -2,6 +2,8 @@
 
 namespace CraigPaul\Mail;
 
+use Symfony\Component\Mime\Email;
+use function in_array;
 use function array_map;
 use Illuminate\Http\Client\Factory as Http;
 use function implode;
@@ -11,6 +13,8 @@ use Symfony\Component\Mailer\Transport\TransportInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\MessageConverter;
 use Symfony\Component\Mime\RawMessage;
+use function array_merge;
+use function array_filter;
 
 class PostmarkTransport implements TransportInterface
 {
@@ -22,7 +26,9 @@ class PostmarkTransport implements TransportInterface
 
     public function send(RawMessage $message, Envelope $envelope = null): ?SentMessage
     {
-        $sentMessage = new SentMessage($message, $envelope ?? Envelope::create($message));
+        $envelope = $envelope ?? Envelope::create($message);
+
+        $sentMessage = new SentMessage($message, $envelope);
 
         $email = MessageConverter::toEmail($sentMessage->getOriginalMessage());
 
@@ -33,7 +39,9 @@ class PostmarkTransport implements TransportInterface
             ])
             ->post('https://api.postmarkapp.com/email', [
                 'From' => $envelope->getSender()->toString(),
-                'To' => implode(',', array_map(fn (Address $address) => $address->toString(), $envelope->getRecipients())),
+                'To' => $this->stringifyAddresses($this->getRecipients($email, $envelope)),
+                'Cc' => $this->stringifyAddresses($email->getCc()),
+                'Bcc' => $this->stringifyAddresses($email->getBcc()),
                 'Subject' => $email->getSubject(),
                 'HtmlBody' => $email->getHtmlBody(),
                 'TextBody' => $email->getTextBody(),
@@ -42,6 +50,20 @@ class PostmarkTransport implements TransportInterface
         $sentMessage->setMessageId($response->json('MessageID'));
 
         return $sentMessage;
+    }
+
+    protected function getRecipients(Email $email, Envelope $envelope): array
+    {
+        $copies = array_merge($email->getCc(), $email->getBcc());
+
+        return array_filter($envelope->getRecipients(), function (Address $address) use ($copies) {
+            return in_array($address, $copies, true) === false;
+        });
+    }
+
+    protected function stringifyAddresses(array $addresses): string
+    {
+        return implode(',', array_map(fn (Address $address) => $address->toString(), $addresses));
     }
 
     public function __toString(): string
