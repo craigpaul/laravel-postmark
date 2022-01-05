@@ -47,6 +47,34 @@ class PostmarkTransportTest extends TestCase
         });
     }
 
+    public function testTransportSendsMessageWithCarbonCopiesSuccessfully()
+    {
+        $email = Email::createCopies();
+
+        $message = $this->newMessage()
+            ->subject($email->getSubject())
+            ->to($email->getTo())
+            ->cc($email->getCc())
+            ->bcc($email->getBcc())
+            ->from($email->getFrom())
+            ->html($email->getHtmlBody())
+            ->text($email->getTextBody());
+
+        $symfonyMessage = $message->getSymfonyMessage();
+
+        $factory = $this->fakeSuccessfulEmail($email);
+
+        $sentMessage = $this->sendMessage($symfonyMessage);
+
+        $this->assertSame($email->getMessageId(), $sentMessage->getMessageId());
+
+        $factory->assertSent(function (Request $request) use ($email) {
+            return $request['To'] === $email->getTo()
+                && $request['Cc'] === $email->getCc()
+                && $request['Bcc'] === $email->getBcc();
+        });
+    }
+
     protected function getToken(): string
     {
         return $this->app['config']->get('services.postmark.token');
