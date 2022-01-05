@@ -2,15 +2,15 @@
 
 namespace CraigPaul\Mail\Tests;
 
-use Illuminate\Http\Response;
-use CraigPaul\Mail\PostmarkTransportException;
 use function basename;
 use CraigPaul\Mail\PostmarkTransport;
+use CraigPaul\Mail\PostmarkTransportException;
 use CraigPaul\Mail\Tests\Factories\Email;
 use const DATE_RFC3339_EXTENDED;
 use function explode;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\Request;
+use Illuminate\Http\Response;
 use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Http;
