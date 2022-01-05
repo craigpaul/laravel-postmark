@@ -16,6 +16,7 @@ class TestCase extends Orchestra
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('mail.default', 'postmark');
+        $app['config']->set('mail.mailers.postmark.message_stream_id', 'MESSAGE_STREAM_ID');
         $app['config']->set('services.postmark.token', 'POSTMARK_API_TEST');
     }
 
