@@ -2,15 +2,15 @@
 
 namespace CraigPaul\Mail\Tests;
 
-use Illuminate\Mail\Message;
+use CraigPaul\Mail\PostmarkTransport;
+use CraigPaul\Mail\Tests\Factories\Email;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\Request;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Date;
-use CraigPaul\Mail\PostmarkTransport;
+use Illuminate\Support\Facades\Http;
 use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mailer\SentMessage;
-use CraigPaul\Mail\Tests\Factories\Email;
 use Symfony\Component\Mime\Email as SymfonyEmail;
 
 class PostmarkTransportTest extends TestCase

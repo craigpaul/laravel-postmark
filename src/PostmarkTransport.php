@@ -2,15 +2,15 @@
 
 namespace CraigPaul\Mail;
 
-use Symfony\Component\Mime\Address;
+use function array_map;
 use Illuminate\Http\Client\Factory as Http;
-use Symfony\Component\Mime\RawMessage;
+use function implode;
 use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mailer\SentMessage;
-use Symfony\Component\Mime\MessageConverter;
 use Symfony\Component\Mailer\Transport\TransportInterface;
-use function implode;
-use function array_map;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\MessageConverter;
+use Symfony\Component\Mime\RawMessage;
 
 class PostmarkTransport implements TransportInterface
 {

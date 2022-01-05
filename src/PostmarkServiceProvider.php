@@ -11,6 +11,7 @@ class PostmarkServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      *
      * @return void
+     *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function boot(): void
