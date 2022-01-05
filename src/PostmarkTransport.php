@@ -2,6 +2,8 @@
 
 namespace CraigPaul\Mail;
 
+use Symfony\Component\Mailer\Header\TagHeader;
+use Symfony\Component\Mailer\Header\MetadataHeader;
 use function array_filter;
 use function array_map;
 use function array_merge;
@@ -18,8 +20,20 @@ use Symfony\Component\Mime\RawMessage;
 
 class PostmarkTransport implements TransportInterface
 {
+    protected const BYPASS_HEADERS = [
+        'from',
+        'to',
+        'cc',
+        'bcc',
+        'subject',
+        'content-type',
+        'sender',
+        'reply-to',
+    ];
+
     public function __construct(
         protected Http $http,
+        protected ?string $messageStreamId,
         protected string $token,
     ) {
     }
@@ -37,17 +51,7 @@ class PostmarkTransport implements TransportInterface
             ->withHeaders([
                 'X-Postmark-Server-Token' => $this->token,
             ])
-            ->post('https://api.postmarkapp.com/email', [
-                'From' => $envelope->getSender()->toString(),
-                'To' => $this->stringifyAddresses($this->getRecipients($email, $envelope)),
-                'Cc' => $this->stringifyAddresses($email->getCc()),
-                'Bcc' => $this->stringifyAddresses($email->getBcc()),
-                'Subject' => $email->getSubject(),
-                'HtmlBody' => $email->getHtmlBody(),
-                'TextBody' => $email->getTextBody(),
-                'ReplyTo' => $this->stringifyAddresses($email->getReplyTo()),
-                'Attachments' => $this->getAttachments($email),
-            ]);
+            ->post('https://api.postmarkapp.com/email', $this->getPayload($email, $envelope));
 
         $sentMessage->setMessageId($response->json('MessageID'));
 
@@ -78,6 +82,47 @@ class PostmarkTransport implements TransportInterface
         }
 
         return $attachments;
+    }
+
+    protected function getPayload(Email $email, Envelope $envelope): array
+    {
+        $payload = [
+            'From' => $envelope->getSender()->toString(),
+            'To' => $this->stringifyAddresses($this->getRecipients($email, $envelope)),
+            'Cc' => $this->stringifyAddresses($email->getCc()),
+            'Bcc' => $this->stringifyAddresses($email->getBcc()),
+            'Subject' => $email->getSubject(),
+            'HtmlBody' => $email->getHtmlBody(),
+            'TextBody' => $email->getTextBody(),
+            'ReplyTo' => $this->stringifyAddresses($email->getReplyTo()),
+            'Attachments' => $this->getAttachments($email),
+            'MessageStream' => $this->messageStreamId ?? '',
+        ];
+
+        foreach ($email->getHeaders()->all() as $name => $header) {
+            if (in_array($name, self::BYPASS_HEADERS, true)) {
+                continue;
+            }
+
+            if ($header instanceof TagHeader) {
+                $payload['Tag'] = $header->getValue();
+
+                continue;
+            }
+
+            if ($header instanceof MetadataHeader) {
+                $payload['Metadata'][$header->getKey()] = $header->getValue();
+
+                continue;
+            }
+
+            $payload['Headers'][] = [
+                'Name' => $name,
+                'Value' => $header->getBodyAsString(),
+            ];
+        }
+
+        return array_filter($payload);
     }
 
     protected function getRecipients(Email $email, Envelope $envelope): array
