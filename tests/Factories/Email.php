@@ -12,6 +12,7 @@ class Email
         protected string $from,
         protected string $htmlBody,
         protected string $messageId,
+        protected string $replyTo,
         protected string $subject,
         protected string $textBody,
         protected string $to,
@@ -28,6 +29,7 @@ class Email
             from: $faker->email(),
             htmlBody: $faker->randomHtml(),
             messageId: $faker->uuid(),
+            replyTo: $faker->email(),
             subject: $faker->words(asText: true),
             textBody: $faker->sentences(asText: true),
             to: $faker->email(),
@@ -44,6 +46,7 @@ class Email
             from: $faker->email(),
             htmlBody: $faker->randomHtml(),
             messageId: $faker->uuid(),
+            replyTo: $faker->email(),
             subject: $faker->words(asText: true),
             textBody: $faker->sentences(asText: true),
             to: $faker->email(),
@@ -73,6 +76,11 @@ class Email
     public function getMessageId(): string
     {
         return $this->messageId;
+    }
+
+    public function getReplyTo(): string
+    {
+        return $this->replyTo;
     }
 
     public function getSubject(): string
