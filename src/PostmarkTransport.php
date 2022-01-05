@@ -46,11 +46,38 @@ class PostmarkTransport implements TransportInterface
                 'HtmlBody' => $email->getHtmlBody(),
                 'TextBody' => $email->getTextBody(),
                 'ReplyTo' => $this->stringifyAddresses($email->getReplyTo()),
+                'Attachments' => $this->getAttachments($email),
             ]);
 
         $sentMessage->setMessageId($response->json('MessageID'));
 
         return $sentMessage;
+    }
+
+    protected function getAttachments(Email $email): array
+    {
+        $attachments = [];
+
+        foreach ($email->getAttachments() as $attachment) {
+            $headers = $attachment->getPreparedHeaders();
+
+            $filename = $headers->getHeaderParameter('Content-Disposition', 'filename');
+            $disposition = $headers->getHeaderBody('Content-Disposition');
+
+            $attributes = [
+                'Name' => $filename,
+                'Content' => $attachment->bodyToString(),
+                'ContentType' => $headers->get('Content-Type')->getBody(),
+            ];
+
+            if ($disposition === 'inline') {
+                $attributes['ContentID'] = 'cid:'.$filename;
+            }
+
+            $attachments[] = $attributes;
+        }
+
+        return $attachments;
     }
 
     protected function getRecipients(Email $email, Envelope $envelope): array
