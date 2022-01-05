@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Http;
 use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mailer\SentMessage;
 use Symfony\Component\Mime\Email as SymfonyEmail;
+use const DATE_RFC3339_EXTENDED;
 
 class PostmarkTransportTest extends TestCase
 {
@@ -28,17 +29,7 @@ class PostmarkTransportTest extends TestCase
 
         $symfonyMessage = $message->getSymfonyMessage();
 
-        $factory = Http::fake([
-            'https://api.postmarkapp.com/email' => Http::response([
-                'To' => $email->getTo(),
-                'SubmittedAt' => Date::now()->format(DATE_RFC3339_EXTENDED),
-                'MessageID' => $email->getMessageId(),
-                'ErrorCode' => 0,
-                'Message' => 'OK',
-            ]),
-        ]);
-
-        $this->instance(Factory::class, $factory);
+        $factory = $this->fakeSuccessfulEmail($email);
 
         $sentMessage = $this->sendMessage($symfonyMessage);
 
@@ -56,6 +47,28 @@ class PostmarkTransportTest extends TestCase
         });
     }
 
+    protected function getToken(): string
+    {
+        return $this->app['config']->get('services.postmark.token');
+    }
+
+    protected function fakeSuccessfulEmail(Email $email): Factory
+    {
+        $factory = Http::fake([
+            'https://api.postmarkapp.com/email' => Http::response([
+                'To' => $email->getTo(),
+                'SubmittedAt' => Date::now()->format(DATE_RFC3339_EXTENDED),
+                'MessageID' => $email->getMessageId(),
+                'ErrorCode' => 0,
+                'Message' => 'OK',
+            ]),
+        ]);
+
+        $this->instance(Factory::class, $factory);
+
+        return $factory;
+    }
+
     protected function newMessage(): Message
     {
         return new Message(new SymfonyEmail());
@@ -66,10 +79,5 @@ class PostmarkTransportTest extends TestCase
         return $this->app->makeWith(PostmarkTransport::class, [
             'token' => $this->getToken(),
         ])->send($symfonyMessage, Envelope::create($symfonyMessage));
-    }
-
-    protected function getToken(): string
-    {
-        return $this->app['config']->get('services.postmark.token');
     }
 }
