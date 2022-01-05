@@ -4,6 +4,8 @@ namespace CraigPaul\Mail\Tests;
 
 use CraigPaul\Mail\PostmarkTransport;
 use CraigPaul\Mail\Tests\Factories\Email;
+use function explode;
+use function basename;
 use const DATE_RFC3339_EXTENDED;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\Request;
@@ -74,6 +76,69 @@ class PostmarkTransportTest extends TestCase
             return $request['To'] === '"'.$email->getToName().'" <'.$email->getToAddress().'>'
                 && $request['Cc'] === $email->getCc()
                 && $request['Bcc'] === $email->getBcc();
+        });
+    }
+
+    public function testTransportSendsMessageWithAttachmentSuccessfully()
+    {
+        $email = Email::createAttachment();
+
+        $message = $this->newMessage()
+            ->subject($email->getSubject())
+            ->to($email->getToAddress(), $email->getToName())
+            ->from($email->getFrom())
+            ->html($email->getHtmlBody())
+            ->text($email->getTextBody())
+            ->attach($email->getAttachment());
+
+        $symfonyMessage = $message->getSymfonyMessage();
+
+        $factory = $this->fakeSuccessfulEmail($email);
+
+        $sentMessage = $this->sendMessage($symfonyMessage);
+
+        $this->assertSame($email->getMessageId(), $sentMessage->getMessageId());
+
+        $factory->assertSent(function (Request $request) use ($email) {
+            $attachment = $request['Attachments'][0];
+
+            return $attachment['Name'] === basename($email->getAttachment())
+                && ! empty($attachment['Content'])
+                && $attachment['ContentType'] === 'image/png'
+                && empty($attachment['ContentID']);
+        });
+    }
+
+    public function testTransportSendsMessageWithEmbeddedAttachmentSuccessfully()
+    {
+        $email = Email::createAttachment();
+
+        $message = $this->newMessage()
+            ->subject($email->getSubject())
+            ->to($email->getToAddress(), $email->getToName())
+            ->from($email->getFrom())
+            ->html($email->getHtmlBody())
+            ->text($email->getTextBody());
+
+        $contentId = $message->embed($email->getAttachment());
+
+        $symfonyMessage = $message->getSymfonyMessage();
+
+        $factory = $this->fakeSuccessfulEmail($email);
+
+        $sentMessage = $this->sendMessage($symfonyMessage);
+
+        $this->assertSame($email->getMessageId(), $sentMessage->getMessageId());
+
+        $factory->assertSent(function (Request $request) use ($contentId, $email) {
+            $attachment = $request['Attachments'][0];
+            [, $name] = explode(':', $contentId);
+
+            return $attachment['Name'] === $name
+                && ! empty($attachment['Content'])
+                && $attachment['ContentType'] === 'image/png'
+                && ! empty($attachment['ContentID'])
+                && $attachment['ContentID'] === $contentId;
         });
     }
 
