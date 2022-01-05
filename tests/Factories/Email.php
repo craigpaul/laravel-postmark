@@ -7,6 +7,8 @@ use Faker\Factory;
 class Email
 {
     public function __construct(
+        protected string $bcc,
+        protected string $cc,
         protected string $from,
         protected string $htmlBody,
         protected string $messageId,
@@ -21,6 +23,8 @@ class Email
         $faker = Factory::create();
 
         return new self(
+            bcc: '',
+            cc: '',
             from: $faker->email(),
             htmlBody: $faker->randomHtml(),
             messageId: $faker->uuid(),
@@ -28,6 +32,32 @@ class Email
             textBody: $faker->sentences(asText: true),
             to: $faker->email(),
         );
+    }
+
+    public static function createCopies(): self
+    {
+        $faker = Factory::create();
+
+        return new self(
+            bcc: $faker->email(),
+            cc: $faker->email(),
+            from: $faker->email(),
+            htmlBody: $faker->randomHtml(),
+            messageId: $faker->uuid(),
+            subject: $faker->words(asText: true),
+            textBody: $faker->sentences(asText: true),
+            to: $faker->email(),
+        );
+    }
+
+    public function getBcc(): string
+    {
+        return $this->bcc;
+    }
+
+    public function getCc(): string
+    {
+        return $this->cc;
     }
 
     public function getFrom(): string
