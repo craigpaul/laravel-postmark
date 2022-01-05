@@ -35,6 +35,7 @@ class PostmarkTransport implements TransportInterface
                 'From' => $envelope->getSender()->toString(),
                 'To' => implode(',', array_map(fn (Address $address) => $address->toString(), $envelope->getRecipients())),
                 'Subject' => $email->getSubject(),
+                'HtmlBody' => $email->getHtmlBody(),
                 'TextBody' => $email->getTextBody(),
             ]);
 
