@@ -2,15 +2,13 @@
 
 namespace CraigPaul\Mail\Tests;
 
-use Illuminate\Support\Facades\Mail;
-use CraigPaul\Mail\TemplatedMailable;
-use CraigPaul\Mail\Tests\Factories\Template;
-use Illuminate\Support\Facades\Notification;
-use CraigPaul\Mail\Tests\Notifications\TemplatedNotification;
 use function basename;
 use CraigPaul\Mail\PostmarkTransport;
 use CraigPaul\Mail\PostmarkTransportException;
+use CraigPaul\Mail\TemplatedMailable;
 use CraigPaul\Mail\Tests\Factories\Email;
+use CraigPaul\Mail\Tests\Factories\Template;
+use CraigPaul\Mail\Tests\Notifications\TemplatedNotification;
 use const DATE_RFC3339_EXTENDED;
 use function explode;
 use Illuminate\Http\Client\Factory;
@@ -19,6 +17,8 @@ use Illuminate\Http\Response;
 use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mailer\Header\MetadataHeader;
 use Symfony\Component\Mailer\Header\TagHeader;

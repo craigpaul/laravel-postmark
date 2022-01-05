@@ -3,9 +3,9 @@
 namespace CraigPaul\Mail\Tests\Notifications;
 
 use CraigPaul\Mail\TemplatedMailMessage;
-use Illuminate\Notifications\Notification;
 use CraigPaul\Mail\Tests\Factories\Template;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class TemplatedNotification extends Notification
 {

@@ -2,8 +2,8 @@
 
 namespace CraigPaul\Mail;
 
-use Illuminate\Mail\Mailable;
 use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
 class TemplatedMailable extends Mailable
