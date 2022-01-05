@@ -15,7 +15,7 @@ use Symfony\Component\Mime\Email as SymfonyEmail;
 
 class PostmarkTransportTest extends TestCase
 {
-    public function testTransportSendsMessageSuccessfully()
+    public function testTransportSendsBasicMessageSuccessfully()
     {
         $email = Email::createBasic();
 
