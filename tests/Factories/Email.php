@@ -7,6 +7,7 @@ use Faker\Factory;
 class Email
 {
     public function __construct(
+        protected string $attachment,
         protected string $bcc,
         protected string $cc,
         protected string $from,
@@ -20,11 +21,31 @@ class Email
     ) {
     }
 
+    public static function createAttachment(): self
+    {
+        $faker = Factory::create();
+
+        return new self(
+            attachment: $faker->image(),
+            bcc: '',
+            cc: '',
+            from: $faker->email(),
+            htmlBody: $faker->randomHtml(),
+            messageId: $faker->uuid(),
+            replyTo: $faker->email(),
+            subject: $faker->words(asText: true),
+            textBody: $faker->sentences(asText: true),
+            toAddress: $faker->email(),
+            toName: $faker->name(),
+        );
+    }
+
     public static function createBasic(): self
     {
         $faker = Factory::create();
 
         return new self(
+            attachment: '',
             bcc: '',
             cc: '',
             from: $faker->email(),
@@ -43,6 +64,7 @@ class Email
         $faker = Factory::create();
 
         return new self(
+            attachment: '',
             bcc: $faker->email(),
             cc: $faker->email(),
             from: $faker->email(),
@@ -54,6 +76,11 @@ class Email
             toAddress: $faker->email(),
             toName: $faker->name(),
         );
+    }
+
+    public function getAttachment(): string
+    {
+        return $this->attachment;
     }
 
     public function getBcc(): string
