@@ -11,29 +11,27 @@ use Illuminate\Support\Facades\Date;
 use CraigPaul\Mail\PostmarkTransport;
 use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mailer\SentMessage;
-use Illuminate\Foundation\Testing\WithFaker;
+use CraigPaul\Mail\Tests\Factories\EmailFactory;
 
 class PostmarkTransportTest extends TestCase
 {
-    use WithFaker;
-
     public function testTransportSendsMessageSuccessfully()
     {
-        $attributes = $this->createFakeAttributes();
+        $email = $this->createFakeAttributes();
 
         $message = $this->newMessage()
-            ->subject($attributes['subject'])
-            ->to($attributes['to'])
-            ->from($attributes['from'])
-            ->text($attributes['body']);
+            ->subject($email->getSubject())
+            ->to($email->getTo())
+            ->from($email->getFrom())
+            ->text($email->getBody());
 
         $symfonyMessage = $message->getSymfonyMessage();
 
         $factory = Http::fake([
             'https://api.postmarkapp.com/email' => Http::response([
-                'To' => $attributes['to'],
+                'To' => $email->getTo(),
                 'SubmittedAt' => Date::now()->format(DATE_RFC3339_EXTENDED),
-                'MessageID' => $attributes['messageId'],
+                'MessageID' => $email->getMessageId(),
                 'ErrorCode' => 0,
                 'Message' => 'OK',
             ]),
@@ -43,28 +41,22 @@ class PostmarkTransportTest extends TestCase
 
         $sentMessage = $this->sendMessage($symfonyMessage);
 
-        $this->assertSame($attributes['messageId'], $sentMessage->getMessageId());
+        $this->assertSame($email->getMessageId(), $sentMessage->getMessageId());
 
-        $factory->assertSent(function (Request $request) use ($attributes) {
+        $factory->assertSent(function (Request $request) use ($email) {
             return $request->method() === 'POST'
                 && $request->isJson()
                 && $request->hasHeader('X-Postmark-Server-Token', $this->getToken())
-                && $request['From'] === $attributes['from']
-                && $request['To'] === $attributes['to']
-                && $request['Subject'] === $attributes['subject']
-                && $request['TextBody'] === $attributes['body'];
+                && $request['From'] === $email->getFrom()
+                && $request['To'] === $email->getTo()
+                && $request['Subject'] === $email->getSubject()
+                && $request['TextBody'] === $email->getBody();
         });
     }
 
-    protected function createFakeAttributes(): array
+    protected function createFakeAttributes(): EmailFactory
     {
-        return [
-            'body' => $this->faker->sentences(asText: true),
-            'from' => $this->faker->email(),
-            'messageId' => $this->faker->uuid(),
-            'subject' => $this->faker->words(asText: true),
-            'to' => $this->faker->email(),
-        ];
+        return EmailFactory::create();
     }
 
     protected function newMessage(): Message
