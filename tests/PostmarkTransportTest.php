@@ -2,19 +2,19 @@
 
 namespace CraigPaul\Mail\Tests;
 
+use function basename;
 use CraigPaul\Mail\PostmarkTransport;
 use CraigPaul\Mail\Tests\Factories\Email;
-use Symfony\Component\Mailer\Header\TagHeader;
-use Symfony\Component\Mailer\Header\MetadataHeader;
-use function explode;
-use function basename;
 use const DATE_RFC3339_EXTENDED;
+use function explode;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\Request;
 use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\Mailer\Envelope;
+use Symfony\Component\Mailer\Header\MetadataHeader;
+use Symfony\Component\Mailer\Header\TagHeader;
 use Symfony\Component\Mailer\SentMessage;
 use Symfony\Component\Mime\Email as SymfonyEmail;
 
@@ -132,7 +132,7 @@ class PostmarkTransportTest extends TestCase
 
         $this->assertSame($email->getMessageId(), $sentMessage->getMessageId());
 
-        $factory->assertSent(function (Request $request) use ($contentId, $email) {
+        $factory->assertSent(function (Request $request) use ($contentId) {
             $attachment = $request['Attachments'][0];
             [, $name] = explode(':', $contentId);
 

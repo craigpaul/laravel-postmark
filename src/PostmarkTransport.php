@@ -2,8 +2,6 @@
 
 namespace CraigPaul\Mail;
 
-use Symfony\Component\Mailer\Header\TagHeader;
-use Symfony\Component\Mailer\Header\MetadataHeader;
 use function array_filter;
 use function array_map;
 use function array_merge;
@@ -11,6 +9,8 @@ use Illuminate\Http\Client\Factory as Http;
 use function implode;
 use function in_array;
 use Symfony\Component\Mailer\Envelope;
+use Symfony\Component\Mailer\Header\MetadataHeader;
+use Symfony\Component\Mailer\Header\TagHeader;
 use Symfony\Component\Mailer\SentMessage;
 use Symfony\Component\Mailer\Transport\TransportInterface;
 use Symfony\Component\Mime\Address;
