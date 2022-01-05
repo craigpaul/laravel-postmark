@@ -53,9 +53,17 @@ class PostmarkTransport implements TransportInterface
             ])
             ->post('https://api.postmarkapp.com/email', $this->getPayload($email, $envelope));
 
-        $sentMessage->setMessageId($response->json('MessageID'));
+        if ($response->ok()) {
+            $sentMessage->setMessageId($response->json('MessageID'));
 
-        return $sentMessage;
+            return $sentMessage;
+        }
+
+        throw new PostmarkTransportException(
+            $response->json('Message'),
+            $response->json('ErrorCode'),
+            $response->toException(),
+        );
     }
 
     protected function getAttachments(Email $email): array
