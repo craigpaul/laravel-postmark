@@ -11,10 +11,13 @@ class Email
         protected string $bcc,
         protected string $cc,
         protected string $from,
+        protected Metadata $header,
         protected string $htmlBody,
         protected string $messageId,
+        protected Metadata $metadata,
         protected string $replyTo,
         protected string $subject,
+        protected string $tag,
         protected string $textBody,
         protected string $toAddress,
         protected string $toName,
@@ -30,10 +33,13 @@ class Email
             bcc: '',
             cc: '',
             from: $faker->email(),
+            header: Metadata::create(),
             htmlBody: $faker->randomHtml(),
             messageId: $faker->uuid(),
+            metadata: Metadata::create(),
             replyTo: $faker->email(),
             subject: $faker->words(asText: true),
+            tag: '',
             textBody: $faker->sentences(asText: true),
             toAddress: $faker->email(),
             toName: $faker->name(),
@@ -49,10 +55,13 @@ class Email
             bcc: '',
             cc: '',
             from: $faker->email(),
+            header: Metadata::create(),
             htmlBody: $faker->randomHtml(),
             messageId: $faker->uuid(),
+            metadata: Metadata::create(),
             replyTo: $faker->email(),
             subject: $faker->words(asText: true),
+            tag: '',
             textBody: $faker->sentences(asText: true),
             toAddress: $faker->email(),
             toName: $faker->name(),
@@ -68,10 +77,35 @@ class Email
             bcc: $faker->email(),
             cc: $faker->email(),
             from: $faker->email(),
+            header: Metadata::create(),
             htmlBody: $faker->randomHtml(),
             messageId: $faker->uuid(),
+            metadata: Metadata::create(),
             replyTo: $faker->email(),
             subject: $faker->words(asText: true),
+            tag: '',
+            textBody: $faker->sentences(asText: true),
+            toAddress: $faker->email(),
+            toName: $faker->name(),
+        );
+    }
+
+    public static function createCustomizations(): self
+    {
+        $faker = Factory::create();
+
+        return new self(
+            attachment: '',
+            bcc: '',
+            cc: '',
+            from: $faker->email(),
+            header: Metadata::create(),
+            htmlBody: $faker->randomHtml(),
+            messageId: $faker->uuid(),
+            metadata: Metadata::create(),
+            replyTo: $faker->email(),
+            subject: $faker->words(asText: true),
+            tag: $faker->words(asText: true),
             textBody: $faker->sentences(asText: true),
             toAddress: $faker->email(),
             toName: $faker->name(),
@@ -98,6 +132,11 @@ class Email
         return $this->from;
     }
 
+    public function getHeader(): Metadata
+    {
+        return $this->header;
+    }
+
     public function getHtmlBody(): string
     {
         return $this->htmlBody;
@@ -108,6 +147,11 @@ class Email
         return $this->messageId;
     }
 
+    public function getMetadata(): Metadata
+    {
+        return $this->metadata;
+    }
+
     public function getReplyTo(): string
     {
         return $this->replyTo;
@@ -116,6 +160,11 @@ class Email
     public function getSubject(): string
     {
         return $this->subject;
+    }
+
+    public function getTag(): string
+    {
+        return $this->tag;
     }
 
     public function getTextBody(): string
