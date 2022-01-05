@@ -22,7 +22,7 @@ class PostmarkTransportTest extends TestCase
 
         $message = $this->newMessage()
             ->subject($email->getSubject())
-            ->to($email->getTo())
+            ->to($email->getToAddress(), $email->getToName())
             ->from($email->getFrom())
             ->replyTo($email->getReplyTo())
             ->html($email->getHtmlBody())
@@ -41,7 +41,7 @@ class PostmarkTransportTest extends TestCase
                 && $request->isJson()
                 && $request->hasHeader('X-Postmark-Server-Token', $this->getToken())
                 && $request['From'] === $email->getFrom()
-                && $request['To'] === $email->getTo()
+                && $request['To'] === '"' . $email->getToName() . '" <' . $email->getToAddress() . '>'
                 && $request['Subject'] === $email->getSubject()
                 && $request['HtmlBody'] === $email->getHtmlBody()
                 && $request['TextBody'] === $email->getTextBody()
@@ -55,7 +55,7 @@ class PostmarkTransportTest extends TestCase
 
         $message = $this->newMessage()
             ->subject($email->getSubject())
-            ->to($email->getTo())
+            ->to($email->getToAddress(), $email->getToName())
             ->cc($email->getCc())
             ->bcc($email->getBcc())
             ->from($email->getFrom())
@@ -71,7 +71,7 @@ class PostmarkTransportTest extends TestCase
         $this->assertSame($email->getMessageId(), $sentMessage->getMessageId());
 
         $factory->assertSent(function (Request $request) use ($email) {
-            return $request['To'] === $email->getTo()
+            return $request['To'] === '"' . $email->getToName() . '" <' . $email->getToAddress() . '>'
                 && $request['Cc'] === $email->getCc()
                 && $request['Bcc'] === $email->getBcc();
         });
@@ -86,7 +86,7 @@ class PostmarkTransportTest extends TestCase
     {
         $factory = Http::fake([
             'https://api.postmarkapp.com/email' => Http::response([
-                'To' => $email->getTo(),
+                'To' => $email->getToAddress(),
                 'SubmittedAt' => Date::now()->format(DATE_RFC3339_EXTENDED),
                 'MessageID' => $email->getMessageId(),
                 'ErrorCode' => 0,

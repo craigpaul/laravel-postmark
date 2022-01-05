@@ -15,7 +15,8 @@ class Email
         protected string $replyTo,
         protected string $subject,
         protected string $textBody,
-        protected string $to,
+        protected string $toAddress,
+        protected string $toName,
     ) {
     }
 
@@ -32,7 +33,8 @@ class Email
             replyTo: $faker->email(),
             subject: $faker->words(asText: true),
             textBody: $faker->sentences(asText: true),
-            to: $faker->email(),
+            toAddress: $faker->email(),
+            toName: $faker->name(),
         );
     }
 
@@ -49,7 +51,8 @@ class Email
             replyTo: $faker->email(),
             subject: $faker->words(asText: true),
             textBody: $faker->sentences(asText: true),
-            to: $faker->email(),
+            toAddress: $faker->email(),
+            toName: $faker->name(),
         );
     }
 
@@ -93,8 +96,13 @@ class Email
         return $this->textBody;
     }
 
-    public function getTo(): string
+    public function getToAddress(): string
     {
-        return $this->to;
+        return $this->toAddress;
+    }
+
+    public function getToName(): string
+    {
+        return $this->toName;
     }
 }
