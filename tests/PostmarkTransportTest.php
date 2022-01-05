@@ -4,6 +4,8 @@ namespace CraigPaul\Mail\Tests;
 
 use CraigPaul\Mail\PostmarkTransport;
 use CraigPaul\Mail\Tests\Factories\Email;
+use Symfony\Component\Mailer\Header\TagHeader;
+use Symfony\Component\Mailer\Header\MetadataHeader;
 use function explode;
 use function basename;
 use const DATE_RFC3339_EXTENDED;
@@ -142,6 +144,48 @@ class PostmarkTransportTest extends TestCase
         });
     }
 
+    public function testTransportSendsMessageWithCustomizationsSuccessfully()
+    {
+        $email = Email::createCustomizations();
+
+        $message = $this->newMessage()
+            ->subject($email->getSubject())
+            ->to($email->getToAddress(), $email->getToName())
+            ->from($email->getFrom())
+            ->html($email->getHtmlBody())
+            ->text($email->getTextBody());
+
+        $header = $email->getHeader();
+        $metadata = $email->getMetadata();
+
+        $message->getHeaders()->add(new TagHeader($email->getTag()));
+        $message->getHeaders()->add(new MetadataHeader($metadata->getKey(), $metadata->getValue()));
+        $message->getHeaders()->addTextHeader($header->getKey(), $header->getValue());
+
+        $symfonyMessage = $message->getSymfonyMessage();
+
+        $factory = $this->fakeSuccessfulEmail($email);
+
+        $sentMessage = $this->sendMessage($symfonyMessage);
+
+        $this->assertSame($email->getMessageId(), $sentMessage->getMessageId());
+
+        $factory->assertSent(function (Request $request) use ($email) {
+            $header = $email->getHeader();
+            $metadata = $email->getMetadata();
+
+            return $request['MessageStream'] === $this->getMessageStreamId()
+                && $request['Tag'] === $email->getTag()
+                && $request['Metadata'] === [$metadata->getKey() => $metadata->getValue()]
+                && $request['Headers'] === [['Name' => $header->getKey(), 'Value' => $header->getValue()]];
+        });
+    }
+
+    protected function getMessageStreamId(): ?string
+    {
+        return $this->app['config']->get('mail.mailers.postmark.message_stream_id');
+    }
+
     protected function getToken(): string
     {
         return $this->app['config']->get('services.postmark.token');
@@ -172,6 +216,7 @@ class PostmarkTransportTest extends TestCase
     protected function sendMessage(SymfonyEmail $symfonyMessage): ?SentMessage
     {
         return $this->app->makeWith(PostmarkTransport::class, [
+            'messageStreamId' => $this->getMessageStreamId(),
             'token' => $this->getToken(),
         ])->send($symfonyMessage, Envelope::create($symfonyMessage));
     }
