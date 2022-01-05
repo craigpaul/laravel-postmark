@@ -4,6 +4,7 @@ namespace CraigPaul\Mail\Tests;
 
 use CraigPaul\Mail\PostmarkTransport;
 use CraigPaul\Mail\Tests\Factories\Email;
+use const DATE_RFC3339_EXTENDED;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\Request;
 use Illuminate\Mail\Message;
@@ -12,7 +13,6 @@ use Illuminate\Support\Facades\Http;
 use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mailer\SentMessage;
 use Symfony\Component\Mime\Email as SymfonyEmail;
-use const DATE_RFC3339_EXTENDED;
 
 class PostmarkTransportTest extends TestCase
 {
