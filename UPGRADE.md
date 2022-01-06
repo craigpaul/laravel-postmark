@@ -6,8 +6,7 @@ If you were previously catching either `\GuzzleHttp\Exception\ConnectException` 
 
 ## From v2.2 to v2.3
 
-You may remove the `postmark` specific key from  the `config/services.php` file.
-We will get your `POSTMARK_SECRET` directly from your `env` file.
+You may remove the `postmark` specific key from the `config/services.php` file as we will get your `POSTMARK_SECRET` directly from your `env` file.
 
 ```php
 return [
