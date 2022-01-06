@@ -24,22 +24,14 @@ $ composer require coconutcraig/laravel-postmark
 
 The package will automatically register itself.
 
-You can optionally publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="postmark-config"
-```
-
 ## Usage
 
 Update your `.env` file by adding your server key and set your mail driver to `postmark`.
 
 ```php
 MAIL_MAILER=postmark
-POSTMARK_SECRET=YOUR-SERVER-KEY-HERE
+POSTMARK_TOKEN=YOUR-SERVER-KEY-HERE
 ```
-
-> Please note, starting at Laravel 7, the MAIL_DRIVER environment variable was renamed to MAIL_MAILER. Your application might still use MAIL_DRIVER, so please refer to your mail.php configuration file.
 
 That's it! The mail system continues to work the exact same way as before and you can switch out Postmark for any of the pre-packaged Laravel mail drivers (smtp, mailgun, log, etc...).
 
@@ -52,9 +44,11 @@ That's it! The mail system continues to work the exact same way as before and yo
 Postmark offers a fantastic templating service for you to utilize instead of maintaining your templates within your Laravel application. If you would like to take advantage of that, this package offers an extension on the base `MailMessage` provided out of the box with Laravel. Within a Laravel notification, you can do the following to start taking advantage of Postmark templates.
 
 ```php
+use CraigPaul\Mail\TemplatedMailMessage;
+
 public function toMail($notifiable)
 {
-    return (new \Coconuts\Mail\MailMessage)
+    return (new TemplatedMailMessage)
         ->identifier(8675309)
         ->include([
             'name' => 'Customer Name',
@@ -65,21 +59,20 @@ public function toMail($notifiable)
 
 ### Mailable
 
-It is also possible to use templates via a Mailable.
+It is also possible to use templated notifications via an extension on the base `Mailable` provided out of the box with Laravel.
 
 ```php
+use CraigPaul\Mail\TemplatedMailable;
 use Illuminate\Support\Facades\Mail;
-use Coconuts\Mail\PostmarkTemplateMailable;
 
-Mail::to('mail@example.com')
-    ->send((new PostmarkTemplateMailable())
-        ->identifier(8675309)
-        ->include([
-            'name' => 'Customer Name',
-            'action_url' => 'https://example.com/login',
-        ])
-    );
+$mailable = (new TemplatedMailable())
+    ->identifier(8675309)
+    ->include([
+        'name' => 'Customer Name',
+        'action_url' => 'https://example.com/login',
+    ]);
 
+Mail::to('mail@example.com')->send($mailable);
 ```
 
 > You may also utilize an alias instead of the template identifier by using the `->alias()` method in both cases.
@@ -89,24 +82,31 @@ Mail::to('mail@example.com')
 If you rely on categorizing your outgoing emails using Tags in Postmark, you can simply add a header within your Mailable class's build method.
 
 ```php
+use Symfony\Component\Mailer\Header\TagHeader;
+use Symfony\Component\Mime\Email;
+
 public function build()
 {
-    $this->withSwiftMessage(function (\Swift_Message $message) {
-        $message->getHeaders()->addTextHeader('tag', 'value');
+    $this->withSymfonyMessage(function (Email $message) {
+        $message->getHeaders()->add(new TagHeader('value'))
     });
 }
 ```
 
 ## Postmark Metadata
 
-Similar to tags, you can also include [metadata](https://postmarkapp.com/support/article/1125-custom-metadata-faq) by adding a header. Metadata headers should be prefixed with `metadata-` where the string that follows is the metadata key.
+Similar to tags, you can also include [metadata](https://postmarkapp.com/support/article/1125-custom-metadata-faq) by adding a header.
 
 ```php
+
+use Symfony\Component\Mailer\Header\MetadataHeader;
+use Symfony\Component\Mime\Email;
+
 public function build()
 {
-    $this->withSwiftMessage(function (\Swift_Message $message) {
-        $message->getHeaders()->addTextHeader('metadata-field', 'value');
-        $message->getHeaders()->addTextHeader('metadata-another-field', 'another value');
+    $this->withSymfonyMessage(function (Email $message) {
+        $message->getHeaders()->add(new MetadataHeader('field', 'value'));
+        $message->getHeaders()->add(new MetadataHeader('another-field', 'another value'));
     });
 }
 ```
@@ -161,4 +161,3 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-author-paul]: https://github.com/craigpaul
 [link-author-mark]: https://github.com/mvdnbrk
 [link-contributors]: ../../contributors
-[link-20-tag]: https://github.com/coconutcraig/laravel-postmark/tree/v2.0.0
