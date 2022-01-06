@@ -28,6 +28,7 @@
         "illuminate/support": "^9.0"
     },
     "require-dev": {
+        "fakerphp/faker": "^1.17",
         "orchestra/testbench": "^7.0",
         "phpunit/phpunit": "^9.0"
     },
