@@ -2,6 +2,53 @@
 
 ## [Unreleased]
 
+### Added
+- Adds support for templated mailables / mail messages by determining via the HTML body if we have sent in a decode-able JSON object or not and adjusting the payload to match [`3bdde38e8b`](https://github.com/craigpaul/laravel-postmark/commit/3bdde38e8b)
+- Adds templated mail message / mailable classes for easier consumption by the end user [`094c83687f`](https://github.com/craigpaul/laravel-postmark/commit/094c83687f)
+- Adds more tests to ensure using a templated mailable / mail message will successfully make the correct calls [`b7ff82ddfe`](https://github.com/craigpaul/laravel-postmark/commit/b7ff82ddfe)
+- Adds stub notification for testing purposes [`193d369718`](https://github.com/craigpaul/laravel-postmark/commit/193d369718)
+- Adds factory for created attributes necessary for a templated mailable / mail message [`d46a4fa130`](https://github.com/craigpaul/laravel-postmark/commit/d46a4fa130)
+- Adds exception when response received by Postmark is not OK [`0ea85312b1`](https://github.com/craigpaul/laravel-postmark/commit/0ea85312b1)
+- Adds basic named exception class [`82f9fb45c8`](https://github.com/craigpaul/laravel-postmark/commit/82f9fb45c8)
+- Adds test to handle expecting correct exception handling when an error occurs [`7f7ee72193`](https://github.com/craigpaul/laravel-postmark/commit/7f7ee72193)
+- Adds support for customization of metadata, headers, etc while sending an email [`12f8b4f5b4`](https://github.com/craigpaul/laravel-postmark/commit/12f8b4f5b4)
+- Adds test to ensure usage of certain customization features are properly utilized [`2a47cd47de`](https://github.com/craigpaul/laravel-postmark/commit/2a47cd47de)
+- Adds support for custom metadata attributes to email factory [`74163ff3ae`](https://github.com/craigpaul/laravel-postmark/commit/74163ff3ae)
+- Adds metadata factory to create simple key value objects [`bd0d3ab0f0`](https://github.com/craigpaul/laravel-postmark/commit/bd0d3ab0f0)
+- Adds support for sending both regular and embedded attachments with an email [`a7a9437aad`](https://github.com/craigpaul/laravel-postmark/commit/a7a9437aad)
+- Adds more tests for utilizing both regular and embedded attachments properly [`7e909ad5c0`](https://github.com/craigpaul/laravel-postmark/commit/7e909ad5c0)
+- Adds support for creating an email with an attachment [`9569f94dc6`](https://github.com/craigpaul/laravel-postmark/commit/9569f94dc6)
+- Adds support for setting a name alongside an email address and updates tests to ensure the correct format is sent when the name is given [`845c2a26a1`](https://github.com/craigpaul/laravel-postmark/commit/845c2a26a1)
+- Sends reply to address with other attributes [`1fa28c6c34`](https://github.com/craigpaul/laravel-postmark/commit/1fa28c6c34)
+- Adds support for setting a reply to address within the email factory [`2cb2792bac`](https://github.com/craigpaul/laravel-postmark/commit/2cb2792bac)
+- Adds support for sending carbon copies of emails [`864c15dfe3`](https://github.com/craigpaul/laravel-postmark/commit/864c15dfe3)
+- Adds test to ensure proper support for sending an email with carbon copies attached to it [`e6a94d072d`](https://github.com/craigpaul/laravel-postmark/commit/e6a94d072d)
+- Adds support for carbon copy attributes to the email factory [`f9cc7c893d`](https://github.com/craigpaul/laravel-postmark/commit/f9cc7c893d)
+- Adds HTML body to array of sent attributes [`ddc5ec5d21`](https://github.com/craigpaul/laravel-postmark/commit/ddc5ec5d21)
+- Introduces a factory object to handle random data generation instead of relying on an untyped array [`d92f25fec9`](https://github.com/craigpaul/laravel-postmark/commit/d92f25fec9)
+- Implements absolute basic code necessary to make a request to send an email via Postmark [`d4b132c143`](https://github.com/craigpaul/laravel-postmark/commit/d4b132c143)
+- Injects Laravel's HTTP client into the transport [`a67da534e0`](https://github.com/craigpaul/laravel-postmark/commit/a67da534e0)
+- Adds initial basic case for sending an email via Postmark [`ea65d58d01`](https://github.com/craigpaul/laravel-postmark/commit/ea65d58d01)
+- Adds necessary environment configuration for testing to occur properly [`bafe8036e0`](https://github.com/craigpaul/laravel-postmark/commit/bafe8036e0)
+
+### Changed
+- Explicitly requires newer version of fakerphp/faker in order to get around old lorempixel issue [`b45fa541fe`](https://github.com/craigpaul/laravel-postmark/commit/b45fa541fe)
+- Updates existing test to ensure the reply to field is set correctly [`c24c812108`](https://github.com/craigpaul/laravel-postmark/commit/c24c812108)
+- Extracts http client factory fake to specific method so it may be re-used in upcoming tests [`0dda0e2faf`](https://github.com/craigpaul/laravel-postmark/commit/0dda0e2faf)
+- Renames test to make it more clear that it is only testing the smallest set of required attributes [`01dcda1650`](https://github.com/craigpaul/laravel-postmark/commit/01dcda1650)
+- Updates existing test to ensure other required attribute is always sent [`95e97fcaa3`](https://github.com/craigpaul/laravel-postmark/commit/95e97fcaa3)
+- Removes unnecessary tests from actions workflow and adds dependency caching to improve test run speed [`d61ac650b5`](https://github.com/craigpaul/laravel-postmark/commit/d61ac650b5)
+- Ensures the most basic type of request will be sent properly [`f6540153a8`](https://github.com/craigpaul/laravel-postmark/commit/f6540153a8)
+- Passes the postmark token through the transport constructor [`6e1360fac9`](https://github.com/craigpaul/laravel-postmark/commit/6e1360fac9)
+- Updates existing test to ensure the proper request is being made with the most basic of required attributes [`8332bfeef1`](https://github.com/craigpaul/laravel-postmark/commit/8332bfeef1)
+- Updates existing root namespace [`ccb5cddf55`](https://github.com/craigpaul/laravel-postmark/commit/ccb5cddf55)
+- Updates author email and homepage [`5e70e90cc8`](https://github.com/craigpaul/laravel-postmark/commit/5e70e90cc8)
+- Updates dependency versions to account for support of new symfony/mailer component [`09346ff254`](https://github.com/craigpaul/laravel-postmark/commit/09346ff254)
+
+### Removed
+- Removes currently unused custom exception [`d1d696f2da`](https://github.com/craigpaul/laravel-postmark/commit/d1d696f2da)
+- Removes the majority of existing code to allow for a clean slate [`21e35e9e96`](https://github.com/craigpaul/laravel-postmark/commit/21e35e9e96)
+
 ## [2.11.1] - 2021-12-07
 
 ### Added
