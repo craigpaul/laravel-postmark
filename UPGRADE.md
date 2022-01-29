@@ -1,5 +1,30 @@
 # Upgrade Guide
 
+## From v2.11 to v3.0
+
+With the release of Laravel 9 came an upgrade to Symfony 6, which included adoption of their new `symfony/mailer` component. That meant a complete re-write of this package, which means there are a few things you'll want to check out during the upgrade process.
+
+You may remove the `postmark.php` configuration file that is published by this package. We have adopted Laravel's default configuration for the Postmark configuration within the `services.php` file. If you're still using the `POSTMARK_SECRET` environment variable, be sure to update it to `POSTMARK_TOKEN`.
+
+With the re-write of this package came a change to bring the various classes exposed by this package to follow more of a convention then before. If you are using any of the following classes, you will need to update the usage(s) to match the new class name and namespace.
+
+```php
+Coconuts\Mail\MailMessage::class
+CraigPaul\Mail\TemplatedMailMessage::class
+```
+
+```php
+Coconuts\Mail\PostmarkException::class
+CraigPaul\Mail\PostmarkTransportException::class
+```
+
+```php
+Coconuts\Mail\PostmarkTemplateMailable::class
+CraigPaul\Mail\TemplatedMailable::class
+```
+
+Lastly, be sure to pay special attention to the `symfony/mailer` section of the official Laravel 9 upgrade guide for any other related changes.
+
 ## From v2.10 to v2.11
 
 If you were previously catching either `\GuzzleHttp\Exception\ConnectException` or `GuzzleHttp\Exception\ServerException`, they will now be rethrown as `\Swift_TransportException` with the appropriate message, code and previous exception. This change was made to support Laravel's mail [failover configuration](https://laravel.com/docs/8.x/mail#failover-configuration).
