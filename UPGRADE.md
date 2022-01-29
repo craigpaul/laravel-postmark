@@ -9,18 +9,18 @@ You may remove the `postmark.php` configuration file that is published by this p
 With the re-write of this package came a change to bring the various classes exposed by this package to follow more of a convention then before. If you are using any of the following classes, you will need to update the usage(s) to match the new class name and namespace.
 
 ```php
-Coconuts\Mail\MailMessage::class
-CraigPaul\Mail\TemplatedMailMessage::class
+Coconuts\Mail\MailMessage::class // Before
+CraigPaul\Mail\TemplatedMailMessage::class // After
 ```
 
 ```php
-Coconuts\Mail\PostmarkException::class
-CraigPaul\Mail\PostmarkTransportException::class
+Coconuts\Mail\PostmarkException::class // Before
+CraigPaul\Mail\PostmarkTransportException::class // After
 ```
 
 ```php
-Coconuts\Mail\PostmarkTemplateMailable::class
-CraigPaul\Mail\TemplatedMailable::class
+Coconuts\Mail\PostmarkTemplateMailable::class // Before
+CraigPaul\Mail\TemplatedMailable::class // After
 ```
 
 Lastly, be sure to pay special attention to the `symfony/mailer` section of the official Laravel 9 upgrade guide for any other related changes.
