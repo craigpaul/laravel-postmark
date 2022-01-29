@@ -23,7 +23,7 @@ Coconuts\Mail\PostmarkTemplateMailable::class // Before
 CraigPaul\Mail\TemplatedMailable::class // After
 ```
 
-Lastly, be sure to pay special attention to the `symfony/mailer` section of the official Laravel 9 upgrade guide for any other related changes.
+Lastly, be sure to pay special attention to the `symfony/mailer` section of the official [Laravel 9 upgrade guide](https://laravel.com/docs/master/upgrade#symfony-mailer) for any other related changes.
 
 ## From v2.10 to v2.11
 
