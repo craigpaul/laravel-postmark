@@ -15,7 +15,7 @@ use CraigPaul\Mail\TemplatedMailMessage; // After
 
 ```php
 use Coconuts\Mail\PostmarkException; // Before
-use CraigPaul\Mail\PostmarkTransportExcepti;:class // After
+use CraigPaul\Mail\PostmarkTransportException; // After
 ```
 
 ```php
