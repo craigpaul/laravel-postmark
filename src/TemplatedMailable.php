@@ -10,11 +10,11 @@ class TemplatedMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public string $alias;
+    public ?string $alias = null;
 
-    public int $id;
+    public ?int $id = null;
 
-    public array $model;
+    public array $model = [];
 
     public function build(): self
     {
