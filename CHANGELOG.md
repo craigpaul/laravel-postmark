@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+## [3.0.1] - 2022-02-13
+
+### Added
+- Adds dynamic server usage [`#134`](https://github.com/craigpaul/laravel-postmark/pull/134)
+
+## [3.0.0] - 2022-01-31
+
 ### Added
 - Adds support for templated mailables / mail messages by determining via the HTML body if we have sent in a decode-able JSON object or not and adjusting the payload to match [`3bdde38e8b`](https://github.com/craigpaul/laravel-postmark/commit/3bdde38e8b)
 - Adds templated mail message / mailable classes for easier consumption by the end user [`094c83687f`](https://github.com/craigpaul/laravel-postmark/commit/094c83687f)
@@ -402,7 +409,9 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/craigpaul/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/craigpaul/laravel-postmark/compare/v2.11.1...HEAD
+[Unreleased]: https://github.com/craigpaul/laravel-postmark/compare/v3.0.1...HEAD
+[3.0.1]: https://github.com/craigpaul/laravel-postmark/compare/v3.0.0...v3.0.1
+[3.0.0]: https://github.com/craigpaul/laravel-postmark/compare/v2.11.1...v3.0.0
 [2.11.1]: https://github.com/craigpaul/laravel-postmark/compare/v2.11.0...v2.11.1
 [2.11.0]: https://github.com/craigpaul/laravel-postmark/compare/v2.10.2...v2.11.0
 [2.10.2]: https://github.com/craigpaul/laravel-postmark/compare/v2.10.1...v2.10.2
