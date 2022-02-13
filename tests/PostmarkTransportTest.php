@@ -3,7 +3,6 @@
 namespace CraigPaul\Mail\Tests;
 
 use function basename;
-
 use CraigPaul\Mail\PostmarkServerTokenHeader;
 use CraigPaul\Mail\PostmarkTransport;
 use CraigPaul\Mail\PostmarkTransportException;
