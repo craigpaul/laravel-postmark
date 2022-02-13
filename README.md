@@ -119,6 +119,22 @@ In this case, the following object will be sent to Postmark as metadata.
 }
 ```
 
+## Postmark Servers
+
+Out of the box, we determine the Postmark server you send to using a configuration variable set within the environment you have deployed to. This works for most use cases, but if you have the need or desire to determine the Postmark server at runtime, you can supply a header during the sending process.
+
+```php
+use CraigPaul\Mail\PostmarkServerTokenHeader;
+use Symfony\Component\Mime\Email;
+
+public function build()
+{
+    $this->withSymfonyMessage(function (Email $message) {
+        $message->getHeaders()->add(new PostmarkServerTokenHeader('POSTMARK_TOKEN'))
+    });
+}
+```
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
