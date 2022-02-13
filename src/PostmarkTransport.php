@@ -51,7 +51,7 @@ class PostmarkTransport implements TransportInterface
         $response = $this->http
             ->acceptJson()
             ->withHeaders([
-                'X-Postmark-Server-Token' => $this->token,
+                'X-Postmark-Server-Token' => $this->getServerToken($email),
             ])
             ->post($this->getApiEndpoint($email), $this->getPayload($email, $envelope));
 
@@ -137,6 +137,10 @@ class PostmarkTransport implements TransportInterface
                 continue;
             }
 
+            if ($header instanceof PostmarkServerTokenHeader) {
+                continue;
+            }
+
             $payload['Headers'][] = [
                 'Name' => $name,
                 'Value' => $header->getBodyAsString(),
@@ -161,6 +165,17 @@ class PostmarkTransport implements TransportInterface
         return array_filter($envelope->getRecipients(), function (Address $address) use ($copies) {
             return in_array($address, $copies, true) === false;
         });
+    }
+
+    protected function getServerToken(Email $email): string
+    {
+        $header = $email->getHeaders()->get(PostmarkServerTokenHeader::NAME);
+
+        if ($header === null) {
+            return $this->token;
+        }
+
+        return $header->getBody();
     }
 
     protected function getTemplatedContent(Email $email): ?array
