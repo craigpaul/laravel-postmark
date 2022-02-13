@@ -3,6 +3,8 @@
 namespace CraigPaul\Mail\Tests;
 
 use function basename;
+
+use CraigPaul\Mail\PostmarkServerTokenHeader;
 use CraigPaul\Mail\PostmarkTransport;
 use CraigPaul\Mail\PostmarkTransportException;
 use CraigPaul\Mail\TemplatedMailable;
@@ -168,6 +170,7 @@ class PostmarkTransportTest extends TestCase
 
         $message->getHeaders()->add(new TagHeader($email->getTag()));
         $message->getHeaders()->add(new MetadataHeader($metadata->getKey(), $metadata->getValue()));
+        $message->getHeaders()->add(new PostmarkServerTokenHeader($metadata->getValue()));
         $message->getHeaders()->addTextHeader($header->getKey(), $header->getValue());
 
         $symfonyMessage = $message->getSymfonyMessage();
@@ -182,7 +185,8 @@ class PostmarkTransportTest extends TestCase
             $header = $email->getHeader();
             $metadata = $email->getMetadata();
 
-            return $request['MessageStream'] === $this->getMessageStreamId()
+            return $request->hasHeader('X-Postmark-Server-Token', $metadata->getValue())
+                && $request['MessageStream'] === $this->getMessageStreamId()
                 && $request['Tag'] === $email->getTag()
                 && $request['Metadata'] === [$metadata->getKey() => $metadata->getValue()]
                 && $request['Headers'] === [['Name' => $header->getKey(), 'Value' => $header->getValue()]];
