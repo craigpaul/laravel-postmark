@@ -6,11 +6,11 @@ use Illuminate\Notifications\Messages\MailMessage as Message;
 
 class TemplatedMailMessage extends Message
 {
-    protected string $alias;
+    protected ?string $alias = null;
 
-    protected array $data;
+    protected array $data = [];
 
-    protected int $id;
+    protected ?int $id = null;
 
     public $view = 'postmark::template';
 
