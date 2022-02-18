@@ -10,7 +10,8 @@ use Illuminate\Notifications\Notification;
 class TemplatedNotification extends Notification
 {
     public function __construct(
-        protected Template $template
+        protected Template $template,
+        protected string $uses,
     ) {
     }
 
@@ -21,9 +22,14 @@ class TemplatedNotification extends Notification
 
     public function toMail(): MailMessage
     {
-        return (new TemplatedMailMessage())
-            ->alias($this->template->getAlias())
-            ->identifier($this->template->getId())
-            ->include($this->template->getModel());
+        $message = (new TemplatedMailMessage());
+
+        if ($this->uses === 'alias') {
+            $message = $message->alias($this->template->getAlias());
+        } else {
+            $message = $message->identifier($this->template->getId());
+        }
+
+        return $message->include($this->template->getModel());
     }
 }
