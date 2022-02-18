@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [3.0.2] - 2022-02-18
+
+### Fixed
+- Fixes typed property error [`#136`](https://github.com/craigpaul/laravel-postmark/pull/136)
+
 ## [3.0.1] - 2022-02-13
 
 ### Added
@@ -409,7 +414,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/craigpaul/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/craigpaul/laravel-postmark/compare/v3.0.1...HEAD
+[Unreleased]: https://github.com/craigpaul/laravel-postmark/compare/v3.0.2...HEAD
+[3.0.2]: https://github.com/craigpaul/laravel-postmark/compare/v3.0.1...v3.0.2
 [3.0.1]: https://github.com/craigpaul/laravel-postmark/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/craigpaul/laravel-postmark/compare/v2.11.1...v3.0.0
 [2.11.1]: https://github.com/craigpaul/laravel-postmark/compare/v2.11.0...v2.11.1
