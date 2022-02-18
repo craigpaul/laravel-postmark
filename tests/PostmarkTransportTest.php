@@ -215,7 +215,7 @@ class PostmarkTransportTest extends TestCase
         $this->sendMessage($symfonyMessage);
     }
 
-    public function testCanSendTemplatedMailableSuccessfully()
+    public function testCanSendTemplatedMailableSuccessfullyUsingAnAlias()
     {
         $template = Template::create();
 
@@ -223,6 +223,29 @@ class PostmarkTransportTest extends TestCase
 
         $mailable = (new TemplatedMailable())
             ->alias($template->getAlias())
+            ->include($template->getModel());
+
+        Mail::to($template->getToAddress())->send($mailable);
+
+        $factory->assertSent(function (Request $request) use ($template) {
+            return $request->method() === 'POST'
+                && $request->isJson()
+                && $request->hasHeader('X-Postmark-Server-Token', $this->getToken())
+                && $request->url() === 'https://api.postmarkapp.com/email/withTemplate'
+                && $request['From'] === '"'.$template->getFromName().'" <'.$template->getFromAddress().'>'
+                && $request['To'] === $template->getToAddress()
+                && empty($request['TemplateId'])
+                && $request['TemplateModel'] === $template->getModel();
+        });
+    }
+
+    public function testCanSendTemplatedMailableSuccessfullyUsingAnIdentifier()
+    {
+        $template = Template::create();
+
+        $factory = $this->fakeSuccessfulTemplate($template);
+
+        $mailable = (new TemplatedMailable())
             ->identifier($template->getId())
             ->include($template->getModel());
 
@@ -236,18 +259,39 @@ class PostmarkTransportTest extends TestCase
                 && $request['From'] === '"'.$template->getFromName().'" <'.$template->getFromAddress().'>'
                 && $request['To'] === $template->getToAddress()
                 && $request['TemplateId'] === $template->getId()
-                && $request['TemplateAlias'] === $template->getAlias()
+                && empty($request['TemplateAlias'])
                 && $request['TemplateModel'] === $template->getModel();
         });
     }
 
-    public function testCanSendTemplatedMailMessageSuccessfully()
+    public function testCanSendTemplatedMailMessageSuccessfullyUsingAlias()
     {
         $template = Template::create();
 
         $factory = $this->fakeSuccessfulTemplate($template);
 
-        Notification::route('mail', $template->getToAddress())->notify(new TemplatedNotification($template));
+        Notification::route('mail', $template->getToAddress())->notify(new TemplatedNotification($template, 'alias'));
+
+        $factory->assertSent(function (Request $request) use ($template) {
+            return $request->method() === 'POST'
+                && $request->isJson()
+                && $request->hasHeader('X-Postmark-Server-Token', $this->getToken())
+                && $request->url() === 'https://api.postmarkapp.com/email/withTemplate'
+                && $request['From'] === '"'.$template->getFromName().'" <'.$template->getFromAddress().'>'
+                && $request['To'] === $template->getToAddress()
+                && empty($request['TemplateId'])
+                && $request['TemplateAlias'] === $template->getAlias()
+                && $request['TemplateModel'] === $template->getModel();
+        });
+    }
+
+    public function testCanSendTemplatedMailMessageSuccessfullyUsingIdentifier()
+    {
+        $template = Template::create();
+
+        $factory = $this->fakeSuccessfulTemplate($template);
+
+        Notification::route('mail', $template->getToAddress())->notify(new TemplatedNotification($template, 'identifier'));
 
         $factory->assertSent(function (Request $request) use ($template) {
             return $request->method() === 'POST'
@@ -257,7 +301,7 @@ class PostmarkTransportTest extends TestCase
                 && $request['From'] === '"'.$template->getFromName().'" <'.$template->getFromAddress().'>'
                 && $request['To'] === $template->getToAddress()
                 && $request['TemplateId'] === $template->getId()
-                && $request['TemplateAlias'] === $template->getAlias()
+                && empty($request['TemplateAlias'])
                 && $request['TemplateModel'] === $template->getModel();
         });
     }
