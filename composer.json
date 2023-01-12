@@ -28,10 +28,10 @@
         "illuminate/support": "^9.0|^10.0"
     },
     "require-dev": {
+        "ext-gd": "*",
         "fakerphp/faker": "^1.17",
         "orchestra/testbench": "^7.19|^8.0",
-        "phpunit/phpunit": "^9.0",
-        "ext-gd": "*"
+        "phpunit/phpunit": "^9.0"
     },
     "suggest": {
         "mvdnbrk/postmark-inbound": "Allows you to process Postmark Inbound Webhooks."
