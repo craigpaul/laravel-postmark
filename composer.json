@@ -30,7 +30,8 @@
     "require-dev": {
         "fakerphp/faker": "^1.17",
         "orchestra/testbench": "^7.19|^8.0",
-        "phpunit/phpunit": "^9.0"
+        "phpunit/phpunit": "^9.0",
+        "ext-gd": "*"
     },
     "suggest": {
         "mvdnbrk/postmark-inbound": "Allows you to process Postmark Inbound Webhooks."
