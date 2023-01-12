@@ -8,12 +8,18 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [ 8.1, 8.0 ]
-        laravel: [ ^9.0 ]
+        php: [ 8.2, 8.1, 8.0 ]
+        laravel: [ ^9.0, ^10.0 ]
         stability: [ prefer-lowest, prefer-stable ]
         include:
           - laravel: ^9.0
-            testbench: ^7.0
+            testbench: ^7.19
+          - laravel: ^10.0
+            testbench: ^8.0
+        exclude:
+          # Laravel 10 requires PHP 8.1 at least
+          - laravel: ^10.0
+            php: 8.0
 
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - ${{ matrix.stability }}
 
