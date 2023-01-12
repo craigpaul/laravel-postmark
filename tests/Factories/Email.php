@@ -29,7 +29,7 @@ class Email
         $faker = Factory::create();
 
         return new self(
-            attachment: $faker->image(),
+            attachment: Attachment::create(),
             bcc: '',
             cc: '',
             from: $faker->email(),
