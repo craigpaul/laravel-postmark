@@ -54,7 +54,7 @@ class PostmarkTransportTest extends TestCase
                 && $request->hasHeader('X-Postmark-Server-Token', $this->getToken())
                 && $request->url() === 'https://api.postmarkapp.com/email'
                 && $request['From'] === $email->getFrom()
-                && $request['To'] === '"' . $email->getToName() . '" <' . $email->getToAddress() . '>'
+                && $request['To'] === '"'.$email->getToName().'" <'.$email->getToAddress().'>'
                 && $request['Subject'] === $email->getSubject()
                 && $request['HtmlBody'] === $email->getHtmlBody()
                 && $request['TextBody'] === $email->getTextBody()
@@ -84,7 +84,7 @@ class PostmarkTransportTest extends TestCase
         $this->assertSame($email->getMessageId(), $sentMessage->getMessageId());
 
         $factory->assertSent(function (Request $request) use ($email) {
-            return $request['To'] === '"' . $email->getToName() . '" <' . $email->getToAddress() . '>'
+            return $request['To'] === '"'.$email->getToName().'" <'.$email->getToAddress().'>'
                 && $request['Cc'] === $email->getCc()
                 && $request['Bcc'] === $email->getBcc();
         });
@@ -114,7 +114,7 @@ class PostmarkTransportTest extends TestCase
             $attachment = $request['Attachments'][0];
 
             return $attachment['Name'] === basename($email->getAttachment())
-                && !empty($attachment['Content'])
+                && ! empty($attachment['Content'])
                 && $attachment['ContentType'] === 'image/png'
                 && empty($attachment['ContentID']);
         });
@@ -146,9 +146,9 @@ class PostmarkTransportTest extends TestCase
             [, $name] = explode(':', $contentId);
 
             return $attachment['Name'] === $name
-                && !empty($attachment['Content'])
+                && ! empty($attachment['Content'])
                 && $attachment['ContentType'] === 'image/png'
-                && !empty($attachment['ContentID'])
+                && ! empty($attachment['ContentID'])
                 && $attachment['ContentID'] === $contentId;
         });
     }
@@ -232,7 +232,7 @@ class PostmarkTransportTest extends TestCase
                 && $request->isJson()
                 && $request->hasHeader('X-Postmark-Server-Token', $this->getToken())
                 && $request->url() === 'https://api.postmarkapp.com/email/withTemplate'
-                && $request['From'] === '"' . $template->getFromName() . '" <' . $template->getFromAddress() . '>'
+                && $request['From'] === '"'.$template->getFromName().'" <'.$template->getFromAddress().'>'
                 && $request['To'] === $template->getToAddress()
                 && empty($request['TemplateId'])
                 && $request['TemplateModel'] === $template->getModel();
@@ -256,7 +256,7 @@ class PostmarkTransportTest extends TestCase
                 && $request->isJson()
                 && $request->hasHeader('X-Postmark-Server-Token', $this->getToken())
                 && $request->url() === 'https://api.postmarkapp.com/email/withTemplate'
-                && $request['From'] === '"' . $template->getFromName() . '" <' . $template->getFromAddress() . '>'
+                && $request['From'] === '"'.$template->getFromName().'" <'.$template->getFromAddress().'>'
                 && $request['To'] === $template->getToAddress()
                 && $request['TemplateId'] === $template->getId()
                 && empty($request['TemplateAlias'])
@@ -277,7 +277,7 @@ class PostmarkTransportTest extends TestCase
                 && $request->isJson()
                 && $request->hasHeader('X-Postmark-Server-Token', $this->getToken())
                 && $request->url() === 'https://api.postmarkapp.com/email/withTemplate'
-                && $request['From'] === '"' . $template->getFromName() . '" <' . $template->getFromAddress() . '>'
+                && $request['From'] === '"'.$template->getFromName().'" <'.$template->getFromAddress().'>'
                 && $request['To'] === $template->getToAddress()
                 && empty($request['TemplateId'])
                 && $request['TemplateAlias'] === $template->getAlias()
@@ -298,7 +298,7 @@ class PostmarkTransportTest extends TestCase
                 && $request->isJson()
                 && $request->hasHeader('X-Postmark-Server-Token', $this->getToken())
                 && $request->url() === 'https://api.postmarkapp.com/email/withTemplate'
-                && $request['From'] === '"' . $template->getFromName() . '" <' . $template->getFromAddress() . '>'
+                && $request['From'] === '"'.$template->getFromName().'" <'.$template->getFromAddress().'>'
                 && $request['To'] === $template->getToAddress()
                 && $request['TemplateId'] === $template->getId()
                 && empty($request['TemplateAlias'])

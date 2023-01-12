@@ -8,6 +8,7 @@ class Attachment
     {
         $image = imagecreatetruecolor(200, 50);
         imagepng($image, '/tmp/test-image.png');
+
         return '/tmp/test-image.png';
     }
 }
