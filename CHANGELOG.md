@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [3.0.3] - 2023-01-12
+
+- Adds support for Laravel 10.x [`#139`](https://github.com/craigpaul/laravel-postmark/pull/139)
+
 ## [3.0.2] - 2022-02-18
 
 ### Fixed
