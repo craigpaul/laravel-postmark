@@ -2,14 +2,7 @@
 
 namespace CraigPaul\Mail;
 
-use function array_filter;
-use function array_map;
-use function array_merge;
 use Illuminate\Http\Client\Factory as Http;
-use function implode;
-use function in_array;
-use function json_decode;
-use const JSON_OBJECT_AS_ARRAY;
 use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mailer\Header\MetadataHeader;
 use Symfony\Component\Mailer\Header\TagHeader;
@@ -19,6 +12,15 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\MessageConverter;
 use Symfony\Component\Mime\RawMessage;
+
+use function array_filter;
+use function array_map;
+use function array_merge;
+use function implode;
+use function in_array;
+use function json_decode;
+
+use const JSON_OBJECT_AS_ARRAY;
 
 class PostmarkTransport implements TransportInterface
 {

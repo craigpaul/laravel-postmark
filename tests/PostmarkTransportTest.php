@@ -2,7 +2,6 @@
 
 namespace CraigPaul\Mail\Tests;
 
-use function basename;
 use CraigPaul\Mail\PostmarkServerTokenHeader;
 use CraigPaul\Mail\PostmarkTransport;
 use CraigPaul\Mail\PostmarkTransportException;
@@ -10,8 +9,6 @@ use CraigPaul\Mail\TemplatedMailable;
 use CraigPaul\Mail\Tests\Factories\Email;
 use CraigPaul\Mail\Tests\Factories\Template;
 use CraigPaul\Mail\Tests\Notifications\TemplatedNotification;
-use const DATE_RFC3339_EXTENDED;
-use function explode;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\Request;
 use Illuminate\Http\Response;
@@ -25,6 +22,11 @@ use Symfony\Component\Mailer\Header\MetadataHeader;
 use Symfony\Component\Mailer\Header\TagHeader;
 use Symfony\Component\Mailer\SentMessage;
 use Symfony\Component\Mime\Email as SymfonyEmail;
+
+use function basename;
+use function explode;
+
+use const DATE_RFC3339_EXTENDED;
 
 class PostmarkTransportTest extends TestCase
 {
