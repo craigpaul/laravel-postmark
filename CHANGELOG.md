@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- Applies code styling fixes [`ea7c4548ae`](https://github.com/craigpaul/laravel-postmark/commit/ea7c4548ae)
+
 ## [3.0.4] - 2023-07-21
 
 ### Changed
