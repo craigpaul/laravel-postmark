@@ -2,8 +2,14 @@
 
 ## [Unreleased]
 
+## [3.0.4] - 2023-07-21
+
+### Changed
+- Swaps explicit mailer configuration fetch with injected configuration [`50147a4cb8`](https://github.com/craigpaul/laravel-postmark/commit/50147a4cb8)
+
 ## [3.0.3] - 2023-01-12
 
+### Added
 - Adds support for Laravel 10.x [`#139`](https://github.com/craigpaul/laravel-postmark/pull/139)
 
 ## [3.0.2] - 2022-02-18
