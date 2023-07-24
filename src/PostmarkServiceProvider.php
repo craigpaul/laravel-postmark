@@ -21,7 +21,7 @@ class PostmarkServiceProvider extends ServiceProvider
         $this->app['mail.manager']->extend('postmark', function ($config) {
             return new PostmarkTransport(
                 $this->app->make(Factory::class),
-                $config['message_stream_id'],
+                $config['message_stream_id'] ?? null,
                 $this->app->make('config')->get('services.postmark.token'),
             );
         });
