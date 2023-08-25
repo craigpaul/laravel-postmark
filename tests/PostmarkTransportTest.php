@@ -313,6 +313,11 @@ class PostmarkTransportTest extends TestCase
         return $this->app['config']->get('mail.mailers.postmark.message_stream_id');
     }
 
+    protected function getOptions(): array
+    {
+        return $this->app['config']->get('services.postmark.options', []);
+    }
+
     protected function getToken(): string
     {
         return $this->app['config']->get('services.postmark.token');
@@ -375,6 +380,7 @@ class PostmarkTransportTest extends TestCase
     {
         return $this->app->makeWith(PostmarkTransport::class, [
             'messageStreamId' => $this->getMessageStreamId(),
+            'options' => $this->getOptions(),
             'token' => $this->getToken(),
         ])->send($symfonyMessage, Envelope::create($symfonyMessage));
     }

@@ -1,5 +1,9 @@
 # Upgrade Guide
 
+## From v3.0 to v3.1
+
+If you are manually constructing PostmarkTransport for any reason, the list of dependencies has change and now includes an array for passing in Guzzle options to the Laravel HTTP client.
+
 ## From v2.11 to v3.0
 
 With the release of Laravel 9 came an upgrade to Symfony 6, which included adoption of their new `symfony/mailer` component. That meant a complete re-write of this package, which means there are a few things you'll want to check out during the upgrade process.

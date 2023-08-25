@@ -38,6 +38,7 @@ class PostmarkTransport implements TransportInterface
     public function __construct(
         protected Http $http,
         protected ?string $messageStreamId,
+        protected array $options,
         protected string $token,
     ) {
     }
@@ -51,6 +52,7 @@ class PostmarkTransport implements TransportInterface
         $email = MessageConverter::toEmail($sentMessage->getOriginalMessage());
 
         $response = $this->http
+            ->withOptions($this->options)
             ->acceptJson()
             ->withHeaders([
                 'X-Postmark-Server-Token' => $this->getServerToken($email),
