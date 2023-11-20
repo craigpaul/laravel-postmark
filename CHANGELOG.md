@@ -2,12 +2,18 @@
 
 ## [Unreleased]
 
+## [3.1.1] - 2023-11-19
+
+### Fixed
+- Renames variable to remove accidental shadowing [`72d33e5778`](https://github.com/craigpaul/laravel-postmark/commit/72d33e5778)
+
 ## [3.1.0] - 2023-08-24
 
 ### Added
 - Adds support for passing in Guzzle options to the Laravel HTTP client [`f7fa0aa150`](https://github.com/craigpaul/laravel-postmark/commit/f7fa0aa150)
 
 ## [3.0.5] - 2023-07-24
+
 ### Fixed
 - Adds fallback for message_stream_id configuration [`0f208109a9`](https://github.com/craigpaul/laravel-postmark/commit/0f208109a9)
 - Applies code styling fixes [`ea7c4548ae`](https://github.com/craigpaul/laravel-postmark/commit/ea7c4548ae)
