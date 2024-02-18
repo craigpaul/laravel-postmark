@@ -8,27 +8,27 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [ 8.2, 8.1, 8.0 ]
-        laravel: [ ^9.0, ^10.0 ]
+        php: [ 8.3, 8.2, 8.1 ]
+        laravel: [ ^10.0, ^11.0 ]
         stability: [ prefer-lowest, prefer-stable ]
         include:
-          - laravel: ^9.0
-            testbench: ^7.19
           - laravel: ^10.0
             testbench: ^8.0
+          - laravel: ^11.0
+            testbench: ^9.0
         exclude:
-          # Laravel 10 requires PHP 8.1 at least
-          - laravel: ^10.0
-            php: 8.0
+          # Laravel 11 requires PHP 8.2 at least
+          - laravel: ^11.0
+            php: 8.1
 
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - ${{ matrix.stability }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Cache dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.composer/cache/files
           key: dependencies-php-${{ matrix.php }}-laravel-${{ matrix.laravel }}-composer-${{ hashFiles('composer.lock') }}
