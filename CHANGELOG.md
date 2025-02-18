@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [3.3.0] - 2025-02-18
+
+### Added
+- Add support for Laravel 12 [`#145`](https://github.com/craigpaul/laravel-postmark/pull/150)
+
 ## [3.2.0] - 2024-02-18
 
 ### Added
