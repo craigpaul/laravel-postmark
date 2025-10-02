@@ -2,10 +2,15 @@
 
 ## [Unreleased]
 
+## [3.3.1] - 2025-10-02
+
+### Fixed
+- Handle nullable for php8.3 [`#152`](https://github.com/craigpaul/laravel-postmark/pull/152)
+
 ## [3.3.0] - 2025-02-18
 
 ### Added
-- Add support for Laravel 12 [`#145`](https://github.com/craigpaul/laravel-postmark/pull/150)
+- Add support for Laravel 12 [`#150`](https://github.com/craigpaul/laravel-postmark/pull/150)
 
 ## [3.2.0] - 2024-02-18
 
@@ -451,6 +456,14 @@
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/craigpaul/laravel-postmark/commit/2f6fe84bcc)
 
 [Unreleased]: https://github.com/craigpaul/laravel-postmark/compare/v3.0.2...HEAD
+[3.3.1]: https://github.com/craigpaul/laravel-postmark/compare/v3.3.0...v3.3.1
+[3.3.0]: https://github.com/craigpaul/laravel-postmark/compare/v3.2.0...v3.3.0
+[3.2.0]: https://github.com/craigpaul/laravel-postmark/compare/v3.1.1...v3.2.0
+[3.1.1]: https://github.com/craigpaul/laravel-postmark/compare/v3.1.0...v3.1.1
+[3.1.0]: https://github.com/craigpaul/laravel-postmark/compare/v3.0.5...v3.1.0
+[3.0.5]: https://github.com/craigpaul/laravel-postmark/compare/v3.0.4...v3.0.5
+[3.0.4]: https://github.com/craigpaul/laravel-postmark/compare/v3.0.3...v3.0.4
+[3.0.3]: https://github.com/craigpaul/laravel-postmark/compare/v3.0.2...v3.0.3
 [3.0.2]: https://github.com/craigpaul/laravel-postmark/compare/v3.0.1...v3.0.2
 [3.0.1]: https://github.com/craigpaul/laravel-postmark/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/craigpaul/laravel-postmark/compare/v2.11.1...v3.0.0
