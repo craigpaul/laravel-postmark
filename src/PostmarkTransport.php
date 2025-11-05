@@ -12,14 +12,12 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\MessageConverter;
 use Symfony\Component\Mime\RawMessage;
-
 use function array_filter;
 use function array_map;
 use function array_merge;
 use function implode;
 use function in_array;
 use function json_decode;
-
 use const JSON_OBJECT_AS_ARRAY;
 
 class PostmarkTransport implements TransportInterface
@@ -184,7 +182,7 @@ class PostmarkTransport implements TransportInterface
 
     protected function getTemplatedContent(Email $email): ?array
     {
-        return json_decode($email->getHtmlBody(), flags: JSON_OBJECT_AS_ARRAY);
+        return json_decode($email->getHtmlBody() ?? null, flags: JSON_OBJECT_AS_ARRAY);
     }
 
     protected function stringifyAddresses(array $addresses): string
