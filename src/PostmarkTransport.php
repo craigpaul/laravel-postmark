@@ -184,7 +184,7 @@ class PostmarkTransport implements TransportInterface
 
     protected function getTemplatedContent(Email $email): ?array
     {
-        return json_decode($email->getHtmlBody() ?? null, flags: JSON_OBJECT_AS_ARRAY);
+        return json_decode($email->getHtmlBody() ?? '', flags: JSON_OBJECT_AS_ARRAY);
     }
 
     protected function stringifyAddresses(array $addresses): string
