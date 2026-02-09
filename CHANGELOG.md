@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+## [3.4.0] - 2026-02-09
+
+### Added
+- Document Postmark MessageID capture and listener setup [`#155`](https://github.com/craigpaul/laravel-postmark/pull/155)
+
+### Fixed
+- Resolve PHP deprecation for json_decode [`#154`](https://github.com/craigpaul/laravel-postmark/pull/154)
+- Supports symfony/mailer change for inline attachments [`ebb1f8010b`](https://github.com/craigpaul/laravel-postmark/commit/ebb1f8010b)
+
 ## [3.3.1] - 2025-10-02
 
 ### Fixed
@@ -455,8 +464,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/craigpaul/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/craigpaul/laravel-postmark/compare/v3.0.2...HEAD
-[3.3.1]: https://github.com/craigpaul/laravel-postmark/compare/v3.3.0...v3.3.1
+[Unreleased]: https://github.com/craigpaul/laravel-postmark/compare/v3.3.1...HEAD
+[3.4.0]: https://github.com/craigpaul/laravel-postmark/compare/v3.3.1...v3.4.0
 [3.3.0]: https://github.com/craigpaul/laravel-postmark/compare/v3.2.0...v3.3.0
 [3.2.0]: https://github.com/craigpaul/laravel-postmark/compare/v3.1.1...v3.2.0
 [3.1.1]: https://github.com/craigpaul/laravel-postmark/compare/v3.1.0...v3.1.1

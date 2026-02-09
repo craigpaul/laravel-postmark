@@ -7,17 +7,14 @@
         "postmark",
         "laravel",
         "mail",
-        "email",
-        "coconutcraig"
+        "email"
     ],
     "homepage": "https://github.com/craigpaul/laravel-postmark",
     "license": "MIT",
     "authors": [
         {
             "name": "Craig Paul",
-            "email": "craig.paul@coconutsoftware.com",
-            "homepage": "https://www.coconutsoftware.com/",
-            "role": "Developer"
+            "email": "craig.paul91@gmail.com"
         }
     ],
     "require": {
