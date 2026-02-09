@@ -136,20 +136,24 @@ class PostmarkTransportTest extends TestCase
 
         $symfonyMessage = $message->getSymfonyMessage();
 
+        $expectedName = $symfonyMessage->getAttachments()[0]
+            ->getPreparedHeaders()
+            ->getHeaderParameter('Content-Disposition', 'filename');
+
         $factory = $this->fakeSuccessfulEmail($email);
 
         $sentMessage = $this->sendMessage($symfonyMessage);
 
         $this->assertSame($email->getMessageId(), $sentMessage->getMessageId());
 
-        $factory->assertSent(function (Request $request) use ($email, $contentId) {
+        $factory->assertSent(function (Request $request) use ($expectedName, $contentId) {
             $attachment = $request['Attachments'][0];
 
-            return $attachment['Name'] === basename($email->getAttachment())
+            return $attachment['Name'] === $expectedName
                 && ! empty($attachment['Content'])
                 && $attachment['ContentType'] === 'image/png'
                 && ! empty($attachment['ContentID'])
-                && $attachment['ContentID'] === $contentId;
+                && $this->normalizeContentId($attachment['ContentID']) === $this->normalizeContentId($contentId);
         });
     }
 
@@ -381,5 +385,14 @@ class PostmarkTransportTest extends TestCase
             'options' => $this->getOptions(),
             'token' => $this->getToken(),
         ])->send($symfonyMessage, Envelope::create($symfonyMessage));
+    }
+
+    protected function normalizeContentId(string $contentId): string
+    {
+        if (strncasecmp($contentId, 'cid:', 4) === 0) {
+            $contentId = substr($contentId, 4);
+        }
+
+        return trim($contentId, '<>');
     }
 }
