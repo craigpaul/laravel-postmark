@@ -24,7 +24,6 @@ use Symfony\Component\Mailer\SentMessage;
 use Symfony\Component\Mime\Email as SymfonyEmail;
 
 use function basename;
-use function explode;
 
 use const DATE_RFC3339_EXTENDED;
 
@@ -143,11 +142,10 @@ class PostmarkTransportTest extends TestCase
 
         $this->assertSame($email->getMessageId(), $sentMessage->getMessageId());
 
-        $factory->assertSent(function (Request $request) use ($contentId) {
+        $factory->assertSent(function (Request $request) use ($email, $contentId) {
             $attachment = $request['Attachments'][0];
-            [, $name] = explode(':', $contentId);
 
-            return $attachment['Name'] === $name
+            return $attachment['Name'] === basename($email->getAttachment())
                 && ! empty($attachment['Content'])
                 && $attachment['ContentType'] === 'image/png'
                 && ! empty($attachment['ContentID'])
