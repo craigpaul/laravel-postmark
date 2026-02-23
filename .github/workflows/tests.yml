@@ -12,7 +12,7 @@ jobs:
       fail-fast: true
       matrix:
         php: [8.5, 8.4, 8.3, 8.2, 8.1]
-        laravel: [^10.0, ^11.0, ^12.0]
+        laravel: [^10.0, ^11.0, ^12.0, ^13.0]
         stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: ^10.0
@@ -21,10 +21,16 @@ jobs:
             testbench: ^9.2
           - laravel: ^12.0
             testbench: ^10.0
+          - laravel: ^13.0
+            testbench: ^11.0
         exclude:
           - laravel: ^11.0
             php: 8.1
           - laravel: ^12.0
+            php: 8.1
+          - laravel: ^13.0
+            php: 8.2
+          - laravel: ^13.0
             php: 8.1
 
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - ${{ matrix.stability }}
