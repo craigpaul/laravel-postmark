@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [4.0.0] - 2026-08-18
+
+### Changed
+- Adds Guzzle 8 support and drops support for Laravel 10.x and 11.x [`#157`](https://github.com/craigpaul/laravel-postmark/pull/157)
+
 ## [3.4.1] - 2026-02-23
 
 ### Added
@@ -469,7 +474,8 @@
 ### Added
 - Adds package skeleton. [`2f6fe84bcc`](https://github.com/craigpaul/laravel-postmark/commit/2f6fe84bcc)
 
-[Unreleased]: https://github.com/craigpaul/laravel-postmark/compare/v3.4.1...HEAD
+[Unreleased]: https://github.com/craigpaul/laravel-postmark/compare/v4.0.0...HEAD
+[4.0.0]: https://github.com/craigpaul/laravel-postmark/compare/v3.4.1...v4.0.0
 [3.4.1]: https://github.com/craigpaul/laravel-postmark/compare/v3.4.0...v3.4.1
 [3.4.0]: https://github.com/craigpaul/laravel-postmark/compare/v3.3.1...v3.4.0
 [3.3.0]: https://github.com/craigpaul/laravel-postmark/compare/v3.2.0...v3.3.0
